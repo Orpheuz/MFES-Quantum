@@ -28,7 +28,7 @@ operations
 					for counter_i = 1 to smallSizeY do (
 						boardLine:= [];
 						for counter_j = 1 to smallSizeX do (
-							boardLine := boardLine ^ [new Tile(counter_i, counter_j)];
+							boardLine := boardLine ^ [new Tile(counter_j, counter_i)];
 						);
 						board(counter_i) := board(counter_i) ^ boardLine;
 					);
