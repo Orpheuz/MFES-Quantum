@@ -14,29 +14,28 @@ values
 instance variables
 		
 		private bigBoard: bool;
-		private boardSeq: seq of seq of Tile := [[]];
-		private static board:Board := new Board();
+		private board: seq of seq of Tile := [[]];
+		private static boardInstance:Board := new Board();
 
 operations
 		public Board: bool ==> Board
 		Board(n) == (
+				dcl boardLine: seq of Tile;
+				
 				if n then bigBoard := true else bigBoard := false;
+				
 				if bigBoard = false then (
 					for counter_i = 1 to smallSizeY do (
-						let boardLine = [] in (
-							for counter_j = 1 to smallSizeX do (
-								boardLine := boardLine ^ [new Tile(counter_i, counter_j)];
-							)
-						)
-					)
+						boardLine:= [];
+						for counter_j = 1 to smallSizeX do (
+							boardLine := boardLine ^ [new Tile(counter_i, counter_j)];
+						);
+						board(counter_i) := board(counter_i) ^ boardLine;
+					);
 				)
 		);
 		
 		public static getInstance: () ==> Board
-		getInstance() == return board;
+		getInstance() == return boardInstance;
         
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
 end Board
