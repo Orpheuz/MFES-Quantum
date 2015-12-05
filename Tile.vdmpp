@@ -4,6 +4,7 @@ types
 												 y : nat1;
 instance variables
 
+		private isSpecial: bool;
 		private coordinates: Coordinates;
 		private piece: [Piece];
 		
@@ -15,6 +16,10 @@ operations
 		Tile(xT, yT) == (
 				coordinates := mk_Coordinates(xT, yT);
 				piece := nil;
+				if ((xT = 1 and yT = 1) or (xT = Board`smallSizeX and yT = Board`smallSizeY) or
+					(xT = 1 and yT = Board`smallSizeY) or (xT = Board`smallSizeX and yT = 1))
+					then isSpecial := true
+					else isSpecial := false;
 				return self
 		);
 		
@@ -30,5 +35,8 @@ operations
 		
 		pure public getPiece: () ==> [Piece]
 		getPiece() == return piece;
+		
+		public setPiece: Piece ==> ()
+		setPiece(p) == piece := p;
 		
 end Tile

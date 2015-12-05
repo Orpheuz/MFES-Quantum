@@ -11,8 +11,9 @@ operations
 
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
-				return (hd stack).canMoveTo(ti, tf);
-		);
+				return (hd stack).canMoveTo(ti, tf, getSize());
+		)
+		pre len stack < 7;
 		
 		public capturePiece: Piece ==> ()
 		capturePiece(p) == (
@@ -22,6 +23,9 @@ operations
 		)
 		post len stack = len stack~ + 1 and
 		pieceOfPlayer <> pieceOfPlayer~;
+		
+		pure public getSize: () ==> nat1
+		getSize() == return len stack;
 		
 functions
 -- TODO Define functiones here

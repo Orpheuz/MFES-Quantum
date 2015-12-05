@@ -1,8 +1,7 @@
 class Piece
 types
 		public Player = <White> | <Black>; 
-values
--- TODO Define values here
+
 instance variables
 
 		protected pieceOfPlayer : Player;
@@ -14,6 +13,10 @@ operations
 		
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == is subclass responsibility
+		pre ti.getPiece() <> nil;
+		
+		public canMoveTo: Tile * Tile * nat1 ==> bool
+		canMoveTo(ti, tf, nt) == is subclass responsibility
 		pre ti.getPiece() <> nil;
 		
 functions

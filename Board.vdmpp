@@ -2,6 +2,7 @@ class Board
 types
 
 values
+
 		public smallSizeX: nat1 = 6;
 		public smallSizeY: nat1 = 10;
 		public smallSize: nat1 = smallSizeX * smallSizeY;
@@ -9,12 +10,27 @@ values
 		public bigSizeX: nat1 = 6;
 		public bigSizeY: nat1 = 10;
 		public bigSize: nat1 = bigSizeX * bigSizeY;
+		
 instance variables
+		
+		private bigBoard: bool;
+		private boardSeq: seq of seq of Tile := [[]];
 		private static board:Board := new Board();
 
 operations
-		public Board: nat1 ==> Board
-		Board(n) == (return self);
+		public Board: bool ==> Board
+		Board(n) == (
+				if n then bigBoard := true else bigBoard := false;
+				if bigBoard = false then (
+					for counter_i = 1 to smallSizeY do (
+						let boardLine = [] in (
+							for counter_j = 1 to smallSizeX do (
+								boardLine := boardLine ^ [new Tile(counter_i, counter_j)];
+							)
+						)
+					)
+				)
+		);
 		
 		public static getInstance: () ==> Board
 		getInstance() == return board;

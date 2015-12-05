@@ -9,5 +9,11 @@ operations
 				return abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 or 
 							 abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1;
 		);
+		
+		public canMoveTo: Tile * Tile * nat1 ==> bool
+		canMoveTo(ti, tf, n) == (
+				return abs(ti.getCoordinates().x - tf.getCoordinates().x) = n or 
+							 abs(ti.getCoordinates().y - tf.getCoordinates().y) = n;
+		);
 
 end Square
