@@ -32,7 +32,7 @@ operations
 						);
 						board(counter_i) := board(counter_i) ^ boardLine;
 					);
-				)
+				);
 		);
 		
 		public static getInstance: () ==> Board
