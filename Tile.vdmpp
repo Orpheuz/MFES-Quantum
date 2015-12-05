@@ -1,0 +1,34 @@
+class Tile
+types
+		public Coordinates ::x : nat1
+												 y : nat1;
+instance variables
+
+		private coordinates: Coordinates;
+		private piece: [Piece];
+		
+		inv coordinates.x in set {1, ..., Board`smallSizeX} and
+				coordinates.y in set {1, ..., Board`smallSizeY}
+		
+operations
+		public Tile: nat1 * nat1 ==> Tile
+		Tile(xT, yT) == (
+				coordinates := mk_Coordinates(xT, yT);
+				piece := nil;
+				return self
+		);
+		
+		public Tile: nat1 * nat1 * Piece ==> Tile
+				Tile(xT, yT, p) == (
+				coordinates := mk_Coordinates(xT, yT);
+				piece := p;
+				return self
+		);
+		
+		pure public getCoordinates: () ==> Coordinates
+		getCoordinates() == return coordinates;
+		
+		pure public getPiece: () ==> [Piece]
+		getPiece() == return piece;
+		
+end Tile

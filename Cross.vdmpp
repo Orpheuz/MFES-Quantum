@@ -1,0 +1,18 @@
+class Cross is subclass of Piece
+
+operations
+
+		public Cross: Player ==> Cross
+		Cross(p) == Piece(p);
+
+		public canMoveTo: Tile * Tile ==> bool
+		canMoveTo(ti, tf) == (
+				return (abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y) and
+								abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 and
+								abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1) 
+								or (abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 or 
+							 	abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1);
+								
+		);
+		
+end Cross

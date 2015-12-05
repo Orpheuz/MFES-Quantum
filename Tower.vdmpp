@@ -1,12 +1,28 @@
 class Tower is subclass of Piece
-types
--- TODO Define types here
-values
--- TODO Define values here
+
 instance variables
--- TODO Define instance variables here
+
+	private stack : seq of Piece := [];
+	inv len stack > 1;
+
 operations
--- TODO Define operations here
+		public Tower: Player ==> Tower
+		Tower(p) == Piece(p);
+
+		public canMoveTo: Tile * Tile ==> bool
+		canMoveTo(ti, tf) == (
+				return (hd stack).canMoveTo(ti, tf);
+		);
+		
+		public capturePiece: Piece ==> ()
+		capturePiece(p) == (
+				stack := stack ^ [p];
+				if pieceOfPlayer = <White> then pieceOfPlayer := <Black>
+				else pieceOfPlayer := <White>;
+		)
+		post len stack = len stack~ + 1 and
+		pieceOfPlayer <> pieceOfPlayer~;
+		
 functions
 -- TODO Define functiones here
 traces

@@ -1,14 +1,13 @@
 class Square is subclass of Piece
-types
--- TODO Define types here
-values
--- TODO Define values here
-instance variables
--- TODO Define instance variables here
+
 operations
--- TODO Define operations here
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
+		public Square: Player ==> Square
+		Square(p) == Piece(p);
+
+		public canMoveTo: Tile * Tile ==> bool
+		canMoveTo(ti, tf) == (
+				return abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 or 
+							 abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1;
+		);
+
 end Square

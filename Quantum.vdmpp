@@ -7,21 +7,14 @@ types
 values
 		private PLAYERS = { p | p:Player };
 		
-		smallSizeX: nat1 = 6;
-		smallSizeY: nat1 = 10;
-		smallSize: nat1 = smallSizeX * smallSizeY;
-		bigSizeX: nat1 = 6;
-		bigSizeY: nat1 = 10;
-		bigSize: nat1 = bigSizeX * bigSizeY;
-		
 instance variables
 		private board : map Coordinates to (Piece | <empty>) := { |-> };
+		private boardType: int;
 		
 operations
 		public Quantum: nat1 ==> Quantum
           Quantum(n) == (
-                board := { mk_Coordinates(xCoord, yCoord) |-> <empty> | 
-                xCoord in set {0, ..., smallSizeX}, yCoord in set {0, ..., smallSizeY}};
+										boardType := n;
                 );
 functions
 -- TODO Define functiones here

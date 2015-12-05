@@ -1,13 +1,21 @@
 class Piece
 types
-		public Coordinates ::xCoord : int
-									 yCoord : int;
+		public Player = <White> | <Black>; 
 values
 -- TODO Define values here
 instance variables
-		private coord : Coordinates;
+
+		protected pieceOfPlayer : Player;
+		
 operations
--- TODO Define operations here
+
+		protected Piece: Player ==> Piece
+		Piece(p) == pieceOfPlayer := p;
+		
+		public canMoveTo: Tile * Tile ==> bool
+		canMoveTo(ti, tf) == is subclass responsibility
+		pre ti.getPiece() <> nil;
+		
 functions
 -- TODO Define functiones here
 traces

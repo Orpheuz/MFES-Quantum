@@ -1,0 +1,26 @@
+class Board
+types
+
+values
+		public smallSizeX: nat1 = 6;
+		public smallSizeY: nat1 = 10;
+		public smallSize: nat1 = smallSizeX * smallSizeY;
+		
+		public bigSizeX: nat1 = 6;
+		public bigSizeY: nat1 = 10;
+		public bigSize: nat1 = bigSizeX * bigSizeY;
+instance variables
+		private static board:Board := new Board();
+
+operations
+		public Board: nat1 ==> Board
+		Board(n) == (return self);
+		
+		public static getInstance: () ==> Board
+		getInstance() == return board;
+        
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Board
