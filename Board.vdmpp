@@ -1,5 +1,4 @@
 class Board
-types
 
 values
 
@@ -28,11 +27,42 @@ operations
 					for counter_i = 1 to smallSizeY do (
 						boardLine:= [];
 						for counter_j = 1 to smallSizeX do (
-							boardLine := boardLine ^ [new Tile(counter_j, counter_i)];
+							boardLine := boardLine ^ [buildBoard(counter_j, counter_i)];
 						);
 						board(counter_i) := board(counter_i) ^ boardLine;
 					);
 				);
+		);
+		
+		private buildBoard: nat1 * nat1 ==> Tile
+		buildBoard(x, y) == (
+		
+		--Black pieces
+			-- Black crosses
+			if (x = 1 and (y = 2 or y = 4)) or ((x = 5 or x = 6) and y = 1)
+			then return (new Tile(x, y, new Cross(<Black>)));
+			-- Black circles
+			if (x = 1 and (y = 3 or y = 4)) or (x = 2 and (y = 2 or y = 5))
+				or ((x = 4 or x = 7) and y = 2)
+			then return (new Tile(x, y, new Circle(<Black>)));
+			-- Black squares
+			if (x = 2 and (y = 3 or y = 4)) or ((x = 4 or x = 7) and y = 1)
+				or ((x = 5 or x = 6) and y = 2)
+			then return (new Tile(x, y, new Square(<Black>)));
+		
+		--White pieces
+			-- White crosses
+			if ((x = 5 or x = 6) and y = 6) or (x = 10 and (y = 2 or y = 4))
+			then return (new Tile(x, y, new Cross(<White>)));
+			-- White circles
+			if ((x = 4 or x = 7) and y = 2) or (x = 9 and (y = 2 or y = 4))
+				or (x = 10 and (y = 3 or y = 4))
+			then return (new Tile(x, y, new Circle(<White>)));
+			-- White squares
+			if (x = 9 and (y = 3 or y = 4)) or ((x = 4 or x = 7) and y = 6)
+				or ((x = 5 or x = 6) and y = 5)
+			then return (new Tile(x, y, new Square(<White>)));
+			return (new Tile(x, y));
 		);
 		
 		public static getInstance: () ==> Board
