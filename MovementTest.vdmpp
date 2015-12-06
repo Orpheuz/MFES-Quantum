@@ -1,0 +1,216 @@
+class MovementTest is subclass of QuantumTest
+
+
+instance variables
+	private bd:Board := new Board();
+
+operations  
+
+  public testCircle: () ==> ()
+  testCircle() == (
+  	dcl p: Piece := new Circle();
+  	dcl t:Tile := new Tile(3,3,p);
+  	dcl t2:Tile := new Tile(2,2);
+  	dcl t3:Tile := new Tile(4,2);
+  	dcl t4:Tile := new Tile(5,5);
+  	dcl t5:Tile := new Tile(3,4);
+  	dcl t6:Tile := new Tile(2,3);
+  	assertEqual(true, p.canMoveTo(t, t2));
+  	assertEqual(true, p.canMoveTo(t, t3));
+  	assertEqual(false, p.canMoveTo(t, t6)); -- movimento na vertical
+  	assertEqual(false, p.canMoveTo(t, t5)); -- movimento horizontal
+  	assertEqual(false, p.canMoveTo(t, t4)); -- mais casas do que o permitido
+  );
+  
+  public testSquare: () ==> ()
+  testSquare() == (
+  	dcl p: Piece := new Square();
+  	dcl t:Tile := new Tile(2,2,p);
+  	dcl t2:Tile := new Tile(1,2);
+  	dcl t3:Tile := new Tile(2,3);
+  	dcl t4:Tile := new Tile(2,6);
+  	dcl t5:Tile := new Tile(3,3);
+  	assertEqual(true, p.canMoveTo(t, t2));
+  	assertEqual(true, p.canMoveTo(t, t3));
+  	assertEqual(false, p.canMoveTo(t, t5)); -- movimento na diagonal
+  	assertEqual(false, p.canMoveTo(t, t4)); -- mais casas do que o permitido
+  );
+  
+  public testCross: () ==> ()
+  testCross() == (
+  	dcl p: Piece := new Cross();
+  	dcl t:Tile := new Tile(2,2,p);
+  	dcl t2:Tile := new Tile(1,2);
+  	dcl t3:Tile := new Tile(2,3);
+  	dcl t4:Tile := new Tile(3,1);
+  	dcl t5:Tile := new Tile(1,1);
+  	dcl t6:Tile := new Tile(4,4);
+  	dcl t7:Tile := new Tile(2,4);
+  	assertEqual(true, p.canMoveTo(t, t2));
+  	assertEqual(true, p.canMoveTo(t, t3));
+  	assertEqual(true, p.canMoveTo(t, t4));
+  	assertEqual(true, p.canMoveTo(t, t5));
+  	assertEqual(false, p.canMoveTo(t, t6));
+  	assertEqual(false, p.canMoveTo(t, t7));
+  );
+  
+  public testTowerCircle: () ==> ()
+  testTowerCircle() == (
+  	dcl p: Piece := new Square();
+  	dcl t: Tower := new Tower();		
+  	dcl p2: Piece := new Circle();
+  	
+  	dcl tl1: Tile := new Tile(4,4);
+  	dcl tl2: Tile := new Tile(4,3);
+  	dcl tl3: Tile := new Tile(4,2);
+  	dcl tl4: Tile := new Tile(3,3);
+  	dcl tl5: Tile := new Tile(2,2);
+  	dcl tl6: Tile := new Tile(1,1);
+
+  	t.capturePiece(p);
+  	assertEqual(true, t.canMoveTo(tl1, tl2));
+		assertEqual(false, t.canMoveTo(tl1, tl3));
+  	assertEqual(false, t.canMoveTo(tl1, tl4));
+  	t.capturePiece(p2);
+  	assertEqual(true, t.canMoveTo(tl1, tl4));
+  	assertEqual(true, t.canMoveTo(tl1, tl5));
+  	assertEqual(false, t.canMoveTo(tl1, tl6));
+  	assertEqual(false, t.canMoveTo(tl1, tl2));
+  );
+  
+  public testTowerSquare: () ==> ()
+  testTowerSquare() == (
+  	dcl p: Piece := new Circle();
+  	dcl t: Tower := new Tower();		
+  	dcl p2: Piece := new Square();
+  	
+  	dcl tl1: Tile := new Tile(4,4);
+  	dcl tl2: Tile := new Tile(4,3);
+  	dcl tl3: Tile := new Tile(4,2);
+  	dcl tl4: Tile := new Tile(3,3);
+  	dcl tl5: Tile := new Tile(2,2);
+  	dcl tl6: Tile := new Tile(4,7);
+
+  	t.capturePiece(p);
+  	assertEqual(true, t.canMoveTo(tl1, tl4));
+		assertEqual(false, t.canMoveTo(tl1, tl5));
+  	assertEqual(false, t.canMoveTo(tl1, tl2));
+  	t.capturePiece(p2);
+  	assertEqual(true, t.canMoveTo(tl1, tl2));
+  	assertEqual(true, t.canMoveTo(tl1, tl3));
+  	assertEqual(false, t.canMoveTo(tl1, tl6));
+  	assertEqual(false, t.canMoveTo(tl1, tl4));
+  );
+  
+  public testTowerCross: () ==> ()
+  testTowerCross() == (
+  	dcl p: Piece := new Circle();
+  	dcl t: Tower := new Tower();		
+  	dcl p2: Piece := new Cross();
+  	
+  	dcl tl1: Tile := new Tile(4,4);
+  	dcl tl2: Tile := new Tile(4,3);
+  	dcl tl3: Tile := new Tile(4,2);
+  	dcl tl4: Tile := new Tile(3,3);
+  	dcl tl5: Tile := new Tile(2,2);
+  	dcl tl6: Tile := new Tile(4,7);
+  	dcl tl7: Tile := new Tile(1,1);
+
+  	t.capturePiece(p);
+  	assertEqual(true, t.canMoveTo(tl1, tl4));
+		assertEqual(false, t.canMoveTo(tl1, tl5));
+  	assertEqual(false, t.canMoveTo(tl1, tl2));
+  	t.capturePiece(p2);
+  	assertEqual(true, t.canMoveTo(tl1, tl2));
+  	assertEqual(true, t.canMoveTo(tl1, tl3));
+  	assertEqual(true, t.canMoveTo(tl1, tl5));
+  	assertEqual(true, t.canMoveTo(tl1, tl4));
+  	assertEqual(false, t.canMoveTo(tl1, tl6));
+  	assertEqual(false, t.canMoveTo(tl1, tl7));
+  );
+  
+  public testTowerCapture: () ==> ()
+  testTowerCapture() == (
+  	dcl p: Piece := new Square();
+  	dcl t: Tower := new Tower();		
+  	dcl p2: Piece := new Cross();
+  	
+  	t.capturePiece(p);
+  	assertEqual(t.getSize(), 1);
+  	t.capturePiece(p2);
+  	assertEqual(2, t.getSize());
+  	t.capturePiece(p2);
+  	assertEqual(2, t.getSize()); -- nao pode capturar uma peça ja pertencente à torre
+  );
+  
+  public testTowerCapture2: () ==> ()
+  testTowerCapture2() == (
+  	dcl p: Piece := new Square();
+  	dcl t: Tower := new Tower();		
+  	dcl p2: Piece := new Cross();
+  	dcl p3: Piece := new Circle();
+  	dcl p4: Piece := new Square();
+  	dcl p5: Piece := new Circle();
+  	dcl p6: Piece := new Square();
+  	dcl p7: Piece := new Circle();
+  	dcl tl1: Tile := new Tile(1,2);
+  	dcl tl2: Tile:= new Tile(1,1);
+  	
+  	t.capturePiece(p);
+  	t.capturePiece(p2);
+  	t.capturePiece(p3);
+  	t.capturePiece(p4);
+  	assertEqual(true, t.canMoveTo(tl1, tl2));
+  	t.capturePiece(p5);
+  	assertEqual(5, t.getSize());
+  	t.capturePiece(p6);
+  	assertEqual(6, t.getSize());
+  	assertEqual(false, t.canMoveTo(tl1, tl2)); -- torre nao move se tiver 6 ou mais peças
+  	t.capturePiece(p7);
+  	assertEqual(6, t.getSize()); -- nao pode capturar mais do que 6 peças
+  );  
+  
+  
+  -- ver captura de torres completas
+  public testTowerCapture3: () ==> ()
+  testTowerCapture3() == (
+  	dcl p: Piece := new Square();
+  	dcl t: Tower := new Tower();		
+  	dcl p2: Piece := new Cross();
+  	dcl p3: Piece := new Square();
+  	dcl t2: Tower := new Tower();		
+  	dcl p4: Piece := new Cross();
+  	dcl p5: Piece := new Cross();
+  	dcl p6: Piece := new Cross();
+  	dcl p7: Piece := new Cross();
+  	dcl p8: Piece := new Cross();
+  	
+  	t.capturePiece(p);
+  	t.capturePiece(p2);
+  	t.capturePiece(p3);
+  	
+  	t2.capturePiece(p4);
+  	t2.capturePiece(p5);
+  	t2.capturePiece(p6);
+  	t2.capturePiece(p7);
+  	t2.capturePiece(p8);
+  	assertEqual(3, t.getSize());
+  	t.capturePiece(p4);
+  	assertEqual(3, t.getSize()); -- nao pode capturar uma peça ja pertencente à torre
+  );  
+  
+   
+  public testAll: () ==> ()
+  testAll() == (
+    testCircle();
+    testSquare();
+  	testCross();
+    testTowerCircle();
+    testTowerSquare();
+  	testTowerCross();
+  	testTowerCapture();
+  	testTowerCapture2();
+  	testTowerCapture3();
+  );
+  
+end MovementTest

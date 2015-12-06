@@ -18,4 +18,51 @@
 	<natures>
 		<nature>org.overture.ide.vdmpp.core.nature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>Board.vdmpp</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/GitHub/MFES-Quantum/Board.vdmpp</locationURI>
+		</link>
+		<link>
+			<name>Circle.vdmpp</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/GitHub/MFES-Quantum/Circle.vdmpp</locationURI>
+		</link>
+		<link>
+			<name>Cross.vdmpp</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/GitHub/MFES-Quantum/Cross.vdmpp</locationURI>
+		</link>
+		<link>
+			<name>Piece.vdmpp</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/GitHub/MFES-Quantum/Piece.vdmpp</locationURI>
+		</link>
+		<link>
+			<name>Quantum.vdmpp</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/GitHub/MFES-Quantum/Quantum.vdmpp</locationURI>
+		</link>
+		<link>
+			<name>Square.vdmpp</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/GitHub/MFES-Quantum/Square.vdmpp</locationURI>
+		</link>
+		<link>
+			<name>Tile.vdmpp</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/GitHub/MFES-Quantum/Tile.vdmpp</locationURI>
+		</link>
+		<link>
+			<name>Tower.vdmpp</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/GitHub/MFES-Quantum/Tower.vdmpp</locationURI>
+		</link>
+		<link>
+			<name>lib</name>
+			<type>2</type>
+			<locationURI>PARENT-4-PROJECT_LOC/Desktop/MFES/VendingMachine2015/lib</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

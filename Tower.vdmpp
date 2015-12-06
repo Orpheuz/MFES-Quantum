@@ -13,7 +13,7 @@ operations
 		canMoveTo(ti, tf) == (
 				return (hd stack).canMoveTo(ti, tf, getSize());
 		)
-		pre len stack < 7;
+		pre len stack < 6;
 		
 		public capturePiece: Piece ==> ()
 		capturePiece(p) == (
@@ -21,6 +21,7 @@ operations
 				if pieceOfPlayer = <White> then pieceOfPlayer := <Black>
 				else pieceOfPlayer := <White>;
 		)
+		pre len stack < 6
 		post len stack = len stack~ + 1 and
 		pieceOfPlayer <> pieceOfPlayer~;
 		
