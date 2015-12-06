@@ -6,8 +6,11 @@ instance variables
 	inv len stack > 1;
 
 operations
-		public Tower: Player ==> Tower
-		Tower(p) == Piece(p);
+		public Tower: Player * Piece * Piece ==> Tower
+		Tower(player, p1, p2) == (	
+				stack := stack ^ [p1, p2];
+				Piece(player);
+		);
 
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
