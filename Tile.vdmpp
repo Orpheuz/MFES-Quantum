@@ -4,7 +4,7 @@ types
 												 y : nat1;
 instance variables
 
-		private isSpecial: bool;
+		private special: bool;
 		private coordinates: Coordinates;
 		private piece: [Piece];
 		
@@ -18,8 +18,8 @@ operations
 				piece := nil;
 				if ((xT = 1 and yT = 1) or (xT = Board`smallSizeX and yT = Board`smallSizeY) or
 					(xT = 1 and yT = Board`smallSizeY) or (xT = Board`smallSizeX and yT = 1))
-					then isSpecial := true
-					else isSpecial := false;
+					then special := true
+					else special := false;
 				return self
 		);
 		
@@ -35,6 +35,9 @@ operations
 		
 		pure public getPiece: () ==> [Piece]
 		getPiece() == return piece;
+		
+		pure public isSpecial: () ==> bool
+		isSpecial() == return special;
 		
 		public setPiece: Piece ==> ()
 		setPiece(p) == piece := p;

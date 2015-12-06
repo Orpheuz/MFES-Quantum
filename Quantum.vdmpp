@@ -1,14 +1,10 @@
 class Quantum
 types
 		Player = <Player1> | <Player2>;
-		Coordinates ::xCoord : int
-									yCoord : int;
-		SquareType = <Normal> | <Special>
 values
 		private PLAYERS = { p | p:Player };
 		
 instance variables
-		private board : map Coordinates to (Piece | <empty>) := { |-> };
 		private boardType: int;
 		
 operations
