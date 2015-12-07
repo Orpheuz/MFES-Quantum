@@ -4,6 +4,7 @@ instance variables
 
 	private stack : seq of Piece := [];
 	inv len stack > 1;
+	-- inv 2 peças seguidas tem de ser de players diferentes
 
 operations
 		public Tower: Player * Piece * Piece ==> Tower
