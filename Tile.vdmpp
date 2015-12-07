@@ -16,15 +16,14 @@ operations
 		Tile(xT, yT) == (
 				coordinates := mk_Coordinates(xT, yT);
 				piece := nil;
-				if ((xT = 1 and yT = 1) or (xT = Board`smallSizeX and yT = Board`smallSizeY) or
-					(xT = 1 and yT = Board`smallSizeY) or (xT = Board`smallSizeX and yT = 1))
-					then special := true
-					else special := false;
+				special:= ((xT = 1 and yT = 1) or (xT = Board`smallSizeX and yT = Board`smallSizeY) or
+					(xT = 1 and yT = Board`smallSizeY) or (xT = Board`smallSizeX and yT = 1));
 				return self
 		);
 		
 		public Tile: nat1 * nat1 * Piece ==> Tile
 				Tile(xT, yT, p) == (
+				special := false;
 				coordinates := mk_Coordinates(xT, yT);
 				piece := p;
 				return self
