@@ -67,5 +67,10 @@ operations
 		
 		public static getInstance: () ==> Board
 		getInstance() == return boardInstance;
+		
+		public getTile: nat1 * nat1 ==> Tile
+		getTile(x, y) == (
+				return board(x)(y);
+		);
         
 end Board

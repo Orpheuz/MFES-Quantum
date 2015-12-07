@@ -19,8 +19,44 @@ operations
 		canMoveTo(ti, tf, nt) == is subclass responsibility
 		pre ti.getPiece() <> nil;
 		
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
+		public moveTo: Tile * Tile ==> bool
+		moveTo(ti, tf) == (
+				if canMoveTo(ti, tf)
+				then (
+					if (tf.getPiece().getSize() > 6 and isofclass(Tower, tf.getPiece()))
+					then return false
+					else (
+						if tf.getPiece() <> nil and not isofclass(Tower, tf.getPiece())
+						then (
+							ti.setPiece(nil);
+							tf.setPiece(new Tower(pieceOfPlayer, self, tf.getPiece()));
+							capturePiece(tf.getPiece());
+							return true;
+						)
+						else (
+							ti.setPiece(nil);
+							tf.setPiece(self);
+							return true;
+						)
+					);
+				)
+				else return false;
+		)
+		pre ti.getPiece() <> nil;
+		--post tf.getPiece() = ti~.getPiece(); Como fazer isto? 
+		
+		public moveTo: Tile * Tile * nat1 ==> bool
+		moveTo(ti, tf, nt) == is subclass responsibility
+		pre ti.getPiece() <> nil;
+		
+		private capturePiece: Piece ==> ()
+		capturePiece(p) == (
+				if pieceOfPlayer = <White> then pieceOfPlayer := <Black>
+					else pieceOfPlayer := <White>;
+		)
+		pre p <> self;
+		
+		pure public getSize: () ==> nat1
+		getSize() == return 1;
+	
 end Piece

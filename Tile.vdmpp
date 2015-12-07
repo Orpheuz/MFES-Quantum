@@ -39,7 +39,7 @@ operations
 		pure public isSpecial: () ==> bool
 		isSpecial() == return special;
 		
-		public setPiece: Piece ==> ()
+		public setPiece: [Piece] ==> ()
 		setPiece(p) == piece := p;
 		
 end Tile
