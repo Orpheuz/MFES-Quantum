@@ -6,14 +6,13 @@ operations
 
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
-				return (abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 and abs(ti.getCoordinates().y - tf.getCoordinates().y) = 0) or 
-							 (abs(ti.getCoordinates().x - tf.getCoordinates().x) = 0 and abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1);
+				return (abs(ti.getCoordinates().x - tf.getCoordinates().x) + abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1);
 		);
 		
 		public canMoveTo: Tile * Tile * nat1 ==> bool
 		canMoveTo(ti, tf, n) == (
-				return abs(ti.getCoordinates().x - tf.getCoordinates().x) = n or 
-							 abs(ti.getCoordinates().y - tf.getCoordinates().y) = n;
+				return abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n or 
+							 abs(ti.getCoordinates().y - tf.getCoordinates().y) <= n;
 		);
 
 end Square

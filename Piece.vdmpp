@@ -49,7 +49,7 @@ operations
 		moveTo(ti, tf, nt) == is subclass responsibility
 		pre ti.getPiece() <> nil;
 		
-		private capturePiece: Piece ==> ()
+		public capturePiece: Piece ==> ()
 		capturePiece(p) == (
 				if pieceOfPlayer = <White> then pieceOfPlayer := <Black>
 					else pieceOfPlayer := <White>;

@@ -7,16 +7,14 @@ operations
 
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
-				return abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y) and
-								abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 and
+				return	abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 and
 								abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1;
 		);
 		
 		public canMoveTo: Tile * Tile * nat1 ==> bool
 		canMoveTo(ti, tf, n) == (
-				return abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y) and
-								abs(ti.getCoordinates().x - tf.getCoordinates().x) = n and
-								abs(ti.getCoordinates().y - tf.getCoordinates().y) = n;
+				return	abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n and
+								abs(ti.getCoordinates().y - tf.getCoordinates().y) <= n;
 		);
 		
 		
