@@ -8,7 +8,7 @@ instance variables
 operations
 		public Tower: Player * Piece * Piece ==> Tower
 		Tower(player, p1, p2) == (	
-				stack := stack ^ [p1, p2];
+				stack := [p1, p2] ^ stack;
 				Piece(player);
 		);
 
@@ -21,7 +21,7 @@ operations
 		--é preciso ver se isto dá override à função da classe mãe
 		public capturePiece: Piece ==> ()
 		capturePiece(p) == (
-				stack := stack ^ [p];
+				stack := [p] ^ stack;
 				if pieceOfPlayer = <White> then pieceOfPlayer := <Black>
 				else pieceOfPlayer := <White>;
 		)
