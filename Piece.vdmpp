@@ -23,10 +23,10 @@ operations
 		moveTo(ti, tf) == (
 				if canMoveTo(ti, tf)
 				then (
-					if (tf.getPiece().getSize() > 6 and isofclass(Tower, tf.getPiece()))
+					if (tf.getPiece() <> nil and tf.getPiece().getSize() > 6 and isofclass(Tower, tf.getPiece()))
 					then return false
 					else (
-						if tf.getPiece() <> nil and not isofclass(Tower, tf.getPiece())
+						if tf.getPiece() <> nil and tf.getPiece().getSize() < 6
 						then (
 							ti.setPiece(nil);
 							tf.setPiece(new Tower(pieceOfPlayer, self, tf.getPiece()));
@@ -43,7 +43,7 @@ operations
 				else return false;
 		)
 		pre ti.getPiece() <> nil;
-		--post tf.getPiece() = ti~.getPiece(); Como fazer isto? 
+		--post tf.getPiece() = ti~.getPiece(); 
 		
 		public moveTo: Tile * Tile * nat1 ==> bool
 		moveTo(ti, tf, nt) == is subclass responsibility
@@ -57,6 +57,6 @@ operations
 		pre p <> self;
 		
 		pure public getSize: () ==> nat1
-		getSize() == return 1;
+		getSize() == is not yet specified;
 	
 end Piece

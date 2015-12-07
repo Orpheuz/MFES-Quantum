@@ -5,24 +5,22 @@ operations
 		public Cross: Player ==> Cross
 		Cross(p) == Piece(p);
 
+    -- checks if can move between two different tiles
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
-				return (abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y) and
-								abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 and
-								abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1) 
-								or (abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 or 
-							 	abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1);
+				return abs(ti.getCoordinates().x - tf.getCoordinates().x) <= 1 and abs(ti.getCoordinates().y - tf.getCoordinates().y) <= 1
+				-- and
+					--			abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 and
+						--		abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1) 
+							--	or (abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 or 
+							 	--abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1);
 								
-		);
+		
+		) pre ti <> tf;
 		
 		public canMoveTo: Tile * Tile * nat1 ==> bool
 		canMoveTo(ti, tf, n) == (
-				return (abs(ti.getCoordinates().x - tf.getCoordinates().x) <= abs(ti.getCoordinates().y - tf.getCoordinates().y) and
-								abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n and
-								abs(ti.getCoordinates().y - tf.getCoordinates().y) <= n) 
-								or (abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n or 
-							 	abs(ti.getCoordinates().y - tf.getCoordinates().y) <= n);
-								
+				return abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n and abs(ti.getCoordinates().y - tf.getCoordinates().y) <= n
 		);
 		
 end Cross
