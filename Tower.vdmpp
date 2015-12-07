@@ -11,7 +11,8 @@ operations
 		Tower(player, p1, p2) == (	
 				stack := [p1, p2] ^ stack;
 				Piece(player);
-		);
+		)
+		pre p1.pieceOfPlayer <> p2.pieceOfPlayer;
 
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
