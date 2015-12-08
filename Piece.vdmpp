@@ -43,7 +43,7 @@ operations
 				else return false;
 		)
 		pre ti.getPiece() <> nil;
-		--post tf.getPiece() = ti~.getPiece(); 
+		--post tf.getPiece() = ti~.getPiece(); not supported 
 		
 		public moveTo: Tile * Tile * nat1 ==> bool
 		moveTo(ti, tf, nt) == is subclass responsibility
