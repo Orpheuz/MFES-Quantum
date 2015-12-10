@@ -6,8 +6,8 @@ instance variables
 
 operations  
 
-  public testCircle: () ==> ()
-  testCircle() == (
+  public testCanMoveto_Circle: () ==> ()
+  testCanMoveto_Circle() == (
   	dcl p: Piece := new Circle();
   	dcl t:Tile := new Tile(3,3,p);
   	dcl t2:Tile := new Tile(2,2);
@@ -22,8 +22,8 @@ operations
   	assertEqual(false, p.canMoveTo(t, t4)); -- mais casas do que o permitido
   );
   
-  public testSquare: () ==> ()
-  testSquare() == (
+  public testCanMoveto_Square: () ==> ()
+  testCanMoveto_Square() == (
   	dcl p: Piece := new Square();
   	dcl t:Tile := new Tile(2,2,p);
   	dcl t2:Tile := new Tile(1,2);
@@ -36,8 +36,8 @@ operations
   	assertEqual(false, p.canMoveTo(t, t4)); -- mais casas do que o permitido
   );
   
-  public testCross: () ==> ()
-  testCross() == (
+  public testCanMoveto_Cross: () ==> ()
+  testCanMoveto_Cross() == (
   	dcl p: Piece := new Cross();
   	dcl t:Tile := new Tile(2,2,p);
   	dcl t2:Tile := new Tile(1,2);
@@ -54,59 +54,61 @@ operations
   	assertEqual(false, p.canMoveTo(t, t7));
   );
   
-  public testTowerCircle: () ==> ()
-  testTowerCircle() == (
-  	dcl p: Piece := new Square();
-  	dcl t: Tower := new Tower();		
-  	dcl p2: Piece := new Circle();
-  	
-  	dcl tl1: Tile := new Tile(4,4);
+  public testCanMoveto_TowerSquare: () ==> ()
+  testCanMoveto_TowerSquare() == (
+  	dcl p: Piece := new Circle(<Black>);
+  	dcl p2: Piece := new Circle(<White>);
+  	dcl t: Piece := new Tower(<White>, p, p2);
+  	dcl p3: Piece := new Square(<Black>);
+  	  	
+  	dcl tl1: Tile := new Tile(4,4,t);
   	dcl tl2: Tile := new Tile(4,3);
   	dcl tl3: Tile := new Tile(4,2);
   	dcl tl4: Tile := new Tile(3,3);
   	dcl tl5: Tile := new Tile(2,2);
   	dcl tl6: Tile := new Tile(1,1);
 
-  	t.capturePiece(p);
-  	assertEqual(true, t.canMoveTo(tl1, tl2));
-		assertEqual(false, t.canMoveTo(tl1, tl3));
-  	assertEqual(false, t.canMoveTo(tl1, tl4));
-  	t.capturePiece(p2);
   	assertEqual(true, t.canMoveTo(tl1, tl4));
   	assertEqual(true, t.canMoveTo(tl1, tl5));
   	assertEqual(false, t.canMoveTo(tl1, tl6));
+  	assertEqual(false, p.canMoveTo(tl1, tl2));
   	assertEqual(false, t.canMoveTo(tl1, tl2));
+  	t.capturePiece(p3);
+  	assertEqual(3, t.getSize());
+  	assertEqual(true, t.canMoveTo(tl1, tl2));
+		assertEqual(true, t.canMoveTo(tl1, tl3));
+  	assertEqual(false, t.canMoveTo(tl1, tl4));
   );
   
-  public testTowerSquare: () ==> ()
-  testTowerSquare() == (
-  	dcl p: Piece := new Circle();
-  	dcl t: Tower := new Tower();		
-  	dcl p2: Piece := new Square();
+  public testCanMoveto_TowerCircle: () ==> ()
+  testCanMoveto_TowerCircle() == (
+  	dcl p: Piece := new Circle(<Black>);
+  	dcl p2: Piece := new Circle(<Black>);
+  	dcl p3: Piece := new Square(<White>);
+  	dcl t: Piece := new Tower(<White>, p3, p);
   	
   	dcl tl1: Tile := new Tile(4,4);
   	dcl tl2: Tile := new Tile(4,3);
   	dcl tl3: Tile := new Tile(4,2);
   	dcl tl4: Tile := new Tile(3,3);
   	dcl tl5: Tile := new Tile(2,2);
-  	dcl tl6: Tile := new Tile(4,7);
-
-  	t.capturePiece(p);
-  	assertEqual(true, t.canMoveTo(tl1, tl4));
-		assertEqual(false, t.canMoveTo(tl1, tl5));
-  	assertEqual(false, t.canMoveTo(tl1, tl2));
-  	t.capturePiece(p2);
-  	assertEqual(true, t.canMoveTo(tl1, tl2));
-  	assertEqual(true, t.canMoveTo(tl1, tl3));
-  	assertEqual(false, t.canMoveTo(tl1, tl6));
+  	
   	assertEqual(false, t.canMoveTo(tl1, tl4));
+		assertEqual(false, t.canMoveTo(tl1, tl5));
+  	assertEqual(true, t.canMoveTo(tl1, tl2));
+  	t.capturePiece(p2);
+  	assertEqual(false, t.canMoveTo(tl1, tl2));
+  	assertEqual(false, t.canMoveTo(tl1, tl3));
+  	assertEqual(true, t.canMoveTo(tl1, tl5));
+  	assertEqual(true, t.canMoveTo(tl1, tl4));
   );
   
-  public testTowerCross: () ==> ()
-  testTowerCross() == (
-  	dcl p: Piece := new Circle();
-  	dcl t: Tower := new Tower();		
-  	dcl p2: Piece := new Cross();
+  public testCanMoveto_TowerCross: () ==> ()
+  testCanMoveto_TowerCross() == (
+  	dcl p: Piece := new Circle(<Black>);
+  	dcl p3: Piece := new Cross(<Black>);
+  	dcl p2: Piece := new Square(<White>);
+  	dcl t: Piece := new Tower(<White>, p2, p);
   	
   	dcl tl1: Tile := new Tile(4,4);
   	dcl tl2: Tile := new Tile(4,3);
@@ -115,102 +117,138 @@ operations
   	dcl tl5: Tile := new Tile(2,2);
   	dcl tl6: Tile := new Tile(4,7);
   	dcl tl7: Tile := new Tile(1,1);
+  	dcl tl8: Tile := new Tile(5,5);
 
-  	t.capturePiece(p);
-  	assertEqual(true, t.canMoveTo(tl1, tl4));
+  	assertEqual(false, t.canMoveTo(tl1, tl4));
 		assertEqual(false, t.canMoveTo(tl1, tl5));
-  	assertEqual(false, t.canMoveTo(tl1, tl2));
-  	t.capturePiece(p2);
+  	assertEqual(true, t.canMoveTo(tl1, tl2));
+  	t.capturePiece(p3);
   	assertEqual(true, t.canMoveTo(tl1, tl2));
   	assertEqual(true, t.canMoveTo(tl1, tl3));
   	assertEqual(true, t.canMoveTo(tl1, tl5));
   	assertEqual(true, t.canMoveTo(tl1, tl4));
-  	assertEqual(false, t.canMoveTo(tl1, tl6));
-  	assertEqual(false, t.canMoveTo(tl1, tl7));
+  	assertEqual(true, t.canMoveTo(tl1, tl6));
+  	assertEqual(false, t.canMoveTo(tl8, tl7));
+  );
+  
+  public testPowerTile: () ==> ()
+  testPowerTile() == (
+  	dcl ps: Piece := new Square();
+  	dcl pc: Piece := new Circle();
+  	dcl tl1: Tile := new Tile(1,1, ps);
+  	dcl tl2: Tile := new Tile(1,1, pc);
+  	dcl tl3: Tile := new Tile(2,2);
+  	dcl tl4: Tile := new Tile(2,1);
+  	
+  	--assertEqual(true, tl1.isSpecial());
+  	--assertEqual(tl2.isSpecial(), true);
+  	assertEqual(true, ps.canMoveTo(tl1, tl3));
+  	assertEqual(true, pc.canMoveTo(tl2, tl4));
+  );
+  
+  public testMove: () ==> ()
+  testMove() == (
+  	dcl p: Piece := new Circle(<Black>);
+  	dcl tl1: Tile := new Tile(1,1, p);
+  	dcl tl2: Tile := new Tile(2,2);
+  	dcl p2: Piece := new Square(<White>);
+  	dcl tl3: Tile := new Tile(1,1, p2);
+  	dcl tl4: Tile := new Tile(2,1);
+  	dcl p3: Piece := new Cross();
+  	dcl tl5: Tile := new Tile(1,1, p3);
+  	dcl tl6: Tile := new Tile(2,3);
+  	dcl tl7: Tile := new Tile(1,2);
+  	
+  	assertEqual(true, p.moveTo(tl1, tl2));
+  	assertEqual(false, tl2.getPiece() = nil);
+  	assertEqual(nil, tl1.getPiece());
+  	
+  	assertEqual(true, p2.moveTo(tl3, tl4));
+  	assertEqual(false, (tl4.getPiece() = nil));
+  	assertEqual(nil, tl3.getPiece());
+  	
+  	assertEqual(true, p3.moveTo(tl5, tl7));
+  	assertEqual(false, tl7.getPiece() = nil);
+  	assertEqual(nil, tl5.getPiece());
+  	assertEqual(true, p3.moveTo(tl7, tl6));
+  	assertEqual(false, tl6.getPiece() = nil);
+  	assertEqual(nil, tl7.getPiece());
+  
   );
   
   public testTowerCapture: () ==> ()
   testTowerCapture() == (
-  	dcl p: Piece := new Square();
-  	dcl t: Tower := new Tower();		
-  	dcl p2: Piece := new Cross();
+  	dcl p: Piece := new Circle(<Black>);
+  	dcl p3: Piece := new Cross(<White>);
+  	dcl p4: Piece := new Cross(<Black>);
+  	dcl p2: Piece := new Square(<White>);
+  	dcl t: Piece := new Tower(<White>, p2, p);
   	
-  	t.capturePiece(p);
-  	assertEqual(t.getSize(), 1);
-  	t.capturePiece(p2);
-  	assertEqual(2, t.getSize());
-  	t.capturePiece(p2);
-  	assertEqual(2, t.getSize()); -- nao pode capturar uma peça ja pertencente à torre
+  	assertEqual(t.getSize(), 2);
+  	t.capturePiece(p4);
+  	assertEqual(3, t.getSize());
+  	t.capturePiece(p3);
+  	assertEqual(4, t.getSize());
   );
   
-  public testTowerCapture2: () ==> ()
-  testTowerCapture2() == (
+  public testCanMoveto_Tower_AfterCapture: () ==> ()
+  testCanMoveto_Tower_AfterCapture() == (
   	dcl p: Piece := new Square();
-  	dcl t: Tower := new Tower();		
   	dcl p2: Piece := new Cross();
+  	dcl t: Tower := new Tower(<White>, p, p2);
   	dcl p3: Piece := new Circle();
   	dcl p4: Piece := new Square();
   	dcl p5: Piece := new Circle();
   	dcl p6: Piece := new Square();
-  	dcl p7: Piece := new Circle();
   	dcl tl1: Tile := new Tile(1,2);
   	dcl tl2: Tile:= new Tile(1,1);
   	
-  	t.capturePiece(p);
-  	t.capturePiece(p2);
   	t.capturePiece(p3);
   	t.capturePiece(p4);
   	assertEqual(true, t.canMoveTo(tl1, tl2));
   	t.capturePiece(p5);
-  	assertEqual(5, t.getSize());
   	t.capturePiece(p6);
   	assertEqual(6, t.getSize());
-  	assertEqual(false, t.canMoveTo(tl1, tl2)); -- torre nao move se tiver 6 ou mais peças
-  	t.capturePiece(p7);
-  	assertEqual(6, t.getSize()); -- nao pode capturar mais do que 6 peças
   );  
   
   
   -- ver captura de torres completas
-  public testTowerCapture3: () ==> ()
-  testTowerCapture3() == (
-  	dcl p: Piece := new Square();
-  	dcl t: Tower := new Tower();		
-  	dcl p2: Piece := new Cross();
-  	dcl p3: Piece := new Square();
-  	dcl t2: Tower := new Tower();		
-  	dcl p4: Piece := new Cross();
-  	dcl p5: Piece := new Cross();
-  	dcl p6: Piece := new Cross();
-  	dcl p7: Piece := new Cross();
-  	dcl p8: Piece := new Cross();
+  public testTowerCaptureTower: () ==> ()
+  testTowerCaptureTower() == (
+  	dcl p: Piece := new Square(<White>);		
+  	dcl p2: Piece := new Cross(<Black>);
+  	dcl p3: Piece := new Square(<Black>);
+  	dcl p4: Piece := new Cross(<White>);
+  	dcl p5: Piece := new Cross(<White>);
+  	dcl p6: Piece := new Cross(<Black>);
+  	dcl p7: Piece := new Cross(<Black>);
+  	dcl p8: Piece := new Cross(<White>);
+  	dcl t: Piece := new Tower(<White>,p,p2);
+  	dcl t2: Piece := new Tower(<Black>,p3,p4);
   	
-  	t.capturePiece(p);
-  	t.capturePiece(p2);
-  	t.capturePiece(p3);
-  	
-  	t2.capturePiece(p4);
   	t2.capturePiece(p5);
-  	t2.capturePiece(p6);
   	t2.capturePiece(p7);
-  	t2.capturePiece(p8);
+  	t.capturePiece(p6);
   	assertEqual(3, t.getSize());
-  	t.capturePiece(p4);
-  	assertEqual(3, t.getSize()); -- nao pode capturar uma peça ja pertencente à torre
+  	assertEqual(4, t2.getSize());
+  	t.capturePiece(p8);
+  	t.capturePiece(t2);
+  	assertEqual(7, t.getSize()) -- nao pode capturar uma peça ja pertencente à torre
   );  
   
    
   public testAll: () ==> ()
   testAll() == (
-    testCircle();
-    testSquare();
-  	testCross();
-    testTowerCircle();
-    testTowerSquare();
-  	testTowerCross();
+    testCanMoveto_Circle();
+    testCanMoveto_Square();
+  	testCanMoveto_Cross();
+    testCanMoveto_TowerCircle();
+    testCanMoveto_TowerSquare();
+  	testCanMoveto_TowerCross();
   	testTowerCapture();
-  	testTowerCapture2();
-  	testTowerCapture3();
+  	testCanMoveto_Tower_AfterCapture();
+  	testTowerCaptureTower();
+  	
   );
   
 end MovementTest
