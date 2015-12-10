@@ -19,21 +19,11 @@ instance variables
 operations
 		public Board: bool ==> Board
 		Board(n) == (
-				-- dcl boardLine: seq of Tile;
 				bigBoard := n; 
 				if bigBoard then
 					board := [[buildBoard(j, i) | j in set {1, ..., bigSizeX}] |  i in set {1, ..., bigSizeY}]
 				else
 					board := [[buildBoard(j, i) | j in set {1, ..., smallSizeX}] |  i in set {1, ..., smallSizeY}];
-				--if bigBoard = false then (
-				--	for counter_i = 1 to smallSizeY do (
-				--		boardLine:= [];
-				--		for counter_j = 1 to smallSizeX do (
-				--			boardLine := boardLine ^ [buildBoard(counter_j, counter_i)];
-				--		);
-				--		board(counter_i) := board(counter_i) ^ boardLine;
-				--	);
-				--);
 		);
 		
 		private buildBoard: nat1 * nat1 ==> Tile
