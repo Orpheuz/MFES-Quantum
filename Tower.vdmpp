@@ -12,7 +12,7 @@ operations
 				stack := [p1, p2] ^ stack;
 				Piece(player);
 		)
-		pre p1.pieceOfPlayer <> p2.pieceOfPlayer;
+		post p1.pieceOfPlayer <> p2.pieceOfPlayer;
 
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
@@ -27,11 +27,10 @@ operations
 				if pieceOfPlayer = <White> then pieceOfPlayer := <Black>
 				else pieceOfPlayer := <White>;
 		)
-		pre len stack < 6 and
-		 forall i, j in set {1, len stack - 1} & j = i + 1 => stack(i).pieceOfPlayer <> stack(j).pieceOfPlayer
-		post len stack = len stack~ + 1 and
-		pieceOfPlayer <> pieceOfPlayer~;
-		
+		pre len stack < 6
+		post len stack > len stack~ and
+		(hd stack).pieceOfPlayer <> (hd tl stack).pieceOfPlayer;	
+			
 		pure public getSize: () ==> nat1
 		getSize() == return len stack;
 		

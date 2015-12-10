@@ -18,5 +18,4 @@ operations
 								abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y);
 		);
 		
-		
 end Circle
