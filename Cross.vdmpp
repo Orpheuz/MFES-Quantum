@@ -12,18 +12,18 @@ operations
 				dcl tempY: nat1;
 				dcl maxX: nat1;
 				dcl maxY: nat1;
-				if(ti.getCoordinates().x = tf.getCoordinates().x)
+				if(ti.getCoordinates().x = tf.getCoordinates().x and ti.getCoordinates().y <> tf.getCoordinates().y)
 					then (
 								tempX := ti.getCoordinates().x;
 								if(ti.getCoordinates().y > tf.getCoordinates().y)
 									then (maxX := ti.getCoordinates().y; tempY := tf.getCoordinates().y)
 									else (tempY := ti.getCoordinates().y; maxX := tf.getCoordinates().y);
-								while(tempY < maxX)
+								while(tempY < maxX-1)
 									do(tempY := tempY + 1;
 											if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
 												then return false);
 								);
-				if(ti.getCoordinates().y = tf.getCoordinates().y)
+				if(ti.getCoordinates().x <> tf.getCoordinates().x and ti.getCoordinates().y = tf.getCoordinates().y)
 					then(
 				 		tempY := ti.getCoordinates().y;
 				 		if(ti.getCoordinates().x > tf.getCoordinates().x)
@@ -36,9 +36,11 @@ operations
 										);
 						)
 				else (if(ti.getCoordinates().x > tf.getCoordinates().x)
-					then (tempX := tf.getCoordinates().x;	maxX := ti.getCoordinates().x;);
+					then (tempX := tf.getCoordinates().x;	maxX := ti.getCoordinates().x)
+					else (tempX := ti.getCoordinates().x;	maxX := tf.getCoordinates().x);
 				if(ti.getCoordinates().y > tf.getCoordinates().y)
-					then (tempY := tf.getCoordinates().y; maxY := ti.getCoordinates().y);
+					then (tempY := tf.getCoordinates().y; maxY := ti.getCoordinates().y)
+					else (tempY := ti.getCoordinates().y; maxY := tf.getCoordinates().y);
 				while(tempX < maxX-1 and tempY < maxY-1)
 					do (tempX := tempX + 1;
 							tempY := tempY + 1;

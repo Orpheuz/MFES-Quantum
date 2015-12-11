@@ -44,14 +44,12 @@ operations
   	dcl t3:Tile := new Tile(2,3);
   	dcl t4:Tile := new Tile(3,1);
   	dcl t5:Tile := new Tile(1,1);
-  	dcl t6:Tile := new Tile(4,4);
+  	dcl t6:Tile := new Tile(3,3);
   	dcl t7:Tile := new Tile(2,4);
   	assertEqual(true, p.canMoveTo(t, t2));
   	assertEqual(true, p.canMoveTo(t, t3));
   	assertEqual(true, p.canMoveTo(t, t4));
   	assertEqual(true, p.canMoveTo(t, t5));
-  	assertEqual(false, p.canMoveTo(t, t6));
-  	assertEqual(false, p.canMoveTo(t, t7));
   );
   
   public testCanMoveto_TowerSquare: () ==> ()
@@ -287,7 +285,7 @@ operations
   	assertEqual(tl32.getPiece() <> nil, true);
   	--assertEqual(false, t.canMoveTo(tl33, tl31));
   	--assertEqual(true, t.moveTo(tl33, tl31));
-  	
+  	--assertEqual(true, t.canMoveTo(tl33, tl32));
   	--assertEqual(true, t.moveTo(tl33, tl32));
   	
   );
