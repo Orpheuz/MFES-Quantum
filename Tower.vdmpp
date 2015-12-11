@@ -13,7 +13,12 @@ operations
 				Piece(player);
 		)
 		post p1.pieceOfPlayer <> p2.pieceOfPlayer;
-
+		
+		public checkPiecesMiddle: Tile * Tile ==> bool
+		checkPiecesMiddle(ti,tf) == (
+				return (hd stack).checkPiecesMiddle(ti, tf);
+		);
+		
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
 				return (hd stack).canMoveTo(ti, tf, getSize());

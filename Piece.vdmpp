@@ -19,6 +19,10 @@ operations
 		canMoveTo(ti, tf, nt) == is subclass responsibility
 		pre ti.getPiece() <> nil;
 		
+		public checkPiecesMiddle: Tile * Tile ==> bool
+		checkPiecesMiddle(ti, tf) == is subclass responsibility
+		pre ti.getPiece() <> nil;
+		
 		public moveTo: Tile * Tile ==> bool
 		moveTo(ti, tf) == (
 				if (canMoveTo(ti, tf) and (tf.getPiece() = nil or ti.getPiece().pieceOfPlayer <> tf.getPiece().pieceOfPlayer))

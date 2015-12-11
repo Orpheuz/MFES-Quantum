@@ -4,14 +4,8 @@ operations
 		public Square: Player ==> Square
 		Square(p) == Piece(p);
 		
-		public canMoveTo: Tile * Tile ==> bool
-		canMoveTo(ti, tf) == (
-				return (abs(ti.getCoordinates().x - tf.getCoordinates().x) + abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1)
-		)
-		pre ti <> tf;
-		
-		public canMoveTo: Tile * Tile * nat1 ==> bool
-		canMoveTo(ti, tf, n) == (
+		public checkPiecesMiddle: Tile * Tile ==> bool
+		checkPiecesMiddle(ti,tf) == (
 				dcl tempX: nat1;
 				dcl tempY: nat1;
 				dcl max: nat1;
@@ -25,6 +19,7 @@ operations
 									do(tempY := tempY + 1;
 											if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
 												then return false);
+								return true
 								)
 					else(
 				 				tempY := ti.getCoordinates().y;
@@ -36,8 +31,32 @@ operations
 											if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
 												then return false
 											);
+								return true
 				);
-				
+		);
+		
+		public canMoveTo: Tile * Tile ==> bool
+		canMoveTo(ti, tf) == (
+			if(ti.isSpecial())
+				then (
+					return (checkPiecesMiddle(ti, tf) and
+									(ti.getCoordinates().x = tf.getCoordinates().x or 
+							 		ti.getCoordinates().x = tf.getCoordinates().x))
+				)
+			else
+				return (abs(ti.getCoordinates().x - tf.getCoordinates().x) + abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1)
+		)
+		pre ti <> tf;
+		
+		public canMoveTo: Tile * Tile * nat1 ==> bool
+		canMoveTo(ti, tf, n) == (
+			if(ti.isSpecial())
+				then (
+					return (checkPiecesMiddle(ti, tf) and
+									(ti.getCoordinates().x = tf.getCoordinates().x or 
+							 		ti.getCoordinates().x = tf.getCoordinates().x))
+				)
+			else
 				return (((abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n) and ti.getCoordinates().x = tf.getCoordinates().x )or 
 							 ((abs(ti.getCoordinates().y - tf.getCoordinates().y)) <= n and ti.getCoordinates().x = tf.getCoordinates().x));
 		)
