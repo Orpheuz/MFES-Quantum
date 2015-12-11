@@ -8,17 +8,13 @@ operations
     -- checks if can move between two different tiles
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
-			if(tf.getPiece() = nil and ti.getPiece() = self)
-				then return abs(ti.getCoordinates().x - tf.getCoordinates().x) <= 1 and
-										abs(ti.getCoordinates().y - tf.getCoordinates().y) <= 1
+				return abs(ti.getCoordinates().x - tf.getCoordinates().x) <= 1 and
+							 abs(ti.getCoordinates().y - tf.getCoordinates().y) <= 1
 				-- and
 					--			abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 and
 						--		abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1) 
 							--	or (abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 or 
 							 	--abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1);
-			else
-				return false;					
-		
 		) pre ti <> tf;
 		
 		public canMoveTo: Tile * Tile * nat1 ==> bool

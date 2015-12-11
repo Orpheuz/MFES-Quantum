@@ -7,11 +7,8 @@ operations
 
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
-			if(tf.getPiece() = nil)
-				then return	abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 and
-										abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1
-			else
-				return false;
+				return	abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 and
+								abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1
 		)
 		pre ti <> tf;
 		
