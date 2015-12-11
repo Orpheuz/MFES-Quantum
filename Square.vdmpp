@@ -12,8 +12,8 @@ operations
 		
 		public canMoveTo: Tile * Tile * nat1 ==> bool
 		canMoveTo(ti, tf, n) == (
-				return (((abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n) and abs(ti.getCoordinates().x - tf.getCoordinates().x) = 0)or 
-							 (abs(ti.getCoordinates().y - tf.getCoordinates().y) <= n and abs(ti.getCoordinates().x - tf.getCoordinates().x) = 0));
+				return (((abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n) and ti.getCoordinates().x = tf.getCoordinates().x )or 
+							 ((abs(ti.getCoordinates().y - tf.getCoordinates().y)) <= n and ti.getCoordinates().x = tf.getCoordinates().x));
 		)
 		pre ti <> tf;
 
