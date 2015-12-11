@@ -21,7 +21,7 @@ operations
 		
 		public moveTo: Tile * Tile ==> bool
 		moveTo(ti, tf) == (
-				if canMoveTo(ti, tf)
+				if (canMoveTo(ti, tf) and (tf.getPiece() = nil or ti.getPiece().pieceOfPlayer <> tf.getPiece().pieceOfPlayer))
 				then (
 					if (tf.getPiece() <> nil and isofclass(Tower, tf.getPiece()) and tf.getPiece().getSize() > 6)
 					then return false

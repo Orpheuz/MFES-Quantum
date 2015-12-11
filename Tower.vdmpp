@@ -28,8 +28,7 @@ operations
 				else pieceOfPlayer := <White>;
 		)
 		pre len stack < 6
-		post len stack > len stack~ and
-		(hd stack).pieceOfPlayer <> (hd tl stack).pieceOfPlayer;	
+		post len stack > len stack~;
 			
 		pure public getSize: () ==> nat1
 		getSize() == return len stack;
