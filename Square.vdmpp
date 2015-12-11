@@ -3,16 +3,21 @@ class Square is subclass of Piece
 operations
 		public Square: Player ==> Square
 		Square(p) == Piece(p);
-
+		
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
-				return (abs(ti.getCoordinates().x - tf.getCoordinates().x) + abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1);
-		);
+			if(tf.getPiece() = nil)
+				then return (abs(ti.getCoordinates().x - tf.getCoordinates().x) + abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1)
+			else
+				return false;
+		)
+		pre ti <> tf;
 		
 		public canMoveTo: Tile * Tile * nat1 ==> bool
 		canMoveTo(ti, tf, n) == (
 				return (((abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n) and abs(ti.getCoordinates().x - tf.getCoordinates().x) = 0)or 
 							 (abs(ti.getCoordinates().y - tf.getCoordinates().y) <= n and abs(ti.getCoordinates().x - tf.getCoordinates().x) = 0));
-		);
+		)
+		pre ti <> tf;
 
 end Square
