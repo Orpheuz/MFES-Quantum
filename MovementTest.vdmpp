@@ -238,8 +238,28 @@ operations
   	assertEqual(7, t.getSize()) -- nao pode capturar uma peça ja pertencente à torre
   );  
   
-  public testMoveandCapture: () ==> ()
-  testMoveandCapture() == (
+  public testPieceMoveandCapture: () ==> ()
+  testPieceMoveandCapture() == (
+  	dcl p2: Piece := new Square(<Black>);
+  	dcl p3: Piece := new Circle(<White>);
+  	
+  	dcl tl11: Tile := new Tile(1,1,p2);
+  	dcl tl21: Tile := new Tile(2,1);
+  	dcl tl31: Tile := new Tile(3,1,p3);
+  	
+  	--simple movement with capture
+  	assertEqual(tl11.getPiece() = nil, false);
+  	assertEqual(tl21.getPiece() = nil, true);
+  	assertEqual(true, p2.moveTo(tl11, tl21));
+  	assertEqual(tl11.getPiece() = nil, true);
+  	assertEqual(tl21.getPiece() = nil, false);
+  	assertEqual(true, p2.moveTo(tl21, tl31));
+  	assertEqual(tl21.getPiece() = nil, true);
+  	assertEqual(tl31.getPiece() = nil, false);
+  );
+   
+  public testTowerMoveandCapture: () ==> ()
+  testTowerMoveandCapture() == (
   	dcl p: Piece := new Square(<White>);
   	dcl p2: Piece := new Square(<Black>);
   	dcl t: Piece := new Tower(<Black>, p2, p);
@@ -261,6 +281,7 @@ operations
   	--assertEqual(t.getSize(), 3);
   	
   );
+  
    
   public testAll: () ==> ()
   testAll() == (
