@@ -14,6 +14,21 @@ operations
 		
 		public canMoveTo: Tile * Tile * nat1 ==> bool
 		canMoveTo(ti, tf, n) == (
+				dcl tempX: nat1 := ti.getCoordinates().x;
+				dcl tempY: nat1 := ti.getCoordinates().y;
+				dcl maxX: nat1 := tf.getCoordinates().x;
+				dcl maxY: nat1 := tf.getCoordinates().y;
+				if(ti.getCoordinates().x > tf.getCoordinates().x)
+					then (tempX := tf.getCoordinates().x;	maxX := ti.getCoordinates().x;);
+				if(ti.getCoordinates().y > tf.getCoordinates().y)
+					then (tempY := tf.getCoordinates().y; maxY := ti.getCoordinates().y);
+				while(tempX < maxX-1 and tempY < maxY-1)
+					do (tempX := tempX + 1;
+							tempY := tempY + 1;
+							if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
+								then return false
+					);
+				
 				return	abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n and
 								abs(ti.getCoordinates().y - tf.getCoordinates().y) <= n and
 								abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y);
