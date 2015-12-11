@@ -256,29 +256,39 @@ operations
   	assertEqual(true, p2.moveTo(tl21, tl31));
   	assertEqual(tl21.getPiece() = nil, true);
   	assertEqual(tl31.getPiece() = nil, false);
+  	assertEqual(isofclass(Tower, tl31.getPiece()), true);
+  	assertEqual(tl31.getPiece().getSize(), 2);
   );
    
   public testTowerMoveandCapture: () ==> ()
   testTowerMoveandCapture() == (
-  	dcl p: Piece := new Square(<White>);
-  	dcl p2: Piece := new Square(<Black>);
+  	dcl p: Piece := new Circle(<White>);
+  	dcl p2: Piece := new Circle(<Black>);
   	dcl t: Piece := new Tower(<Black>, p2, p);
-  	dcl p3: Piece := new Circle(<White>);
+  	dcl p3: Piece := new Square(<White>);
   	dcl p4: Piece := new Cross(<Black>);
   	
   	dcl tl11: Tile := new Tile(1,1,t);
-  	dcl tl21: Tile := new Tile(2,1);
-  	--dcl tl31: Tile := new Tile(3,1,p3);
-  	--dcl tl32: Tile := new Tile(3,2,p4);
-  	--dcl tl33: Tile := new Tile(3,3);
+  	dcl tl22: Tile := new Tile(2,2);
+  	dcl tl33: Tile := new Tile(3,3,p3);
+  	dcl tl31: Tile := new Tile(3,1);
+  	dcl tl32: Tile := new Tile(3,2,p4);
   	
   	--simple movement with capture
   	assertEqual(tl11.getPiece() = nil, false);
-  	assertEqual(tl21.getPiece() = nil, true);
-  	--assertEqual(true, p2.moveTo(tl11, tl21));
-  	assertEqual(tl11.getPiece() = nil, true);
-  	assertEqual(tl21.getPiece() = nil, false);
-  	--assertEqual(t.getSize(), 3);
+  	assertEqual(tl22.getPiece() = nil, true);
+  	assertEqual(true, t.canMoveTo(tl11, tl22));
+  	assertEqual(true, t.moveTo(tl11, tl22));
+  	assertEqual(true, t.canMoveTo(tl22, tl33));
+  	assertEqual(true, t.moveTo(tl22, tl33));
+  	assertEqual(tl22.getPiece() = nil, true);
+  	assertEqual(tl33.getPiece() = nil, false);
+  	--assertEqual(tl33.getPiece().getSize(), 2);
+  	assertEqual(tl32.getPiece() <> nil, true);
+  	--assertEqual(false, t.canMoveTo(tl33, tl31));
+  	--assertEqual(true, t.moveTo(tl33, tl31));
+  	
+  	--assertEqual(true, t.moveTo(tl33, tl32));
   	
   );
   
