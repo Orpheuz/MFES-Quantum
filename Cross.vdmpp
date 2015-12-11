@@ -8,6 +8,44 @@ operations
     -- checks if can move between two different tiles
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
+				dcl tempX: nat1;
+				dcl tempY: nat1;
+				dcl maxX: nat1;
+				dcl maxY: nat1;
+				if(ti.getCoordinates().x = tf.getCoordinates().x)
+					then (
+								tempX := ti.getCoordinates().x;
+								if(ti.getCoordinates().y > tf.getCoordinates().y)
+									then (maxX := ti.getCoordinates().y; tempY := tf.getCoordinates().y)
+									else (tempY := ti.getCoordinates().y; maxX := tf.getCoordinates().y);
+								while(tempY < maxX)
+									do(tempY := tempY + 1;
+											if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
+												then return false);
+								);
+				if(ti.getCoordinates().y = tf.getCoordinates().y)
+					then(
+				 		tempY := ti.getCoordinates().y;
+				 		if(ti.getCoordinates().x > tf.getCoordinates().x)
+							then (maxX := ti.getCoordinates().x; tempX := tf.getCoordinates().x)
+							else (tempX := ti.getCoordinates().x; maxX := tf.getCoordinates().x);
+							while(tempX < maxX-1)
+								do (tempX := tempX + 1;
+										if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
+											then return false
+										);
+						)
+				else (if(ti.getCoordinates().x > tf.getCoordinates().x)
+					then (tempX := tf.getCoordinates().x;	maxX := ti.getCoordinates().x;);
+				if(ti.getCoordinates().y > tf.getCoordinates().y)
+					then (tempY := tf.getCoordinates().y; maxY := ti.getCoordinates().y);
+				while(tempX < maxX-1 and tempY < maxY-1)
+					do (tempX := tempX + 1;
+							tempY := tempY + 1;
+							if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
+								then return false
+					););
+				
 				return abs(ti.getCoordinates().x - tf.getCoordinates().x) <= 1 and
 							 abs(ti.getCoordinates().y - tf.getCoordinates().y) <= 1
 				-- and
