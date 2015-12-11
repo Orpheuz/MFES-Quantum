@@ -23,7 +23,7 @@ operations
 		moveTo(ti, tf) == (
 				if canMoveTo(ti, tf)
 				then (
-					if (tf.getPiece() <> nil and tf.getPiece().getSize() > 6 and isofclass(Tower, tf.getPiece()))
+					if (tf.getPiece() <> nil and isofclass(Tower, tf.getPiece()) and tf.getPiece().getSize() > 6)
 					then return false
 					else (
 						if tf.getPiece() <> nil and tf.getPiece().getSize() < 6
@@ -57,6 +57,6 @@ operations
 		pre p <> self;
 		
 		pure public getSize: () ==> nat1
-		getSize() == is not yet specified;
+		getSize() == return 1;
 	
 end Piece
