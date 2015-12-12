@@ -3,6 +3,7 @@ types
 		Player = <Player1> | <Player2>;
 values
 		private PLAYERS = { p | p:Player };
+		private scores : map Player to nat;
 		
 instance variables
 		private boardType: int;
