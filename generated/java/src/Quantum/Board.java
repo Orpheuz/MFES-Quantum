@@ -1,4 +1,4 @@
-package Quantum;
+package quantum;
 
 import java.util.Iterator;
 
@@ -9,18 +9,13 @@ import org.overture.codegen.runtime.Utils;
 import org.overture.codegen.runtime.VDMSeq;
 import org.overture.codegen.runtime.VDMSet;
 
-import Quantum.quotes.BlackQuote;
-import Quantum.quotes.WhiteQuote;
-
 
 @SuppressWarnings("all")
 public class Board {
-    public static final double smallSizeY = 6L;
     public static final double smallSizeX = 10L;
-    public static final Number smallSize = smallSizeX * smallSizeY;
-    public static final double bigSizeX = 6L;
-    public static final double bigSizeY = 10L;
-    public static final Number bigSize = bigSizeX * bigSizeY;
+    public static final double smallSizeY = 6L;
+    public static final double bigSizeX = 12L;
+    public static final double bigSizeY = 8L;
     private static Board boardInstance = new Board();
     private VDMSeq board = SeqUtil.seq(SeqUtil.seq());
 
@@ -374,7 +369,7 @@ public class Board {
                                                                                             Number intPattern_40 =
                                                                                                 ((Number) tuplePattern_20.get(1));
                                                                                             success_1 = Utils.equals(intPattern_40,
-                                                                                                    4L);
+                                                                                                    5L);
                                                                                         }
                                                                                     }
 
@@ -394,7 +389,7 @@ public class Board {
                                                                                                 Number intPattern_42 =
                                                                                                     ((Number) tuplePattern_21.get(1));
                                                                                                 success_1 = Utils.equals(intPattern_42,
-                                                                                                        2L);
+                                                                                                        5L);
                                                                                             }
                                                                                         }
 
@@ -408,13 +403,13 @@ public class Board {
                                                                                                 Number intPattern_43 =
                                                                                                     ((Number) tuplePattern_22.get(0));
                                                                                                 success_1 = Utils.equals(intPattern_43,
-                                                                                                        7L);
+                                                                                                        4L);
 
                                                                                                 if (success_1) {
                                                                                                     Number intPattern_44 =
                                                                                                         ((Number) tuplePattern_22.get(1));
                                                                                                     success_1 = Utils.equals(intPattern_44,
-                                                                                                            2L);
+                                                                                                            7L);
                                                                                                 }
                                                                                             }
 
@@ -454,7 +449,7 @@ public class Board {
                                                                                                             Number intPattern_48 =
                                                                                                                 ((Number) tuplePattern_24.get(1));
                                                                                                             success_1 = Utils.equals(intPattern_48,
-                                                                                                                    4L);
+                                                                                                                    5L);
                                                                                                         }
                                                                                                     }
 
@@ -619,102 +614,102 @@ public class Board {
                                                                                                                                     }
 
                                                                                                                                     if (success_1) {
-                                                                                                                                        casesExpResult_1 = new Square(WhiteQuote.getInstance());
+                                                                                                                                        casesExpResult_1 = new Square(quantum.quotes.WhiteQuote.getInstance());
                                                                                                                                     } else {
                                                                                                                                         casesExpResult_1 = null;
                                                                                                                                     }
                                                                                                                                 } else {
-                                                                                                                                    casesExpResult_1 = new Square(WhiteQuote.getInstance());
+                                                                                                                                    casesExpResult_1 = new Square(quantum.quotes.WhiteQuote.getInstance());
                                                                                                                                 }
                                                                                                                             } else {
-                                                                                                                                casesExpResult_1 = new Square(WhiteQuote.getInstance());
+                                                                                                                                casesExpResult_1 = new Square(quantum.quotes.WhiteQuote.getInstance());
                                                                                                                             }
                                                                                                                         } else {
-                                                                                                                            casesExpResult_1 = new Square(WhiteQuote.getInstance());
+                                                                                                                            casesExpResult_1 = new Square(quantum.quotes.WhiteQuote.getInstance());
                                                                                                                         }
                                                                                                                     } else {
-                                                                                                                        casesExpResult_1 = new Square(WhiteQuote.getInstance());
+                                                                                                                        casesExpResult_1 = new Square(quantum.quotes.WhiteQuote.getInstance());
                                                                                                                     }
                                                                                                                 } else {
-                                                                                                                    casesExpResult_1 = new Square(WhiteQuote.getInstance());
+                                                                                                                    casesExpResult_1 = new Square(quantum.quotes.WhiteQuote.getInstance());
                                                                                                                 }
                                                                                                             } else {
-                                                                                                                casesExpResult_1 = new Circle(WhiteQuote.getInstance());
+                                                                                                                casesExpResult_1 = new Circle(quantum.quotes.WhiteQuote.getInstance());
                                                                                                             }
                                                                                                         } else {
-                                                                                                            casesExpResult_1 = new Circle(WhiteQuote.getInstance());
+                                                                                                            casesExpResult_1 = new Circle(quantum.quotes.WhiteQuote.getInstance());
                                                                                                         }
                                                                                                     } else {
-                                                                                                        casesExpResult_1 = new Circle(WhiteQuote.getInstance());
+                                                                                                        casesExpResult_1 = new Circle(quantum.quotes.WhiteQuote.getInstance());
                                                                                                     }
                                                                                                 } else {
-                                                                                                    casesExpResult_1 = new Circle(WhiteQuote.getInstance());
+                                                                                                    casesExpResult_1 = new Circle(quantum.quotes.WhiteQuote.getInstance());
                                                                                                 }
                                                                                             } else {
-                                                                                                casesExpResult_1 = new Circle(WhiteQuote.getInstance());
+                                                                                                casesExpResult_1 = new Circle(quantum.quotes.WhiteQuote.getInstance());
                                                                                             }
                                                                                         } else {
-                                                                                            casesExpResult_1 = new Circle(WhiteQuote.getInstance());
+                                                                                            casesExpResult_1 = new Circle(quantum.quotes.WhiteQuote.getInstance());
                                                                                         }
                                                                                     } else {
-                                                                                        casesExpResult_1 = new Cross(WhiteQuote.getInstance());
+                                                                                        casesExpResult_1 = new Cross(quantum.quotes.WhiteQuote.getInstance());
                                                                                     }
                                                                                 } else {
-                                                                                    casesExpResult_1 = new Cross(WhiteQuote.getInstance());
+                                                                                    casesExpResult_1 = new Cross(quantum.quotes.WhiteQuote.getInstance());
                                                                                 }
                                                                             } else {
-                                                                                casesExpResult_1 = new Cross(WhiteQuote.getInstance());
+                                                                                casesExpResult_1 = new Cross(quantum.quotes.WhiteQuote.getInstance());
                                                                             }
                                                                         } else {
-                                                                            casesExpResult_1 = new Cross(WhiteQuote.getInstance());
+                                                                            casesExpResult_1 = new Cross(quantum.quotes.WhiteQuote.getInstance());
                                                                         }
                                                                     } else {
-                                                                        casesExpResult_1 = new Square(BlackQuote.getInstance());
+                                                                        casesExpResult_1 = new Square(quantum.quotes.BlackQuote.getInstance());
                                                                     }
                                                                 } else {
-                                                                    casesExpResult_1 = new Square(BlackQuote.getInstance());
+                                                                    casesExpResult_1 = new Square(quantum.quotes.BlackQuote.getInstance());
                                                                 }
                                                             } else {
-                                                                casesExpResult_1 = new Square(BlackQuote.getInstance());
+                                                                casesExpResult_1 = new Square(quantum.quotes.BlackQuote.getInstance());
                                                             }
                                                         } else {
-                                                            casesExpResult_1 = new Square(BlackQuote.getInstance());
+                                                            casesExpResult_1 = new Square(quantum.quotes.BlackQuote.getInstance());
                                                         }
                                                     } else {
-                                                        casesExpResult_1 = new Square(BlackQuote.getInstance());
+                                                        casesExpResult_1 = new Square(quantum.quotes.BlackQuote.getInstance());
                                                     }
                                                 } else {
-                                                    casesExpResult_1 = new Square(BlackQuote.getInstance());
+                                                    casesExpResult_1 = new Square(quantum.quotes.BlackQuote.getInstance());
                                                 }
                                             } else {
-                                                casesExpResult_1 = new Circle(BlackQuote.getInstance());
+                                                casesExpResult_1 = new Circle(quantum.quotes.BlackQuote.getInstance());
                                             }
                                         } else {
-                                            casesExpResult_1 = new Circle(BlackQuote.getInstance());
+                                            casesExpResult_1 = new Circle(quantum.quotes.BlackQuote.getInstance());
                                         }
                                     } else {
-                                        casesExpResult_1 = new Circle(BlackQuote.getInstance());
+                                        casesExpResult_1 = new Circle(quantum.quotes.BlackQuote.getInstance());
                                     }
                                 } else {
-                                    casesExpResult_1 = new Circle(BlackQuote.getInstance());
+                                    casesExpResult_1 = new Circle(quantum.quotes.BlackQuote.getInstance());
                                 }
                             } else {
-                                casesExpResult_1 = new Circle(BlackQuote.getInstance());
+                                casesExpResult_1 = new Circle(quantum.quotes.BlackQuote.getInstance());
                             }
                         } else {
-                            casesExpResult_1 = new Circle(BlackQuote.getInstance());
+                            casesExpResult_1 = new Circle(quantum.quotes.BlackQuote.getInstance());
                         }
                     } else {
-                        casesExpResult_1 = new Cross(BlackQuote.getInstance());
+                        casesExpResult_1 = new Cross(quantum.quotes.BlackQuote.getInstance());
                     }
                 } else {
-                    casesExpResult_1 = new Cross(BlackQuote.getInstance());
+                    casesExpResult_1 = new Cross(quantum.quotes.BlackQuote.getInstance());
                 }
             } else {
-                casesExpResult_1 = new Cross(BlackQuote.getInstance());
+                casesExpResult_1 = new Cross(quantum.quotes.BlackQuote.getInstance());
             }
         } else {
-            casesExpResult_1 = new Cross(BlackQuote.getInstance());
+            casesExpResult_1 = new Cross(quantum.quotes.BlackQuote.getInstance());
         }
 
         {
@@ -780,10 +775,9 @@ public class Board {
 
     public String toString() {
         return "Board{" + "smallSizeX = " + Utils.toString(smallSizeX) +
-        ", smallSizeY = " + Utils.toString(smallSizeY) + ", smallSize = " +
-        Utils.toString(smallSize) + ", bigSizeX = " + Utils.toString(bigSizeX) +
-        ", bigSizeY = " + Utils.toString(bigSizeY) + ", bigSize = " +
-        Utils.toString(bigSize) + ", board := " + Utils.toString(board) +
-        ", boardInstance := " + Utils.toString(boardInstance) + "}";
+        ", smallSizeY = " + Utils.toString(smallSizeY) + ", bigSizeX = " +
+        Utils.toString(bigSizeX) + ", bigSizeY = " + Utils.toString(bigSizeY) +
+        ", board := " + Utils.toString(board) + ", boardInstance := " +
+        Utils.toString(boardInstance) + "}";
     }
 }

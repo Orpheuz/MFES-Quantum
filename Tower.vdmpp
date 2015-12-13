@@ -25,6 +25,10 @@ operations
 		)
 		pre len stack < 6;
 		
+		--placeholder
+		public canMoveTo: Tile * Tile * nat1 ==> bool
+		canMoveTo(ti, tf, n) == return true;
+		
 		public capturePiece: Piece ==> ()
 		capturePiece(p) == (
 				stack := [p] ^ stack;
@@ -36,5 +40,11 @@ operations
 			
 		pure public getSize: () ==> nat1
 		getSize() == return len stack;
+		
+		pure public getStack: () ==> seq of Piece
+		getStack() == return stack;
+		
+		pure public getPieceTower: () ==> Piece
+		getPieceTower() == return hd stack;
 		
 end Tower

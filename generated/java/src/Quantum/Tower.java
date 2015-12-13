@@ -1,11 +1,8 @@
-package Quantum;
+package quantum;
 
-import org.overture.codegen.runtime.SeqUtil;
-import org.overture.codegen.runtime.Utils;
-import org.overture.codegen.runtime.VDMSeq;
+import org.overture.codegen.runtime.*;
 
-import Quantum.quotes.BlackQuote;
-import Quantum.quotes.WhiteQuote;
+import java.util.*;
 
 
 @SuppressWarnings("all")
@@ -34,13 +31,17 @@ public class Tower extends Piece {
         return ((Piece) stack.get(0)).canMoveTo(ti, tf, getSize());
     }
 
+    public Boolean canMoveTo(final Tile ti, final Tile tf, final Number n) {
+        return true;
+    }
+
     public void capturePiece(final Piece p) {
         stack = SeqUtil.conc(SeqUtil.seq(p), Utils.copy(stack));
 
-        if (Utils.equals(pieceOfPlayer, WhiteQuote.getInstance())) {
-            pieceOfPlayer = BlackQuote.getInstance();
+        if (Utils.equals(pieceOfPlayer, quantum.quotes.WhiteQuote.getInstance())) {
+            pieceOfPlayer = quantum.quotes.BlackQuote.getInstance();
         } else {
-            pieceOfPlayer = WhiteQuote.getInstance();
+            pieceOfPlayer = quantum.quotes.WhiteQuote.getInstance();
         }
     }
 
@@ -48,19 +49,15 @@ public class Tower extends Piece {
         return stack.size();
     }
 
+    public VDMSeq getStack() {
+        return Utils.copy(stack);
+    }
+
+    public Piece getPieceTower() {
+        return ((Piece) stack.get(0));
+    }
+
     public String toString() {
         return "Tower{" + "stack := " + Utils.toString(stack) + "}";
     }
-
-	@Override
-	public Boolean canMoveTo(Tile ti, Tile tf, Number nt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Boolean moveTo(Tile ti, Tile tf, Number nt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -1,6 +1,8 @@
-package Quantum;
+package quantum;
 
-import org.overture.codegen.runtime.Utils;
+import org.overture.codegen.runtime.*;
+
+import java.util.*;
 
 
 @SuppressWarnings("all")
@@ -239,10 +241,4 @@ public class Cross extends Piece {
     public String toString() {
         return "Cross{}";
     }
-
-	@Override
-	public Boolean moveTo(Tile ti, Tile tf, Number nt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -1,9 +1,8 @@
-package Quantum;
+package quantum;
 
-import org.overture.codegen.runtime.Utils;
+import org.overture.codegen.runtime.*;
 
-import Quantum.quotes.BlackQuote;
-import Quantum.quotes.WhiteQuote;
+import java.util.*;
 
 
 @SuppressWarnings("all")
@@ -93,13 +92,11 @@ abstract public class Piece {
         }
     }
 
-    public abstract Boolean moveTo(final Tile ti, final Tile tf, final Number nt);
-
     public void capturePiece(final Piece p) {
-        if (Utils.equals(pieceOfPlayer, WhiteQuote.getInstance())) {
-            pieceOfPlayer = BlackQuote.getInstance();
+        if (Utils.equals(pieceOfPlayer, quantum.quotes.WhiteQuote.getInstance())) {
+            pieceOfPlayer = quantum.quotes.BlackQuote.getInstance();
         } else {
-            pieceOfPlayer = WhiteQuote.getInstance();
+            pieceOfPlayer = quantum.quotes.WhiteQuote.getInstance();
         }
     }
 

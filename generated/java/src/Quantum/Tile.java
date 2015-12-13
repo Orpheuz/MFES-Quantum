@@ -1,4 +1,4 @@
-package Quantum;
+package quantum;
 
 import org.overture.codegen.runtime.*;
 

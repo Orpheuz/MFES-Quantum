@@ -1,4 +1,4 @@
-package Quantum;
+package quantum;
 
 public class Main {
 
@@ -14,7 +14,10 @@ public class Main {
 			}
 			System.out.println("");
 		}
-
+	}
+	
+	private String getPieceString(Piece p) {
+		return "";
 	}
 
 }

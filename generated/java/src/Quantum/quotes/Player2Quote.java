@@ -1,4 +1,4 @@
-package Quantum.quotes;
+package quantum.quotes;
 
 import org.overture.codegen.runtime.*;
 

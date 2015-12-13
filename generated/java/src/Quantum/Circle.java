@@ -1,6 +1,8 @@
-package Quantum;
+package quantum;
 
-import org.overture.codegen.runtime.Utils;
+import org.overture.codegen.runtime.*;
+
+import java.util.*;
 
 
 @SuppressWarnings("all")
@@ -141,10 +143,4 @@ public class Circle extends Piece {
     public String toString() {
         return "Circle{}";
     }
-
-	@Override
-	public Boolean moveTo(Tile ti, Tile tf, Number nt) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

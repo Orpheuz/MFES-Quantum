@@ -1,21 +1,8 @@
-package Quantum;
+package quantum;
 
-import java.util.Iterator;
+import org.overture.codegen.runtime.*;
 
-import org.overture.codegen.runtime.MapUtil;
-import org.overture.codegen.runtime.Maplet;
-import org.overture.codegen.runtime.SetUtil;
-import org.overture.codegen.runtime.Utils;
-import org.overture.codegen.runtime.VDMMap;
-import org.overture.codegen.runtime.VDMSet;
-
-import Quantum.quotes.NotStartedQuote;
-import Quantum.quotes.Player1Quote;
-import Quantum.quotes.Player1WonQuote;
-import Quantum.quotes.Player2Quote;
-import Quantum.quotes.Player2WonQuote;
-import Quantum.quotes.PlayingQuote;
-import Quantum.quotes.WhiteQuote;
+import java.util.*;
 
 
 @SuppressWarnings("all")
@@ -25,8 +12,8 @@ public class Quantum {
     private Object playerTurn;
     private Object actualState;
     private VDMMap score = MapUtil.map(new Maplet(
-                Player1Quote.getInstance(), 0L),
-            new Maplet(Player2Quote.getInstance(), 0L));
+                quantum.quotes.Player1Quote.getInstance(), 0L),
+            new Maplet(quantum.quotes.Player2Quote.getInstance(), 0L));
 
     public Quantum(final Boolean n) {
         cg_init_Quantum_1(n);
@@ -39,8 +26,8 @@ public class Quantum {
         boardType = n;
         board = Board.getInstance();
         board.setBoardType(boardType);
-        playerTurn = Player1Quote.getInstance();
-        actualState = NotStartedQuote.getInstance();
+        playerTurn = quantum.quotes.Player1Quote.getInstance();
+        actualState = quantum.quotes.NotStartedQuote.getInstance();
     }
 
     public void isGameOver() {
@@ -66,45 +53,45 @@ public class Quantum {
 
             if (t.getPiece().getSize().longValue() >= 6L) {
                 if (Utils.equals(t.getPiece().getPlayer(),
-                            WhiteQuote.getInstance())) {
+                            quantum.quotes.WhiteQuote.getInstance())) {
                     countW = countW.longValue() + 1L;
-                } else { 
+                } else {
                     countB = countB.longValue() + 1L;
                 }
             }
         }
 
         if (countW.longValue() >= 3L) {
-            actualState = Player1WonQuote.getInstance();
+            actualState = quantum.quotes.Player1WonQuote.getInstance();
             score = MapUtil.override(Utils.copy(score),
                     MapUtil.map(
-                        new Maplet(Player1Quote.getInstance(),
+                        new Maplet(quantum.quotes.Player1Quote.getInstance(),
                             ((Number) Utils.get(score,
-                                Player1Quote.getInstance())).longValue() +
+                                quantum.quotes.Player1Quote.getInstance())).longValue() +
                             1L)));
         } else {
             if (countB.longValue() >= 3L) {
-                actualState = Player2WonQuote.getInstance();
+                actualState = quantum.quotes.Player2WonQuote.getInstance();
                 score = MapUtil.override(Utils.copy(score),
                         MapUtil.map(
                             new Maplet(
-                                Player2Quote.getInstance(),
+                                quantum.quotes.Player2Quote.getInstance(),
                                 ((Number) Utils.get(score,
-                                    Player2Quote.getInstance())).longValue() +
+                                    quantum.quotes.Player2Quote.getInstance())).longValue() +
                                 1L)));
             }
         }
     }
 
     public void startGame() {
-        actualState = PlayingQuote.getInstance();
+        actualState = quantum.quotes.PlayingQuote.getInstance();
     }
 
     public void endTurn() {
-        if (Utils.equals(playerTurn, Player1Quote.getInstance())) {
-            playerTurn = Player2Quote.getInstance();
+        if (Utils.equals(playerTurn, quantum.quotes.Player1Quote.getInstance())) {
+            playerTurn = quantum.quotes.Player2Quote.getInstance();
         } else {
-            playerTurn = Player1Quote.getInstance();
+            playerTurn = quantum.quotes.Player1Quote.getInstance();
         }
     }
 
