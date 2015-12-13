@@ -2,12 +2,10 @@ class Quantum
 types
 		public Player = <Player1> | <Player2>;
 		public State = <Player1Won> | <Player2Won> | <Playing> | <NotStarted>;
-values
-		private PLAYERS = { p | p:Player };
-		
+
 instance variables
 		private boardType: bool;
-		private board: Board;
+		public board: Board;
 		private playerTurn: Player;
 		private actualState: State;
 		private score: map Player to nat := {<Player1> |-> 0, <Player2> |-> 0};
