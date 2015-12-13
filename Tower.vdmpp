@@ -25,7 +25,6 @@ operations
 		)
 		pre len stack < 6;
 		
-		--é preciso ver se isto dá override à função da classe mãe
 		public capturePiece: Piece ==> ()
 		capturePiece(p) == (
 				stack := [p] ^ stack;
@@ -38,8 +37,4 @@ operations
 		pure public getSize: () ==> nat1
 		getSize() == return len stack;
 		
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
 end Tower

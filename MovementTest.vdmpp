@@ -1,6 +1,5 @@
 class MovementTest is subclass of QuantumTest
 
-
 instance variables
 	private bd:Board := new Board();
 

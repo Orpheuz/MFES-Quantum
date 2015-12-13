@@ -11,20 +11,11 @@ values
 		public bigSize: nat1 = bigSizeX * bigSizeY;
 		
 instance variables
-		
-		private bigBoard: bool;
+
 		private board: seq of seq of Tile := [[]];
 		private static boardInstance:Board := new Board();
 
 operations
-		public Board: bool ==> Board
-		Board(n) == (
-				bigBoard := n; 
-				if bigBoard then
-					board := [[buildBoard(j, i) | j in set {1, ..., bigSizeX}] |  i in set {1, ..., bigSizeY}]
-				else
-					board := [[buildBoard(j, i) | j in set {1, ..., smallSizeX}] |  i in set {1, ..., smallSizeY}];
-		);
 		
 		private buildBoard: nat1 * nat1 ==> Tile
 		buildBoard(x, y) == (
@@ -46,7 +37,15 @@ operations
 		public static getInstance: () ==> Board
 		getInstance() == return boardInstance;
 		
-		public getTile: nat1 * nat1 ==> Tile
+		public setBoardType: bool ==> () 
+		setBoardType(bigBoard) == (
+			if bigBoard then
+					board := [[buildBoard(j, i) | j in set {1, ..., bigSizeX}] |  i in set {1, ..., bigSizeY}]
+				else
+					board := [[buildBoard(j, i) | j in set {1, ..., smallSizeX}] |  i in set {1, ..., smallSizeY}];
+		);
+		
+		pure public getTile: nat1 * nat1 ==> Tile
 		getTile(x, y) == (
 				return board(x)(y);
 		);

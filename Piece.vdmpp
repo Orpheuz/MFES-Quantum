@@ -60,6 +60,9 @@ operations
 		)
 		pre p <> self;
 		
+		pure public getPlayer: () ==> Player
+		getPlayer() == return pieceOfPlayer;
+		
 		pure public getSize: () ==> nat1
 		getSize() == return 1;
 	

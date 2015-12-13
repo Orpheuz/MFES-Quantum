@@ -1,20 +1,66 @@
 class Quantum
 types
-		Player = <Player1> | <Player2>;
+		public Player = <Player1> | <Player2>;
+		public State = <Player1Won> | <Player2Won> | <Playing> | <NotStarted>;
 values
 		private PLAYERS = { p | p:Player };
-		private scores : map Player to nat;
 		
 instance variables
-		private boardType: int;
-		
+		private boardType: bool;
+		private board: Board;
+		private playerTurn: Player;
+		private actualState: State;
+		private score: map Player to nat := {<Player1> |-> 0, <Player2> |-> 0};
+	
 operations
-		public Quantum: nat1 ==> Quantum
-          Quantum(n) == (
-										boardType := n;
-                );
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
+		public Quantum: bool ==> Quantum
+    Quantum(n) == (
+			boardType := n;
+			board := Board`getInstance();
+			board.setBoardType(boardType);
+			playerTurn := <Player1>;
+			actualState := <NotStarted>;
+    );
+                
+    public isGameOver: () ==> ()
+    isGameOver() == (
+    		dcl countW: nat := 0;
+    		dcl countB: nat := 0;
+    		for all t in set {board.getTile(x, y) | x in set {0, ..., Board`smallSizeX}, y in set {0, ..., Board`smallSizeY}} 
+    			do (
+    				if(t.getPiece().getSize() >= 6) then
+    					if(t.getPiece().getPlayer() = <White>) then countW := countW + 1
+    					else countB := countB + 1;
+    			);
+    		if(countW >= 3) then (
+    			actualState := <Player1Won>;
+    			score := score ++ {<Player1> |-> score(<Player1>) + 1};
+    			)
+    		else if(countB >= 3) then (
+    			actualState := <Player2Won>;
+    			score := score ++ {<Player2> |-> score(<Player2>) + 1};
+    			)
+    );   
+             
+    public startGame: () ==> ()
+    startGame() == actualState := <Playing>;  
+    
+    public endTurn: () ==> ()
+    endTurn() == (
+    	if(playerTurn = <Player1>) then playerTurn := <Player2>
+    	else playerTurn := <Player1>
+    );
+    
+    public movePieceTo: nat1 * nat1 * nat1 * nat1 ==> bool
+    movePieceTo(xi, yi, xf, yf) == (
+    	if(board.getTile(xi, yi).getPiece() = nil) then return false;
+    	return board.getTile(xi, yi).getPiece().moveTo(board.getTile(xi, yi), board.getTile(xf, yf));
+    );
+    
+    pure public getGameState: () ==> State
+    getGameState() == return actualState;
+    
+    pure public getActualPlayer: () ==> Player
+    getActualPlayer() == return playerTurn;
+    
 end Quantum
