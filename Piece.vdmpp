@@ -49,9 +49,6 @@ operations
 		pre ti.getPiece() <> nil;
 		--post tf.getPiece() = ti~.getPiece(); not supported 
 		
-		public moveTo: Tile * Tile * nat1 ==> bool
-		moveTo(ti, tf, nt) == is subclass responsibility
-		pre ti.getPiece() <> nil;
 		
 		public capturePiece: Piece ==> ()
 		capturePiece(p) == (
@@ -59,6 +56,9 @@ operations
 					else pieceOfPlayer := <White>;
 		)
 		pre p <> self;
+		
+		pure public getPlayer: () ==> Player
+		getPlayer() == return pieceOfPlayer;
 		
 		pure public getSize: () ==> nat1
 		getSize() == return 1;

@@ -25,7 +25,10 @@ operations
 		)
 		pre len stack < 6;
 		
-		--é preciso ver se isto dá override à função da classe mãe
+		--placeholder
+		public canMoveTo: Tile * Tile * nat1 ==> bool
+		canMoveTo(ti, tf, n) == return true;
+		
 		public capturePiece: Piece ==> ()
 		capturePiece(p) == (
 				stack := [p] ^ stack;
@@ -52,8 +55,10 @@ operations
 			return size_tmp;
 		);
 		
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
+		pure public getStack: () ==> seq of Piece
+		getStack() == return stack;
+		
+		pure public getPieceTower: () ==> Piece
+		getPieceTower() == return hd stack;
+		
 end Tower
