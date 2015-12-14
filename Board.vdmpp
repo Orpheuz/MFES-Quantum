@@ -29,7 +29,10 @@ operations
 			     others -> nil
 			  end
 			in  
-				return new Tile(x,y, piece);
+				if(piece <> nil)
+					then return new Tile(x,y, piece)
+				else
+					return new Tile(x,y);
 		);
 		
 		public static getInstance: () ==> Board

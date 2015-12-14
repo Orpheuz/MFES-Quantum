@@ -11,6 +11,7 @@ instance variables
 		private score: map Player to nat := {<Player1> |-> 0, <Player2> |-> 0};
 	
 operations
+		
 		public Quantum: bool ==> Quantum
     Quantum(n) == (
 			boardType := n;
@@ -51,8 +52,9 @@ operations
     
     public movePieceTo: nat1 * nat1 * nat1 * nat1 ==> bool
     movePieceTo(xi, yi, xf, yf) == (
-    	if(board.getTile(xi, yi).getPiece() = nil) then return false;
-    	return board.getTile(xi, yi).getPiece().moveTo(board.getTile(xi, yi), board.getTile(xf, yf));
+    	if(board.getTile(xi, yi).getPiece() <> nil)
+    		then return board.getTile(xi, yi).getPiece().moveTo(board.getTile(xi, yi), board.getTile(xf, yf))
+    	else return false;
     );
     
     pure public getGameState: () ==> State

@@ -61,6 +61,10 @@ operations
 		getPlayer() == return pieceOfPlayer;
 		
 		pure public getSize: () ==> nat1
-		getSize() == return 1;
+		getSize() == (
+			if(isofclass(Tower, self))
+				then return 1
+			else return 3;
+		);
 	
 end Piece
