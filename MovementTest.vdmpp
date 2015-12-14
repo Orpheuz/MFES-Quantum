@@ -350,18 +350,18 @@ operations
     testCanMoveto_Circle();
     testCanMoveto_Square();
   	testCanMoveto_Cross();
-    testCanMoveto_TowerCircle();
-    testCanMoveto_TowerSquare();
-  	testCanMoveto_TowerCross();
-  	testTowerCapture();
-  	testCanMoveto_Tower_AfterCapture();
-  	testTowerCaptureTower();
-  	testMove();
-  	testPowerTile();  
-  	testPieceMoveandCapture();	
-  	testTowerMoveandCapture();
-  	GameCicleTest();
-  	GameOverTest();
+  --  testCanMoveto_TowerCircle();
+  --  testCanMoveto_TowerSquare();
+  --	testCanMoveto_TowerCross();
+  --	testTowerCapture();
+  --	testCanMoveto_Tower_AfterCapture();
+  --	testTowerCaptureTower();
+  --	testMove();
+  --	testPowerTile();  
+  --	testPieceMoveandCapture();	
+  --	testTowerMoveandCapture();
+  --	GameCicleTest();
+  --	GameOverTest();
   );
   
 end MovementTest
