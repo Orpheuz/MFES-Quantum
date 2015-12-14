@@ -38,7 +38,6 @@ operations
 								tf.setPiece(self);
 							)
 							else (
-								capturePiece(tf.getPiece());
 								tf.setPiece(new Tower(pieceOfPlayer, self, tf.getPiece().getStack()));
 							);
 							return true;
@@ -58,8 +57,7 @@ operations
 		
 		public capturePiece: Piece ==> ()
 		capturePiece(p) == (
-				if pieceOfPlayer = <White> then pieceOfPlayer := <Black>
-					else pieceOfPlayer := <White>;
+			return;
 		)
 		pre p <> self
 		post pieceOfPlayer <> pieceOfPlayer~;

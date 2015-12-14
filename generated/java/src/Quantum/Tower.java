@@ -36,13 +36,7 @@ public class Tower extends Piece {
     }
 
     public void capturePiece(final Piece p) {
-        stack = SeqUtil.conc(p.getStack(), Utils.copy(stack));
-
-        if (Utils.equals(p.getOwner(), quantum.quotes.WhiteQuote.getInstance())) {
-            p.setOwner(quantum.quotes.BlackQuote.getInstance());
-        } else {
-            p.setOwner(quantum.quotes.WhiteQuote.getInstance());
-        }
+        stack = SeqUtil.conc(Utils.copy(stack), p.getStack());
     }
 
     public Number getSize() {
