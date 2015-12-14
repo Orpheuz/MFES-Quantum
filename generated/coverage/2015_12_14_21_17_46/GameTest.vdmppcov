@@ -1,0 +1,44 @@
+class GameTest is subclass of QuantumTest
+
+operations  
+
+	public GameCicleTest: () ==> ()
+	GameCicleTest() == (
+		dcl n: bool := false;
+		dcl q: Quantum := new Quantum(n);
+		assertEqual(q.getGameState() = <NotStarted>, true);
+		q.startGame();
+		assertEqual(q.getGameState() = <Playing>, true);
+		assertEqual(q.getActualPlayer(), <Player1>);
+		q.endTurn();
+		assertEqual(q.getActualPlayer(), <Player2>);
+		q.endTurn();
+		assertEqual(q.getActualPlayer(), <Player1>);
+	);
+	
+	public GameOverTest: () ==> ()
+	GameOverTest() == (
+		dcl q: Quantum := new Quantum(false);
+		q.startGame();
+		assertEqual(isofclass(Square, q.board.getTile(5,5).getPiece()), true);
+		assertEqual(q.movePieceTo(5, 5, 4, 5), true);
+		q.endTurn(); q.endTurn();
+		assertEqual(q.movePieceTo(4, 5, 3, 5), true);
+		q.endTurn(); q.endTurn();
+		--assertEqual(q.board.getTile(5,2).getPiece().getSize(), 1);
+		assertEqual(q.movePieceTo(3, 5, 2, 5), true);
+		assertEqual(true, isofclass(Tower, q.board.getTile(5,2).getPiece()));
+		--assertEqual(q.board.getTile(5,2).getPiece().getSize(), 2);
+		q.endTurn(); q.endTurn();
+		assertEqual(q.movePieceTo(2, 5, 1, 5), true);
+		--assertEqual(q.board.getTile(5,2).getPiece().getSize(), 3);
+		--q.isGameOver();
+		--assertEqual(q.getGameState() = <Player2Won>, true)
+	);
+   
+  public testAll: () ==> ()
+  testAll() == (
+  	GameCicleTest();
+  );
+  
+end GameTest

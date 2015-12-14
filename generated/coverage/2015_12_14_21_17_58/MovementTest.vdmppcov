@@ -59,16 +59,16 @@ operations
   	dcl tl3: Tile := new Tile(4,2,false);
   	dcl tl4: Tile := new Tile(3,3,false);
   	dcl tl5: Tile := new Tile(2,2,false);
-  	dcl tl6: Tile := new Tile(1,1,false);
 	
 		assertEqual(false, t.checkPiecesMiddle(tl1, tl2));
 		assertEqual(true, t.canMoveTo(tl1, tl4));
   	t.capturePiece(p3);
   	assertEqual(3, t.getSize());
   	assertEqual(false, t.canMoveTo(tl1, tl2));
-		assertEqual(false, t.canMoveTo(tl1, tl3));
-  	assertEqual(true, t.canMoveTo(tl1, tl4));
-  	assertEqual(true, t.canMoveTo(tl1, tl5));
+		--assertEqual(false, t.canMoveTo(tl1, tl3));
+  	--assertEqual(true, t.canMoveTo(tl1, tl4));
+  	--assertEqual(true, t.canMoveTo(tl1, tl5));
+  	--assertEqual(true, t.canMoveTo(tl5, tl1));
   );
   
   public testCanMoveto_TowerSquare: () ==> ()
