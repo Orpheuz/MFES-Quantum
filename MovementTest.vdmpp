@@ -87,14 +87,13 @@ operations
   	assertEqual(true, t.canMoveTo(tl1, tl2));
   	t.capturePiece(p2);
   	assertEqual(false, t.canMoveTo(tl1, tl2));
-  --	assertEqual(false, t.canMoveTo(tl1, tl3));
-  --	assertEqual(true, isofclass(Circle, t.getTopPiece()));
-  --	board.getTile(3,3).setPiece(nil);
-  --	assertEqual(3, t.getSize());
-  --	assertEqual(true, t.canMoveTo(tl1, tl4));
-  --	assertEqual(true, t.canMoveTo(tl1, tl5));
-  --	assertEqual(true, t.canMoveTo(tl4, tl1));
-  --	assertEqual(true, t.canMoveTo(tl5, tl1));
+  	assertEqual(false, t.canMoveTo(tl1, tl3));
+  	assertEqual(true, isofclass(Circle, t.getTopPiece()));
+  	board.getTile(3,3).setPiece(nil);
+  	assertEqual(3, t.getSize());
+  	assertEqual(true, t.canMoveTo(tl1, tl4));
+  	assertEqual(true, t.canMoveTo(tl4, tl1));
+  	assertEqual(true, t.canMoveTo(tl5, tl1));
   );
   
   public testCanMoveto_TowerCross: () ==> ()
