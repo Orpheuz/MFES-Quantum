@@ -64,6 +64,8 @@ operations
     -- checks if can move between two different tiles
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
+			if(tf.getPiece() <> nil)
+				then return false;
 			if(ti.isSpecial())
 				then (
 					return (checkPiecesMiddle(ti, tf) and
@@ -83,6 +85,8 @@ operations
 		
 		public canMoveTo: Tile * Tile * nat1 ==> bool
 		canMoveTo(ti, tf, n) == (
+			if(tf.getPiece() <> nil)
+				then return false;
 			if(ti.isSpecial())
 				then (
 					return ((ti.getCoordinates().x = tf.getCoordinates().x or
