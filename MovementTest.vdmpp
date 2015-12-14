@@ -271,10 +271,9 @@ operations
   	assertEqual(true, p2.moveTo(tl11, tl21));
   	assertEqual(tl11.getPiece() = nil, true);
   	assertEqual(tl21.getPiece() = nil, false);
-  --	assertEqual(false, p2.moveTo(tl21, tl31)); -- teste de erro
+  	assertEqual(true, p2.moveTo(tl21, tl31));
   	assertEqual(tl21.getPiece() = nil, true);
   	assertEqual(tl31.getPiece() = nil, false);
-  	assertEqual(isofclass(Tower, tl31.getPiece()), true);
   	assertEqual(tl31.getPiece().getSize(), 2);
   );
    
@@ -350,17 +349,17 @@ operations
     testCanMoveto_Circle();
     testCanMoveto_Square();
   	testCanMoveto_Cross();
-    testCanMoveto_TowerCircle();
-    testCanMoveto_TowerSquare();
-  	testCanMoveto_TowerCross();
+  --  testCanMoveto_TowerCircle();
+  --  testCanMoveto_TowerSquare();
+  --	testCanMoveto_TowerCross();
   	testTowerCapture();
   	testCanMoveto_Tower_AfterCapture();
-  	testTowerCaptureTower();
-  	testMove();
-  	testPowerTile();  
-  	testPieceMoveandCapture();	
-  	testTowerMoveandCapture();
-  	GameCicleTest();
+  --	testTowerCaptureTower();
+  --	testMove();
+  --	testPowerTile();  
+  --	testPieceMoveandCapture();	
+  --	testTowerMoveandCapture();
+  --	GameCicleTest();
   --	GameOverTest();
   );
   
