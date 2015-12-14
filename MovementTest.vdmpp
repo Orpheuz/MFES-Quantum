@@ -5,12 +5,12 @@ operations
   public testCanMoveto_Circle: () ==> ()
   testCanMoveto_Circle() == (
   	dcl p: Piece := new Circle();
-  	dcl t:Tile := new Tile(3,3,p);
-  	dcl t2:Tile := new Tile(2,2);
-  	dcl t3:Tile := new Tile(4,2);
-  	dcl t4:Tile := new Tile(5,5);
-  	dcl t5:Tile := new Tile(3,4);
-  	dcl t6:Tile := new Tile(2,3);
+  	dcl t:Tile := new Tile(3,3,p,false);
+  	dcl t2:Tile := new Tile(2,2,false);
+  	dcl t3:Tile := new Tile(4,2,false);
+  	dcl t4:Tile := new Tile(5,5,false);
+  	dcl t5:Tile := new Tile(3,4,false);
+  	dcl t6:Tile := new Tile(2,3,false);
   	assertEqual(true, p.canMoveTo(t, t2));
   	assertEqual(true, p.canMoveTo(t, t3));
   	assertEqual(false, p.canMoveTo(t, t6)); -- movimento na vertical
@@ -21,11 +21,11 @@ operations
   public testCanMoveto_Square: () ==> ()
   testCanMoveto_Square() == (
   	dcl p: Piece := new Square();
-  	dcl t:Tile := new Tile(2,2,p);
-  	dcl t2:Tile := new Tile(1,2);
-  	dcl t3:Tile := new Tile(2,3);
-  	dcl t4:Tile := new Tile(2,6);
-  	dcl t5:Tile := new Tile(3,3);
+  	dcl t:Tile := new Tile(2,2,p,false);
+  	dcl t2:Tile := new Tile(1,2,false);
+  	dcl t3:Tile := new Tile(2,3,false);
+  	dcl t4:Tile := new Tile(2,6,false);
+  	dcl t5:Tile := new Tile(3,3,false);
   	assertEqual(true, p.canMoveTo(t, t2));
   	assertEqual(true, p.canMoveTo(t, t3));
   	assertEqual(false, p.canMoveTo(t, t5)); -- movimento na diagonal
@@ -35,11 +35,11 @@ operations
   public testCanMoveto_Cross: () ==> ()
   testCanMoveto_Cross() == (
   	dcl p: Piece := new Cross();
-  	dcl t:Tile := new Tile(2,2,p);
-  	dcl t2:Tile := new Tile(1,2);
-  	dcl t3:Tile := new Tile(2,3);
-  	dcl t4:Tile := new Tile(3,1);
-  	dcl t5:Tile := new Tile(1,1);
+  	dcl t:Tile := new Tile(2,2,p,false);
+  	dcl t2:Tile := new Tile(1,2,false);
+  	dcl t3:Tile := new Tile(2,3,false);
+  	dcl t4:Tile := new Tile(3,1,false);
+  	dcl t5:Tile := new Tile(1,1,false);
   	assertEqual(true, p.canMoveTo(t, t2));
   	assertEqual(true, p.canMoveTo(t, t3));
   	assertEqual(true, p.canMoveTo(t, t4));
@@ -53,12 +53,12 @@ operations
   	dcl t: Piece := new Tower(<Black>, p, p2);
   	dcl p3: Piece := new Square(<White>);
   	  	
-  	dcl tl1: Tile := new Tile(4,4,t);
-  	dcl tl2: Tile := new Tile(4,3);
-  	dcl tl3: Tile := new Tile(4,2);
-  	dcl tl4: Tile := new Tile(3,3, p3);
-  	dcl tl5: Tile := new Tile(2,2);
-  	dcl tl6: Tile := new Tile(1,1);
+  	dcl tl1: Tile := new Tile(4,4,t,false);
+  	dcl tl2: Tile := new Tile(4,3,false);
+  	dcl tl3: Tile := new Tile(4,2,false);
+  	dcl tl4: Tile := new Tile(3,3, p3,false);
+  	dcl tl5: Tile := new Tile(2,2,false);
+  	dcl tl6: Tile := new Tile(1,1,false);
 
   	assertEqual(true, t.canMoveTo(tl1, tl4));
   	assertEqual(true, t.canMoveTo(tl1, tl5));
@@ -82,11 +82,11 @@ operations
   	dcl p3: Piece := new Square(<White>);
   	dcl t: Piece := new Tower(<White>, p3, p);
   	
-  	dcl tl1: Tile := new Tile(4,4);
-  	dcl tl2: Tile := new Tile(4,3);
-  	dcl tl3: Tile := new Tile(4,2);
-  	dcl tl4: Tile := new Tile(3,3);
-  	dcl tl5: Tile := new Tile(2,2);
+  	dcl tl1: Tile := new Tile(4,4,false);
+  	dcl tl2: Tile := new Tile(4,3,false);
+  	dcl tl3: Tile := new Tile(4,2,false);
+  	dcl tl4: Tile := new Tile(3,3,false);
+  	dcl tl5: Tile := new Tile(2,2,false);
   	board.setBoardType(false);
   	
   	assertEqual(false, t.canMoveTo(tl1, tl4));
@@ -109,14 +109,14 @@ operations
   	dcl p2: Piece := new Square(<White>);
   	dcl t: Piece := new Tower(<White>, p2, p);
   	
-  	dcl tl1: Tile := new Tile(4,4);
-  	dcl tl2: Tile := new Tile(4,3);
-  	dcl tl3: Tile := new Tile(4,2);
-  	dcl tl4: Tile := new Tile(3,3);
-  	dcl tl5: Tile := new Tile(2,2);
-  	dcl tl6: Tile := new Tile(3,2);
-  	dcl tl7: Tile := new Tile(1,1);
-  	dcl tl8: Tile := new Tile(5,5);
+  	dcl tl1: Tile := new Tile(4,4,false);
+  	dcl tl2: Tile := new Tile(4,3,false);
+  	dcl tl3: Tile := new Tile(4,2,false);
+  	dcl tl4: Tile := new Tile(3,3,false);
+  	dcl tl5: Tile := new Tile(2,2,false);
+  	dcl tl6: Tile := new Tile(3,2,false);
+  	dcl tl7: Tile := new Tile(1,1,false);
+  	dcl tl8: Tile := new Tile(5,5,false);
   	board.setBoardType(false);
 
   	assertEqual(false, t.canMoveTo(tl1, tl4));
@@ -154,15 +154,15 @@ operations
   public testMove: () ==> ()
   testMove() == (
   	dcl p: Piece := new Circle(<Black>);
-  	dcl tl1: Tile := new Tile(1,1, p);
-  	dcl tl2: Tile := new Tile(2,2);
+  	dcl tl1: Tile := new Tile(1,1, p,false);
+  	dcl tl2: Tile := new Tile(2,2,false);
   	dcl p2: Piece := new Square(<White>);
-  	dcl tl3: Tile := new Tile(1,1, p2);
-  	dcl tl4: Tile := new Tile(2,1);
+  	dcl tl3: Tile := new Tile(1,1, p2,false);
+  	dcl tl4: Tile := new Tile(2,1,false);
   	dcl p3: Piece := new Cross();
-  	dcl tl5: Tile := new Tile(1,1, p3);
-  	dcl tl6: Tile := new Tile(2,3);
-  	dcl tl7: Tile := new Tile(1,2);
+  	dcl tl5: Tile := new Tile(1,1, p3,false);
+  	dcl tl6: Tile := new Tile(2,3,false);
+  	dcl tl7: Tile := new Tile(1,2,false);
   	
   	assertEqual(true, p.moveTo(tl1, tl2));
   	assertEqual(false, tl2.getPiece() = nil);
@@ -205,8 +205,8 @@ operations
   	dcl p4: Piece := new Square();
   	dcl p5: Piece := new Circle();
   	dcl p6: Piece := new Square();
-  	dcl tl1: Tile := new Tile(1,2);
-  	dcl tl2: Tile:= new Tile(1,1);
+  	dcl tl1: Tile := new Tile(1,2,false);
+  	dcl tl2: Tile:= new Tile(1,1,false);
   	
   	t.capturePiece(p3);
   	t.capturePiece(p4);
@@ -244,9 +244,9 @@ operations
   	dcl p2: Piece := new Square(<Black>);
   	dcl p3: Piece := new Circle(<White>);
   	
-  	dcl tl11: Tile := new Tile(1,1,p2);
-  	dcl tl21: Tile := new Tile(2,1);
-  	dcl tl31: Tile := new Tile(3,1,p3);
+  	dcl tl11: Tile := new Tile(1,1,p2,false);
+  	dcl tl21: Tile := new Tile(2,1,false);
+  	dcl tl31: Tile := new Tile(3,1,p3,false);
   	
   	--simple movement with capture
   	assertEqual(tl11.getPiece() = nil, false);
@@ -269,11 +269,11 @@ operations
   	dcl p3: Piece := new Square(<White>);
   	dcl p4: Piece := new Cross(<Black>);
   	
-  	dcl tl11: Tile := new Tile(1,1,t);
-  	dcl tl22: Tile := new Tile(2,2);
-  	dcl tl33: Tile := new Tile(3,3,p3);
-  	dcl tl31: Tile := new Tile(3,1);
-  	dcl tl32: Tile := new Tile(3,2,p4);
+  	dcl tl11: Tile := new Tile(1,1,t,false);
+  	dcl tl22: Tile := new Tile(2,2,false);
+  	dcl tl33: Tile := new Tile(3,3,p3,false);
+  	dcl tl31: Tile := new Tile(3,1,false);
+  	dcl tl32: Tile := new Tile(3,2,p4,false);
   	
   	--simple movement with capture
   	assertEqual(tl11.getPiece() = nil, false);

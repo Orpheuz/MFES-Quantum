@@ -10,7 +10,7 @@ operations
 				dcl tempX: nat1;
 				dcl tempY: nat1;
 				dcl maxX: nat1;
-				dcl maxY: nat1;
+				--dcl maxY: nat1;
 				dcl tempXc: nat1 := ti.getCoordinates().x;
 				dcl tempYc: nat1 := ti.getCoordinates().y;
 				dcl signalX: bool := false;

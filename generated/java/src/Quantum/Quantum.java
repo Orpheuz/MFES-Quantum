@@ -30,7 +30,7 @@ public class Quantum {
         actualState = quantum.quotes.NotStartedQuote.getInstance();
     }
 
-    public void isGameOver() {
+    public void updateGameState() {
         Number countW = 0L;
         Number countB = 0L;
         VDMSet setCompResult_1 = SetUtil.set();
@@ -97,12 +97,12 @@ public class Quantum {
 
     public Boolean movePieceTo(final Number xi, final Number yi,
         final Number xf, final Number yf) {
-        if (Utils.equals(board.getTile(xi, yi).getPiece(), null)) {
+        if (!(Utils.equals(board.getTile(xi, yi).getPiece(), null))) {
+            return board.getTile(xi, yi).getPiece()
+                        .moveTo(board.getTile(xi, yi), board.getTile(xf, yf));
+        } else {
             return false;
         }
-
-        return board.getTile(xi, yi).getPiece()
-                    .moveTo(board.getTile(xi, yi), board.getTile(xf, yf));
     }
 
     public Object getGameState() {

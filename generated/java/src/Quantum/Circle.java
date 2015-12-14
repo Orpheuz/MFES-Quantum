@@ -21,17 +21,15 @@ public class Circle extends Piece {
     public Boolean checkPiecesMiddle(final Tile ti, final Tile tf) {
         Number tempX = ti.getCoordinates().x;
         Number tempY = ti.getCoordinates().y;
-        Number maxX = tf.getCoordinates().x;
-        Number maxY = tf.getCoordinates().y;
+        Boolean signalX = false;
+        Boolean signalY = false;
 
-        if (ti.getCoordinates().x.longValue() > tf.getCoordinates().x.longValue()) {
-            tempX = tf.getCoordinates().x;
-            maxX = ti.getCoordinates().x;
+        if (tf.getCoordinates().x.longValue() > ti.getCoordinates().x.longValue()) {
+            signalX = true;
         }
 
-        if (ti.getCoordinates().y.longValue() > tf.getCoordinates().y.longValue()) {
-            tempY = tf.getCoordinates().y;
-            maxY = ti.getCoordinates().y;
+        if (tf.getCoordinates().y.longValue() > ti.getCoordinates().y.longValue()) {
+            signalY = true;
         }
 
         Boolean whileCond_1 = true;
@@ -39,8 +37,8 @@ public class Circle extends Piece {
         while (whileCond_1) {
             Boolean andResult_1 = false;
 
-            if (tempX.longValue() < (maxX.longValue() - 1L)) {
-                if (tempY.longValue() < (maxY.longValue() - 1L)) {
+            if (!(Utils.equals(tempX, tf.getCoordinates().x))) {
+                if (!(Utils.equals(tempY, tf.getCoordinates().y))) {
                     andResult_1 = true;
                 }
             }
@@ -51,8 +49,17 @@ public class Circle extends Piece {
                 break;
             }
 
-            tempX = tempX.longValue() + 1L;
-            tempY = tempY.longValue() + 1L;
+            if (signalX) {
+                tempX = tempX.longValue() + 1L;
+            } else {
+                tempX = tempX.longValue() - 1L;
+            }
+
+            if (signalY) {
+                tempY = tempY.longValue() + 1L;
+            } else {
+                tempY = tempY.longValue() - 1L;
+            }
 
             if (!(Utils.equals(Board.getInstance().getTile(tempX, tempY)
                                         .getPiece(), null))) {
@@ -109,24 +116,16 @@ public class Circle extends Piece {
         } else {
             Boolean andResult_5 = false;
 
-            if (checkPiecesMiddle(ti, tf)) {
+            if (Utils.abs(ti.getCoordinates().x.longValue() -
+                        tf.getCoordinates().x.longValue()) <= n.longValue()) {
                 Boolean andResult_6 = false;
 
-                if (Utils.abs(ti.getCoordinates().x.longValue() -
-                            tf.getCoordinates().x.longValue()) <= n.longValue()) {
-                    Boolean andResult_7 = false;
-
-                    if (Utils.abs(ti.getCoordinates().y.longValue() -
-                                tf.getCoordinates().y.longValue()) <= n.longValue()) {
-                        if (Utils.equals(Utils.abs(ti.getCoordinates().x.longValue() -
-                                        tf.getCoordinates().x.longValue()),
-                                    Utils.abs(ti.getCoordinates().y.longValue() -
-                                        tf.getCoordinates().y.longValue()))) {
-                            andResult_7 = true;
-                        }
-                    }
-
-                    if (andResult_7) {
+                if (Utils.abs(ti.getCoordinates().y.longValue() -
+                            tf.getCoordinates().y.longValue()) <= n.longValue()) {
+                    if (Utils.equals(Utils.abs(ti.getCoordinates().x.longValue() -
+                                    tf.getCoordinates().x.longValue()),
+                                Utils.abs(ti.getCoordinates().y.longValue() -
+                                    tf.getCoordinates().y.longValue()))) {
                         andResult_6 = true;
                     }
                 }
@@ -138,6 +137,10 @@ public class Circle extends Piece {
 
             return andResult_5;
         }
+    }
+
+    public Number getSize() {
+        return 1L;
     }
 
     public String toString() {

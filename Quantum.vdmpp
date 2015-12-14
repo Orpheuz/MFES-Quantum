@@ -21,8 +21,8 @@ operations
 			actualState := <NotStarted>;
     );
                 
-    public isGameOver: () ==> ()
-    isGameOver() == (
+    public updateGameState: () ==> ()
+    updateGameState() == (
     		dcl countW: nat := 0;
     		dcl countB: nat := 0;
     		for all t in set {board.getTile(x, y) | x in set {0, ..., Board`smallSizeX}, y in set {0, ..., Board`smallSizeY}} 
@@ -48,7 +48,8 @@ operations
     endTurn() == (
     	if(playerTurn = <Player1>) then playerTurn := <Player2>
     	else playerTurn := <Player1>
-    );
+    )
+    post playerTurn <> playerTurn~;
     
     public movePieceTo: nat1 * nat1 * nat1 * nat1 ==> bool
     movePieceTo(xi, yi, xf, yf) == (

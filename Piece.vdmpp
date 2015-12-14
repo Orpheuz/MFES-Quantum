@@ -55,7 +55,8 @@ operations
 				if pieceOfPlayer = <White> then pieceOfPlayer := <Black>
 					else pieceOfPlayer := <White>;
 		)
-		pre p <> self;
+		pre p <> self
+		post pieceOfPlayer <> pieceOfPlayer~;
 		
 		pure public getPlayer: () ==> Player
 		getPlayer() == return pieceOfPlayer;

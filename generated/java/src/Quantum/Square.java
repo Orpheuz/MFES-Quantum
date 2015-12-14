@@ -37,7 +37,7 @@ public class Square extends Piece {
             Boolean whileCond_5 = true;
 
             while (whileCond_5) {
-                whileCond_5 = tempY.longValue() < max.longValue();
+                whileCond_5 = tempY.longValue() < (max.longValue() - 1L);
 
                 if (!(whileCond_5)) {
                     break;
@@ -86,7 +86,7 @@ public class Square extends Piece {
 
     public Boolean canMoveTo(final Tile ti, final Tile tf) {
         if (ti.isSpecial()) {
-            Boolean andResult_19 = false;
+            Boolean andResult_18 = false;
 
             if (checkPiecesMiddle(ti, tf)) {
                 Boolean orResult_6 = false;
@@ -99,11 +99,11 @@ public class Square extends Piece {
                 }
 
                 if (orResult_6) {
-                    andResult_19 = true;
+                    andResult_18 = true;
                 }
             }
 
-            return andResult_19;
+            return andResult_18;
         } else {
             return Utils.equals(Utils.abs(ti.getCoordinates().x.longValue() -
                     tf.getCoordinates().x.longValue()) +
@@ -114,54 +114,58 @@ public class Square extends Piece {
 
     public Boolean canMoveTo(final Tile ti, final Tile tf, final Number n) {
         if (ti.isSpecial()) {
-            Boolean andResult_20 = false;
+            Boolean andResult_19 = false;
 
-            if (checkPiecesMiddle(ti, tf)) {
-                Boolean orResult_7 = false;
+            Boolean orResult_7 = false;
 
-                if (Utils.equals(ti.getCoordinates().x, tf.getCoordinates().x)) {
-                    orResult_7 = true;
-                } else {
-                    orResult_7 = Utils.equals(ti.getCoordinates().x,
-                            tf.getCoordinates().x);
-                }
+            if (Utils.equals(ti.getCoordinates().x, tf.getCoordinates().x)) {
+                orResult_7 = true;
+            } else {
+                orResult_7 = Utils.equals(ti.getCoordinates().x,
+                        tf.getCoordinates().x);
+            }
 
-                if (orResult_7) {
-                    andResult_20 = true;
+            if (orResult_7) {
+                if (checkPiecesMiddle(ti, tf)) {
+                    andResult_19 = true;
                 }
             }
 
-            return andResult_20;
+            return andResult_19;
         } else {
             Boolean orResult_8 = false;
 
-            Boolean andResult_21 = false;
+            Boolean andResult_20 = false;
 
             if (Utils.abs(ti.getCoordinates().x.longValue() -
                         tf.getCoordinates().x.longValue()) <= n.longValue()) {
                 if (Utils.equals(ti.getCoordinates().x, tf.getCoordinates().x)) {
-                    andResult_21 = true;
+                    andResult_20 = true;
                 }
             }
 
-            if (andResult_21) {
+            if (andResult_20) {
                 orResult_8 = true;
             } else {
-                Boolean andResult_22 = false;
+                Boolean andResult_21 = false;
 
                 if (Utils.abs(ti.getCoordinates().y.longValue() -
                             tf.getCoordinates().y.longValue()) <= n.longValue()) {
                     if (Utils.equals(ti.getCoordinates().x,
                                 tf.getCoordinates().x)) {
-                        andResult_22 = true;
+                        andResult_21 = true;
                     }
                 }
 
-                orResult_8 = andResult_22;
+                orResult_8 = andResult_21;
             }
 
             return orResult_8;
         }
+    }
+
+    public Number getSize() {
+        return 1L;
     }
 
     public String toString() {
