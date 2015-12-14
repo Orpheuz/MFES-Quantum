@@ -64,5 +64,8 @@ operations
 
 		pure public getSize: () ==> nat1
 		getSize() == return 1;
+		
+		pure public getTopPiece: () ==> Piece
+		getTopPiece() == return self;
 
 end Square

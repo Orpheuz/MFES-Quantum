@@ -33,8 +33,14 @@ operations
 						if tf.getPiece() <> nil and tf.getPiece().getSize() < 6
 						then (
 							ti.setPiece(nil);
-							tf.setPiece(new Tower(pieceOfPlayer, self, tf.getPiece()));
-							capturePiece(tf.getPiece());
+							if (isofclass(Tower, tf.getPiece())) then (
+								capturePiece(tf.getPiece());
+								tf.setPiece(self);
+							)
+							else (
+								tf.setPiece(new Tower(pieceOfPlayer, self, tf.getPiece()));
+								capturePiece(tf.getPiece());
+							);
 							return true;
 						)
 						else (
@@ -66,5 +72,14 @@ operations
 		
 		pure public getSize: () ==> nat1
 		getSize() == is not yet specified;
+		
+		pure public getOwner: () ==> Player
+		getOwner() == return pieceOfPlayer;
+		
+		public setOwner: Player ==> ()
+		setOwner(p) == pieceOfPlayer := p;
+		
+		pure public getTopPiece: () ==> Piece
+		getTopPiece() == is subclass responsibility;
 	
 end Piece

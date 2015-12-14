@@ -245,6 +245,10 @@ public class Cross extends Piece {
         return 1L;
     }
 
+    public Piece getTopPiece() {
+        return this;
+    }
+
     public String toString() {
         return "Cross{}";
     }

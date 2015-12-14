@@ -143,6 +143,10 @@ public class Circle extends Piece {
         return 1L;
     }
 
+    public Piece getTopPiece() {
+        return this;
+    }
+
     public String toString() {
         return "Circle{}";
     }

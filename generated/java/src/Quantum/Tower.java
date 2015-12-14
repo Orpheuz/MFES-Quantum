@@ -38,10 +38,10 @@ public class Tower extends Piece {
     public void capturePiece(final Piece p) {
         stack = SeqUtil.conc(p.getStack(), Utils.copy(stack));
 
-        if (Utils.equals(pieceOfPlayer, quantum.quotes.WhiteQuote.getInstance())) {
-            pieceOfPlayer = quantum.quotes.BlackQuote.getInstance();
+        if (Utils.equals(p.getOwner(), quantum.quotes.WhiteQuote.getInstance())) {
+            p.setOwner(quantum.quotes.BlackQuote.getInstance());
         } else {
-            pieceOfPlayer = quantum.quotes.WhiteQuote.getInstance();
+            p.setOwner(quantum.quotes.WhiteQuote.getInstance());
         }
     }
 
@@ -53,7 +53,7 @@ public class Tower extends Piece {
         return Utils.copy(stack);
     }
 
-    public Piece getPieceTower() {
+    public Piece getTopPiece() {
         return ((Piece) stack.get(0));
     }
 

@@ -33,7 +33,7 @@ public class Main {
 			if(!game.movePieceTo(Integer.parseInt(coordI[1]), Integer.parseInt(coordI[0]), 
 					Integer.parseInt(coordF[1]), Integer.parseInt(coordF[0])))
 				System.out.println("Movimento inválido");
-			game.updateGameState();
+			//game.updateGameState();
 			printBoard(bigBoard);
 		}
 
@@ -78,7 +78,7 @@ public class Main {
 		for(int i = 1; i < y + 1; i++) {
 			for(int j = 1; j < x + 1; j++) {
 				if(Board.getInstance().getTile(i, j).getPiece() != null)
-					System.out.print(getPieceString(Board.getInstance().getTile(i, j).getPiece(), " ", 0));
+					System.out.print(getPieceString(Board.getInstance().getTile(i, j).getPiece()));
 				else System.out.print
 				("| -- |");
 			}
@@ -86,30 +86,41 @@ public class Main {
 		}
 	}
 	
-	private static String getPieceString(Piece p, String append, Number towerCall) {
-		String size = " ";
-		if(towerCall.intValue() != 0) {
-			size = towerCall.toString();
-		}
+	private static String getPieceString(Piece p) {
 		if(p instanceof Circle) {
 			if(p.pieceOfPlayer.equals(WhiteQuote.getInstance()))
-				return "|" + append + "WO" + size + "|";
-			else return "|" + append + "BO" + size + "|";
+				return "| WO |";
+			else return "| BO |";
 		}
 		if(p instanceof Cross) {
 			if(p.pieceOfPlayer.equals(WhiteQuote.getInstance()))
-				return "|" + append + "W+" + size + "|";
-			else return "|" + append + "B+" + size + "|";
+				return "| W+ |";
+			else return "| B+ |";
 		}
 		if(p instanceof Square) {
 			if(p.pieceOfPlayer.equals(WhiteQuote.getInstance()))
-				return "|" + append + "WS" + size + "|";
-			else return "|" + append + "BS" + size + "|";
+				return "| WS |";
+			else return "| BS |";
 		}
 		if(p instanceof Tower) {
-			return getPieceString(((Tower) p).getPieceTower(), "T", p.getSize());
+			Piece tPiece = p.getTopPiece();
+			if(tPiece instanceof Circle) {
+				if(p.pieceOfPlayer.equals(WhiteQuote.getInstance()))
+					return "|TWO" + p.getSize() + "|";
+				else return "|TBO" + p.getSize() + "|";
+			}
+			if(tPiece instanceof Cross) {
+				if(p.pieceOfPlayer.equals(WhiteQuote.getInstance()))
+					return "|TW+" + p.getSize() + "|";
+				else return "|TB+" + p.getSize() + "|";
+			}
+			if(tPiece instanceof Square) {
+				if(p.pieceOfPlayer.equals(WhiteQuote.getInstance()))
+					return "|TWS" + p.getSize() + "|";
+				else return "|TBS" + p.getSize() + "|";
+			}
 		}
-		return "";
+		return "0";
 	}
 	
 	private static String[] getCoordinates(boolean init, Scanner input) {
