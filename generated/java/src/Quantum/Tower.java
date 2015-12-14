@@ -9,16 +9,16 @@ import java.util.*;
 public class Tower extends Piece {
     private VDMSeq stack = SeqUtil.seq();
 
-    public Tower(final Object player, final Piece p1, final Piece p2) {
-        cg_init_Tower_1(((Object) player), p1, p2);
+    public Tower(final Object player, final Piece p1, final VDMSeq p2) {
+        cg_init_Tower_1(((Object) player), p1, Utils.copy(p2));
     }
 
     public Tower() {
     }
 
     public void cg_init_Tower_1(final Object player, final Piece p1,
-        final Piece p2) {
-        stack = SeqUtil.conc(SeqUtil.seq(p1, p2), Utils.copy(stack));
+        final VDMSeq p2) {
+        stack = SeqUtil.conc(SeqUtil.seq(p1), Utils.copy(p2));
 
         cg_init_Piece_1(((Object) player));
     }

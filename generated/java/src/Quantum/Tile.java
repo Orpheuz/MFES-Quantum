@@ -33,52 +33,52 @@ public class Tile {
         if (bigBoard) {
             Boolean orResult_9 = false;
 
-            Boolean andResult_22 = false;
+            Boolean andResult_23 = false;
 
             if (Utils.equals(xT, 1L)) {
                 if (Utils.equals(yT, 1L)) {
-                    andResult_22 = true;
+                    andResult_23 = true;
                 }
             }
 
-            if (andResult_22) {
+            if (andResult_23) {
                 orResult_9 = true;
             } else {
                 Boolean orResult_10 = false;
 
-                Boolean andResult_23 = false;
+                Boolean andResult_24 = false;
 
                 if (Utils.equals(xT, Board.smallSizeX)) {
                     if (Utils.equals(yT, Board.smallSizeY)) {
-                        andResult_23 = true;
+                        andResult_24 = true;
                     }
                 }
 
-                if (andResult_23) {
+                if (andResult_24) {
                     orResult_10 = true;
                 } else {
                     Boolean orResult_11 = false;
 
-                    Boolean andResult_24 = false;
+                    Boolean andResult_25 = false;
 
                     if (Utils.equals(xT, 1L)) {
                         if (Utils.equals(yT, Board.smallSizeY)) {
-                            andResult_24 = true;
+                            andResult_25 = true;
                         }
                     }
 
-                    if (andResult_24) {
+                    if (andResult_25) {
                         orResult_11 = true;
                     } else {
-                        Boolean andResult_25 = false;
+                        Boolean andResult_26 = false;
 
                         if (Utils.equals(xT, Board.smallSizeX)) {
                             if (Utils.equals(yT, 1L)) {
-                                andResult_25 = true;
+                                andResult_26 = true;
                             }
                         }
 
-                        orResult_11 = andResult_25;
+                        orResult_11 = andResult_26;
                     }
 
                     orResult_10 = orResult_11;
@@ -91,52 +91,52 @@ public class Tile {
         } else {
             Boolean orResult_12 = false;
 
-            Boolean andResult_26 = false;
+            Boolean andResult_27 = false;
 
             if (Utils.equals(xT, 1L)) {
                 if (Utils.equals(yT, 1L)) {
-                    andResult_26 = true;
+                    andResult_27 = true;
                 }
             }
 
-            if (andResult_26) {
+            if (andResult_27) {
                 orResult_12 = true;
             } else {
                 Boolean orResult_13 = false;
 
-                Boolean andResult_27 = false;
+                Boolean andResult_28 = false;
 
                 if (Utils.equals(xT, Board.bigSizeX)) {
                     if (Utils.equals(yT, Board.bigSizeY)) {
-                        andResult_27 = true;
+                        andResult_28 = true;
                     }
                 }
 
-                if (andResult_27) {
+                if (andResult_28) {
                     orResult_13 = true;
                 } else {
                     Boolean orResult_14 = false;
 
-                    Boolean andResult_28 = false;
+                    Boolean andResult_29 = false;
 
                     if (Utils.equals(xT, 1L)) {
                         if (Utils.equals(yT, Board.bigSizeY)) {
-                            andResult_28 = true;
+                            andResult_29 = true;
                         }
                     }
 
-                    if (andResult_28) {
+                    if (andResult_29) {
                         orResult_14 = true;
                     } else {
-                        Boolean andResult_29 = false;
+                        Boolean andResult_30 = false;
 
                         if (Utils.equals(xT, Board.bigSizeX)) {
                             if (Utils.equals(yT, 1L)) {
-                                andResult_29 = true;
+                                andResult_30 = true;
                             }
                         }
 
-                        orResult_14 = andResult_29;
+                        orResult_14 = andResult_30;
                     }
 
                     orResult_13 = orResult_14;
