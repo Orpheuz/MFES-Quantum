@@ -350,13 +350,13 @@ operations
     testCanMoveto_Circle();
     testCanMoveto_Square();
   	testCanMoveto_Cross();
-  --  testCanMoveto_TowerCircle();
-  --  testCanMoveto_TowerSquare();
-  --	testCanMoveto_TowerCross();
-  --	testTowerCapture();
+    testCanMoveto_TowerCircle();
+    testCanMoveto_TowerSquare();
+  	testCanMoveto_TowerCross();
+  	testTowerCapture();
   --	testCanMoveto_Tower_AfterCapture();
   --	testTowerCaptureTower();
-  --	testMove();
+  	testMove();
   --	testPowerTile();  
   --	testPieceMoveandCapture();	
   --	testTowerMoveandCapture();
