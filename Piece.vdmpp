@@ -60,11 +60,10 @@ operations
 		pure public getPlayer: () ==> Player
 		getPlayer() == return pieceOfPlayer;
 		
+		pure public getStack: () ==> seq of Piece
+		getStack() == return [self];
+		
 		pure public getSize: () ==> nat1
-		getSize() == (
-			if(isofclass(Tower, self))
-				then return 1
-			else return 3;
-		);
+		getSize() == is not yet specified;
 	
 end Piece

@@ -31,30 +31,15 @@ operations
 		
 		public capturePiece: Piece ==> ()
 		capturePiece(p) == (
-				stack := [p] ^ stack;
-				if pieceOfPlayer = <White> then pieceOfPlayer := <Black>
-				else pieceOfPlayer := <White>;
+			stack := p.getStack() ^ stack;
+			if pieceOfPlayer = <White> then pieceOfPlayer := <Black>
+			else pieceOfPlayer := <White>;
 		)
 		pre len stack < 6
 		post len stack > len stack~;
 			
-		--pure public getSize: () ==> nat1
-		--getSize() == (
-		--	dcl size_tmp: nat1 := 0;
-		--	dcl stack_temp : seq of Piece := stack;
-		--	if(len stack_temp = 1)
-		--		then size_tmp := 1
-		--	else
-		--		while(len stack_temp>1)
-		--			do (size_tmp := size_tmp +1;
-		--					if(isofclass(Tower, hd tl stack_temp))
-		--						then (size_tmp := size_tmp +1;
-		--									stack_temp := (tl stack_temp)
-		--						)
-		--			);
-		--	return size_tmp;
-		--return 5;
-		--);
+		pure public getSize: () ==> nat1
+		getSize() == return len stack;
 		
 		pure public getStack: () ==> seq of Piece
 		getStack() == return stack;
