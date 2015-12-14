@@ -12,16 +12,16 @@ operations
 		Piece(p) == pieceOfPlayer := p;
 		
 		public canMoveTo: Tile * Tile ==> bool
-		canMoveTo(ti, tf) == is subclass responsibility
-		pre ti.getPiece() <> nil;
+		canMoveTo(ti, tf) == is subclass responsibility;
+		--pre ti.getPiece() <> nil;
 		
 		public canMoveTo: Tile * Tile * nat1 ==> bool
-		canMoveTo(ti, tf, nt) == is subclass responsibility
-		pre ti.getPiece() <> nil;
+		canMoveTo(ti, tf, nt) == is subclass responsibility;
+		--pre ti.getPiece() <> nil;
 		
 		public checkPiecesMiddle: Tile * Tile ==> bool
-		checkPiecesMiddle(ti, tf) == is subclass responsibility
-		pre ti.getPiece() <> nil;
+		checkPiecesMiddle(ti, tf) == is subclass responsibility;
+		--pre ti.getPiece() <> nil;
 		
 		public moveTo: Tile * Tile ==> bool
 		moveTo(ti, tf) == (

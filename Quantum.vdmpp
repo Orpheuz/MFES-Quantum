@@ -25,9 +25,9 @@ operations
     updateGameState() == (
     		dcl countW: nat := 0;
     		dcl countB: nat := 0;
-    		for all t in set {board.getTile(x, y) | x in set {0, ..., Board`smallSizeX}, y in set {0, ..., Board`smallSizeY}} 
+    		for all t in set {board.getTile(x, y) | x in set {1, ..., Board`smallSizeY}, y in set {1, ..., Board`smallSizeX}} 
     			do (
-    				if(t.getPiece().getSize() >= 6) then
+    				if(t.getPiece() <> nil and t.getPiece().getSize() >= 6) then
     					if(t.getPiece().getPlayer() = <White>) then countW := countW + 1
     					else countB := countB + 1;
     			);
