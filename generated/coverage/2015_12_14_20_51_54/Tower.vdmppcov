@@ -1,0 +1,47 @@
+class Tower is subclass of Piece
+
+instance variables
+
+	private stack : seq of Piece := [];
+	inv len stack > 1;
+	
+operations
+		public Tower: Player * Piece * seq of Piece ==> Tower
+		Tower(player, p1, p2) == (	
+				stack := [p1] ^ p2;
+				Piece(player);
+		)
+		post p1.pieceOfPlayer <> (hd p2).pieceOfPlayer;
+		
+		public checkPiecesMiddle: Tile * Tile ==> bool
+		checkPiecesMiddle(ti,tf) == (
+				return (hd stack).checkPiecesMiddle(ti, tf);
+		);
+		
+		public canMoveTo: Tile * Tile ==> bool
+		canMoveTo(ti, tf) == (
+				return (hd stack).canMoveTo(ti, tf, getSize());
+		)
+		pre len stack < 6;
+		
+		--placeholder
+		public canMoveTo: Tile * Tile * nat1 ==> bool
+		canMoveTo(ti, tf, n) == return true;
+		
+		public capturePiece: Piece ==> ()
+		capturePiece(p) == (
+			stack := stack ^ p.getStack();
+		)
+		pre len stack < 6
+		post len stack > len stack~;
+			
+		pure public getSize: () ==> nat1
+		getSize() == return len stack;
+		
+		pure public getStack: () ==> seq of Piece
+		getStack() == return stack;
+		
+		pure public getTopPiece: () ==> Piece
+		getTopPiece() == return (hd stack);
+		
+end Tower

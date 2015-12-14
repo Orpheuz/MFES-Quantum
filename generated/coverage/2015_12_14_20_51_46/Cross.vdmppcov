@@ -40,12 +40,12 @@ operations
 										);
 								return true
 						)
-				elseif abs(tf.getCoordinates().x - ti.getCoordinates().x) = abs(tf.getCoordinates().y - ti.getCoordinates().y) then (
+				else (
 					if(tf.getCoordinates().x > ti.getCoordinates().x)
 					then signalX := true;
-					if(tf.getCoordinates().y > ti.getCoordinates().y)
+				if(tf.getCoordinates().y > ti.getCoordinates().y)
 					then signalY := true;
-					while(tempXc <> tf.getCoordinates().x and tempYc <> tf.getCoordinates().y)
+				while(tempXc <> tf.getCoordinates().x and tempYc <> tf.getCoordinates().y)
 						do (
 								if(signalX)
 									then tempXc := tempXc + 1
@@ -58,8 +58,7 @@ operations
 									then return false;
 								);
 				return true;
-				)
-				else return false;
+				);
 		);
 
     -- checks if can move between two different tiles

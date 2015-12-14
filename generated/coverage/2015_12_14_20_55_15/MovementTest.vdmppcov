@@ -60,14 +60,13 @@ operations
   	dcl tl4: Tile := new Tile(3,3,false);
   	dcl tl5: Tile := new Tile(2,2,false);
 
-		assertEqual(true, t.canMoveTo(tl1, tl4));
   	t.capturePiece(p3);
   	assertEqual(3, t.getSize());
   	assertEqual(false, t.canMoveTo(tl1, tl2));
 		assertEqual(false, t.canMoveTo(tl1, tl3));
-  	assertEqual(true, t.canMoveTo(tl1, tl4));
-  	assertEqual(true, t.canMoveTo(tl1, tl5));
-  	assertEqual(true, t.canMoveTo(tl5, tl1));
+  --	assertEqual(true, t.canMoveTo(tl1, tl4));
+  --	assertEqual(true, t.canMoveTo(tl1, tl5));
+  --	assertEqual(true, t.canMoveTo(tl5, tl1));
   );
   
   public testCanMoveto_TowerSquare: () ==> ()
@@ -86,17 +85,17 @@ operations
   	board.setBoardType(false);
   	
   	assertEqual(false, t.canMoveTo(tl1, tl4));
---		assertEqual(false, t.canMoveTo(tl1, tl5));
- -- 	assertEqual(true, t.canMoveTo(tl1, tl2));
-  --	t.capturePiece(p2);
-  --	assertEqual(true, t.canMoveTo(tl1, tl2));
-  --	assertEqual(true, t.canMoveTo(tl1, tl3));
-  --	assertEqual(true, isofclass(Square, t.getTopPiece()));
-  --	assertEqual(3, t.getSize());
- -- 	assertEqual(true, t.canMoveTo(tl1, tl2));
- -- 	assertEqual(true, t.canMoveTo(tl1, tl3));
- -- 	assertEqual(true, t.canMoveTo(tl2, tl1));
- -- 	assertEqual(true, t.canMoveTo(tl3, tl1));
+		assertEqual(false, t.canMoveTo(tl1, tl5));
+  	assertEqual(true, t.canMoveTo(tl1, tl2));
+  	t.capturePiece(p2);
+  	assertEqual(true, t.canMoveTo(tl1, tl2));
+  	assertEqual(true, t.canMoveTo(tl1, tl3));
+  	assertEqual(true, isofclass(Square, t.getTopPiece()));
+  	assertEqual(3, t.getSize());
+  	assertEqual(true, t.canMoveTo(tl1, tl2));
+  	assertEqual(true, t.canMoveTo(tl1, tl3));
+  	assertEqual(true, t.canMoveTo(tl2, tl1));
+  	assertEqual(true, t.canMoveTo(tl3, tl1));
   );
   
   public testCanMoveto_TowerCross: () ==> ()

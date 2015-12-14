@@ -1,0 +1,77 @@
+class Board
+
+values
+
+		public smallSizeX: nat1 = 10;
+		public smallSizeY: nat1 = 6;
+		
+		public bigSizeX: nat1 = 12;
+		public bigSizeY: nat1 = 8;
+		
+instance variables
+
+		private board: seq of seq of Tile := [[]];
+		private bigBoard: bool := false;
+		private static boardInstance:Board := new Board();
+
+operations
+		
+		private buildBoard: nat1 * nat1 ==> Tile
+		buildBoard(x, y) == (
+			let piece =
+			  cases mk_(x, y):
+			     mk_(1,2), mk_(1,5), mk_(5,1), mk_(6,1) -> new Cross(<Black>),
+			     mk_(1,3), mk_(1,4), mk_(2,2), mk_(2,5), mk_(4,2), mk_(7,2) -> new Circle(<Black>),
+			     mk_(2,3), mk_(2,4), mk_(4,1), mk_(7,1), mk_(5,2), mk_(6,2) -> new Square(<Black>),
+			     mk_(5,6), mk_(6,6), mk_(10,2), mk_(10,5) -> new Cross(<White>),
+			     mk_(4,5), mk_(7,5), mk_(9,2), mk_(9,5), mk_(10,3), mk_(10,4) -> new Circle(<White>),
+			     mk_(9,3), mk_(9,4), mk_(4,6), mk_(7,6), mk_(5,5), mk_(6,5) -> new Square(<White>),
+			     others -> nil
+			  end
+			in  
+				if(piece <> nil)
+					then return new Tile(x,y, piece, bigBoard)
+				else
+					return new Tile(x,y, bigBoard);
+		);
+		
+		private buildBigBoard: nat1 * nat1 ==> Tile
+		buildBigBoard(x, y) == (
+			let piece =
+			  cases mk_(x, y):
+			     mk_(1,3), mk_(1,6), mk_(6,1), mk_(7,1) -> new Cross(<Black>),
+			     mk_(1,4), mk_(1,5), mk_(2,3), mk_(2,6), mk_(5,2), mk_(8,2) -> new Circle(<Black>),
+			     mk_(2,4), mk_(2,5), mk_(5,1), mk_(8,1), mk_(6,2), mk_(7,2) -> new Square(<Black>),
+			     mk_(6,8), mk_(7,8), mk_(12,3), mk_(12,6) -> new Cross(<White>),
+			     mk_(5,7), mk_(8,7), mk_(11,3), mk_(11,6), mk_(12,4), mk_(12,5) -> new Circle(<White>),
+			     mk_(11,4), mk_(11,5), mk_(5,8), mk_(8,8), mk_(6,7), mk_(7,7) -> new Square(<White>),
+			     others -> nil
+			  end
+			in  
+				if(piece <> nil)
+					then return new Tile(x,y, piece, bigBoard)
+				else
+					return new Tile(x,y, bigBoard);
+		);
+		
+		public static getInstance: () ==> Board
+		getInstance() == return boardInstance;
+		
+		public setBoardType: bool ==> () 
+		setBoardType(boardType) == (
+			bigBoard := boardType;
+			if bigBoard then
+					board := [[buildBigBoard(j, i) | j in set {1, ..., bigSizeX}] |  i in set {1, ..., bigSizeY}]
+				else
+					board := [[buildBoard(j, i) | j in set {1, ..., smallSizeX}] |  i in set {1, ..., smallSizeY}];
+		);
+		
+		pure public getTile: nat1 * nat1 ==> Tile
+		getTile(x, y) == (
+				return board(x)(y);
+		);
+		
+		pure public isBigBoard: () ==> bool
+		isBigBoard() == return bigBoard;
+        
+end Board
