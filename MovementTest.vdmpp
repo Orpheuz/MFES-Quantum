@@ -136,6 +136,7 @@ operations
   	dcl board: Board := Board`getInstance();
   	dcl ps: Piece := new Square();
   	dcl pc: Piece := new Circle();
+  	dcl pcr: Piece := new Cross();
   	board.setBoardType(false);
   	
   	assertEqual(true, board.getInstance().getTile(1,1).isSpecial());
@@ -149,6 +150,24 @@ operations
   	board.getInstance().getTile(2,2).setPiece(nil);
   	board.getInstance().getTile(3,3).setPiece(nil);
   	assertEqual(true, board.getInstance().getTile(1,1).getPiece().canMoveTo(board.getInstance().getTile(1,1), board.getInstance().getTile(3,3)));
+  	-- testing cross piece in special tile
+  	board.getInstance().getTile(1,1).setPiece(pcr);
+  	board.getInstance().getTile(1,2).setPiece(nil);
+  	board.getInstance().getTile(1,3).setPiece(nil);
+  	assertEqual(true, board.getInstance().getTile(1,1).getPiece().canMoveTo(board.getInstance().getTile(1,1), board.getInstance().getTile(1,3)));
+  	board.getInstance().getTile(2,1).setPiece(nil);
+  	board.getInstance().getTile(3,1).setPiece(nil);
+  	assertEqual(true, board.getInstance().getTile(1,1).getPiece().canMoveTo(board.getInstance().getTile(1,1), board.getInstance().getTile(3,1)));
+  	board.getInstance().getTile(1,3).setPiece(pcr);
+  	board.getInstance().getTile(1,2).setPiece(new Circle());
+  	board.getInstance().getTile(1,1).setPiece(nil);
+  	assertEqual(false, board.getInstance().getTile(1,3).getPiece().canMoveTo(board.getInstance().getTile(1,3), board.getInstance().getTile(1,1)));
+  	board.getInstance().getTile(3,1).setPiece(pcr);
+  	board.getInstance().getTile(2,1).setPiece(new Square());
+  	board.getInstance().getTile(1,1).setPiece(nil);
+  	assertEqual(false, board.getInstance().getTile(3,1).getPiece().canMoveTo(board.getInstance().getTile(3,1), board.getInstance().getTile(1,1)));
+  	
+  	
   );
   
   public testMove: () ==> ()
@@ -323,7 +342,7 @@ operations
 		assertEqual(2, q.board.getTile(2,5).getPiece().getSize());
 		q.endTurn(); q.endTurn();
 		assertEqual(true, q.board.getTile(1,5).getPiece() <> nil);
-		assertEqual(q.board.getTile(1,5).getPiece().getSize(), 3);
+		--assertEqual(q.board.getTile(1,5).getPiece().getSize(), 3);
 		--q.isGameOver();
 		--assertEqual(q.getGameState() = <Player2Won>, true);
 	);
