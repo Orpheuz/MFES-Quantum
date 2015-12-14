@@ -151,6 +151,10 @@ public class Cross extends Piece {
     }
 
     public Boolean canMoveTo(final Tile ti, final Tile tf) {
+        if (!(Utils.equals(tf.getPiece(), null))) {
+            return false;
+        }
+
         if (ti.isSpecial()) {
             Boolean andResult_11 = false;
 
@@ -197,6 +201,10 @@ public class Cross extends Piece {
     }
 
     public Boolean canMoveTo(final Tile ti, final Tile tf, final Number n) {
+        if (!(Utils.equals(tf.getPiece(), null))) {
+            return false;
+        }
+
         if (ti.isSpecial()) {
             Boolean andResult_13 = false;
 

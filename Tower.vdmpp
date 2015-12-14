@@ -30,7 +30,7 @@ operations
 		
 		public capturePiece: Piece ==> ()
 		capturePiece(p) == (
-			stack := stack ^ p.getStack();
+			stack := p.getStack() ^ stack;
 		)
 		pre len stack < 6
 		post len stack > len stack~;
