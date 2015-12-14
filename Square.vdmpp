@@ -45,8 +45,7 @@ operations
 							 		ti.getCoordinates().x = tf.getCoordinates().x))
 				)
 			else
-				return (abs(ti.getCoordinates().x - tf.getCoordinates().x) + abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1 and
-								checkPiecesMiddle(ti, tf))
+				return (abs(ti.getCoordinates().x - tf.getCoordinates().x) + abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1)
 		)
 		pre ti <> tf;
 		
@@ -58,8 +57,8 @@ operations
 							 		ti.getCoordinates().x = tf.getCoordinates().x) and checkPiecesMiddle(ti, tf))
 				)
 			else
-				return (((abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n) and ti.getCoordinates().x = tf.getCoordinates().x )or 
-							 ((abs(ti.getCoordinates().y - tf.getCoordinates().y)) <= n and ti.getCoordinates().x = tf.getCoordinates().x) and
+				return ((((abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n) and ti.getCoordinates().x = tf.getCoordinates().x )or 
+							 ((abs(ti.getCoordinates().y - tf.getCoordinates().y)) <= n and ti.getCoordinates().x = tf.getCoordinates().x)) and
 							 checkPiecesMiddle(ti, tf));
 		)
 		pre ti <> tf;
