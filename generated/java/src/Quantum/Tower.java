@@ -28,7 +28,8 @@ public class Tower extends Piece {
     }
 
     public Boolean canMoveTo(final Tile ti, final Tile tf) {
-        return ((Piece) stack.get(0)).canMoveTo(ti, tf, getSize());
+        return ((Piece) SeqUtil.reverse(Utils.copy(stack)).get(0)).canMoveTo(ti,
+            tf, getSize());
     }
 
     public Boolean canMoveTo(final Tile ti, final Tile tf, final Number n) {
@@ -48,7 +49,7 @@ public class Tower extends Piece {
     }
 
     public Piece getTopPiece() {
-        return ((Piece) stack.get(0));
+        return ((Piece) SeqUtil.reverse(Utils.copy(stack)).get(0));
     }
 
     public String toString() {

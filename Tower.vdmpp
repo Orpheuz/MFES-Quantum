@@ -20,7 +20,7 @@ operations
 		
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
-				return (hd reverse stack).canMoveTo(ti, tf, getSize());
+				return (hd stack).canMoveTo(ti, tf, getSize());
 		)
 		pre len stack < 6;
 		
@@ -42,6 +42,6 @@ operations
 		getStack() == return stack;
 		
 		pure public getTopPiece: () ==> Piece
-		getTopPiece() == return (hd reverse stack);
+		getTopPiece() == return (hd stack);
 		
 end Tower
