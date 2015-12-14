@@ -11,11 +11,19 @@ operations
 				dcl tempY: nat1 := ti.getCoordinates().y;
 				dcl signalX: bool := false;
 				dcl signalY: bool := false;
+				dcl maxX: nat1 := ti.getCoordinates().x;
+				dcl maxY: nat1 := ti.getCoordinates().y;
 				if(tf.getCoordinates().x > ti.getCoordinates().x)
-					then signalX := true;
+					then (
+						signalX := true;
+						maxX := tf.getCoordinates().x;
+					);
 				if(tf.getCoordinates().y > ti.getCoordinates().y)
-					then signalY := true;
-				while(tempX <> tf.getCoordinates().x and tempY <> tf.getCoordinates().y)
+					then (
+						signalY := true;
+						maxY := tf.getCoordinates().y;
+					);
+				while(tempX < maxX -1 or tempY < maxY -1)
 						do (
 								if(signalX)
 									then tempX := tempX + 1
@@ -51,9 +59,8 @@ operations
 					)
 				else return	abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n and
 										abs(ti.getCoordinates().y - tf.getCoordinates().y) <= n and
-										abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y) and
-										checkPiecesMiddle(ti,tf)
-										;
+										abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y)
+										 and checkPiecesMiddle(ti,tf);
 		)
 		pre ti <> tf;
 		
