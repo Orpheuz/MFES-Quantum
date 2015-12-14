@@ -40,8 +40,6 @@ operations
   	dcl t3:Tile := new Tile(2,3);
   	dcl t4:Tile := new Tile(3,1);
   	dcl t5:Tile := new Tile(1,1);
-  	dcl t6:Tile := new Tile(3,3);
-  	dcl t7:Tile := new Tile(2,4);
   	assertEqual(true, p.canMoveTo(t, t2));
   	assertEqual(true, p.canMoveTo(t, t3));
   	assertEqual(true, p.canMoveTo(t, t4));
@@ -69,7 +67,7 @@ operations
   	assertEqual(false, t.canMoveTo(tl1, tl2));
   	t.capturePiece(p3);
   	-- check if after capture tower leaves previous position
-  	--assertEqual(tl1.getPiece() = nil, true);
+  	-- assertEqual(tl1.getPiece() = nil, true);
   	assertEqual(3, t.getSize());
   	assertEqual(true, t.canMoveTo(tl1, tl2));
 		assertEqual(true, t.canMoveTo(tl1, tl3));
@@ -78,6 +76,7 @@ operations
   
   public testCanMoveto_TowerCircle: () ==> ()
   testCanMoveto_TowerCircle() == (
+ 		dcl board: Board := Board`getInstance();
   	dcl p: Piece := new Circle(<Black>);
   	dcl p2: Piece := new Circle(<Black>);
   	dcl p3: Piece := new Square(<White>);
@@ -88,6 +87,7 @@ operations
   	dcl tl3: Tile := new Tile(4,2);
   	dcl tl4: Tile := new Tile(3,3);
   	dcl tl5: Tile := new Tile(2,2);
+  	board.setBoardType(false);
   	
   	assertEqual(false, t.canMoveTo(tl1, tl4));
 		assertEqual(false, t.canMoveTo(tl1, tl5));
@@ -95,12 +95,15 @@ operations
   	t.capturePiece(p2);
   	assertEqual(false, t.canMoveTo(tl1, tl2));
   	assertEqual(false, t.canMoveTo(tl1, tl3));
+  	assertEqual(true, isofclass(Circle, hd t.getStack()));
+  	board.getTile(3,3).setPiece(nil);
   	assertEqual(true, t.canMoveTo(tl1, tl5));
   	assertEqual(true, t.canMoveTo(tl1, tl4));
   );
   
   public testCanMoveto_TowerCross: () ==> ()
   testCanMoveto_TowerCross() == (
+  	dcl board: Board := Board`getInstance();
   	dcl p: Piece := new Circle(<Black>);
   	dcl p3: Piece := new Cross(<Black>);
   	dcl p2: Piece := new Square(<White>);
@@ -111,9 +114,10 @@ operations
   	dcl tl3: Tile := new Tile(4,2);
   	dcl tl4: Tile := new Tile(3,3);
   	dcl tl5: Tile := new Tile(2,2);
-  	dcl tl6: Tile := new Tile(4,7);
+  	dcl tl6: Tile := new Tile(3,2);
   	dcl tl7: Tile := new Tile(1,1);
   	dcl tl8: Tile := new Tile(5,5);
+  	board.setBoardType(false);
 
   	assertEqual(false, t.canMoveTo(tl1, tl4));
 		assertEqual(false, t.canMoveTo(tl1, tl5));
@@ -129,17 +133,22 @@ operations
   
   public testPowerTile: () ==> ()
   testPowerTile() == (
+  	dcl board: Board := Board`getInstance();
   	dcl ps: Piece := new Square();
   	dcl pc: Piece := new Circle();
-  	dcl tl1: Tile := new Tile(1,1, ps);
-  	dcl tl2: Tile := new Tile(1,1, pc);
-  	dcl tl3: Tile := new Tile(2,2);
-  	dcl tl4: Tile := new Tile(2,1);
+  	board.setBoardType(false);
   	
-  	--assertEqual(true, tl1.isSpecial());
-  	--assertEqual(tl2.isSpecial(), true);
-  	assertEqual(true, ps.canMoveTo(tl1, tl3));
-  	assertEqual(true, pc.canMoveTo(tl2, tl4));
+  	assertEqual(true, board.getInstance().getTile(1,1).isSpecial());
+  	board.getInstance().getTile(1,1).setPiece(ps);
+  	board.getInstance().getTile(4,1).setPiece(nil);
+  	assertEqual(false, board.getInstance().getTile(1,1).getPiece().canMoveTo(board.getInstance().getTile(1,1), board.getInstance().getTile(2,2)));
+  	board.getInstance().getTile(2,1).setPiece(nil);
+  	board.getInstance().getTile(3,1).setPiece(nil);
+  	assertEqual(true, board.getInstance().getTile(1,1).getPiece().canMoveTo(board.getInstance().getTile(1,1), board.getInstance().getTile(4,1)));
+  	board.getInstance().getTile(1,1).setPiece(pc);
+  	board.getInstance().getTile(2,2).setPiece(nil);
+  	board.getInstance().getTile(3,3).setPiece(nil);
+  	assertEqual(true, board.getInstance().getTile(1,1).getPiece().canMoveTo(board.getInstance().getTile(1,1), board.getInstance().getTile(3,3)));
   );
   
   public testMove: () ==> ()
@@ -218,7 +227,6 @@ operations
   	dcl p5: Piece := new Cross(<White>);
   	dcl p6: Piece := new Cross(<Black>);
   	dcl p7: Piece := new Cross(<Black>);
-  	dcl p8: Piece := new Cross(<White>);
   	dcl t: Piece := new Tower(<White>,p,p2);
   	dcl t2: Piece := new Tower(<Black>,p3,p4);
   	
@@ -227,9 +235,8 @@ operations
   	t.capturePiece(p6);
   	assertEqual(3, t.getSize());
   	assertEqual(4, t2.getSize());
-  	t.capturePiece(p8);
   	t.capturePiece(t2);
-  	assertEqual(7, t.getSize()) -- nao pode capturar uma peça ja pertencente à torre
+  	assertEqual(7, t.getSize())
   );  
   
   public testPieceMoveandCapture: () ==> ()
@@ -277,12 +284,12 @@ operations
   	assertEqual(true, t.moveTo(tl22, tl33));
   	assertEqual(tl22.getPiece() = nil, true);
   	assertEqual(tl33.getPiece() = nil, false);
-  	--assertEqual(tl33.getPiece().getSize(), 2);
+  	assertEqual(tl33.getPiece().getSize(), 2);
   	assertEqual(tl32.getPiece() <> nil, true);
-  	--assertEqual(false, t.canMoveTo(tl33, tl31));
-  	--assertEqual(true, t.moveTo(tl33, tl31));
-  	--assertEqual(true, t.canMoveTo(tl33, tl32));
-  	--assertEqual(true, t.moveTo(tl33, tl32));
+  	assertEqual(true, t.canMoveTo(tl33, tl31));
+  	assertEqual(true, t.moveTo(tl33, tl31));
+  	assertEqual(true, t.canMoveTo(tl31, tl32));
+  	assertEqual(true, t.moveTo(tl31, tl32));
   	
   );
   
@@ -293,12 +300,14 @@ operations
     testCanMoveto_Square();
   	testCanMoveto_Cross();
     testCanMoveto_TowerCircle();
-    --testCanMoveto_TowerSquare();
-  	--testCanMoveto_TowerCross();
-  	--testTowerCapture();
-  	--testCanMoveto_Tower_AfterCapture();
-  	--testTowerCaptureTower();
-  	
+    testCanMoveto_TowerSquare();
+  	testCanMoveto_TowerCross();
+  	testTowerCapture();
+  	testCanMoveto_Tower_AfterCapture();
+  	testTowerCaptureTower();
+  	testMove();
+  	testPowerTile();  	
+  	testTowerMoveandCapture();
   );
   
 end MovementTest

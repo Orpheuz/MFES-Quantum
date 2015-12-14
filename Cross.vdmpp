@@ -11,6 +11,10 @@ operations
 				dcl tempY: nat1;
 				dcl maxX: nat1;
 				dcl maxY: nat1;
+				dcl tempXc: nat1 := ti.getCoordinates().x;
+				dcl tempYc: nat1 := ti.getCoordinates().y;
+				dcl signalX: bool := false;
+				dcl signalY: bool := false;
 				if(ti.getCoordinates().x = tf.getCoordinates().x and ti.getCoordinates().y <> tf.getCoordinates().y)
 					then (
 								tempX := ti.getCoordinates().x;
@@ -37,20 +41,23 @@ operations
 								return true
 						)
 				else (
-					if(ti.getCoordinates().x > tf.getCoordinates().x)
-						then (tempX := tf.getCoordinates().x;	maxX := ti.getCoordinates().x)
-						else (tempX := ti.getCoordinates().x;	maxX := tf.getCoordinates().x);
-					if(ti.getCoordinates().y > tf.getCoordinates().y)
-						then (tempY := tf.getCoordinates().y; maxY := ti.getCoordinates().y)
-						else (tempY := ti.getCoordinates().y; maxY := tf.getCoordinates().y);
-					while(tempX < maxX-1 and tempY < maxY-1)
+					if(tf.getCoordinates().x > ti.getCoordinates().x)
+					then signalX := true;
+				if(tf.getCoordinates().y > ti.getCoordinates().y)
+					then signalY := true;
+				while(tempXc <> tf.getCoordinates().x and tempYc <> tf.getCoordinates().y)
 						do (
-							tempX := tempX + 1;
-							tempY := tempY + 1;
-							if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
-								then return false
-						);
-							return true
+								if(signalX)
+									then tempXc := tempXc + 1
+								else	tempXc := tempXc - 1;
+								if(signalY)
+									then tempYc := tempYc + 1
+								else
+									tempYc := tempYc-1;
+								if(Board`getInstance().getTile(tempXc, tempYc).getPiece() <> nil)
+									then return false;
+								);
+				return true;
 				);
 		);
 
@@ -78,14 +85,17 @@ operations
 		canMoveTo(ti, tf, n) == (
 			if(ti.isSpecial())
 				then (
-					return (checkPiecesMiddle(ti, tf) and
-									(ti.getCoordinates().x = tf.getCoordinates().x or
+					return ((ti.getCoordinates().x = tf.getCoordinates().x or
 					 				ti.getCoordinates().y = tf.getCoordinates().y or
-					 				(abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y))));
+					 				(abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y))) and
+					 				checkPiecesMiddle(ti, tf));
 				)
 			else
 				return abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n and abs(ti.getCoordinates().y - tf.getCoordinates().y) <= n
 		)
 		pre ti <> tf;
+		
+		pure public getSize: () ==> nat1
+		getSize() == return 1;
 		
 end Cross

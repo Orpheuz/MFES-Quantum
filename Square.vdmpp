@@ -15,8 +15,9 @@ operations
 								if(ti.getCoordinates().y > tf.getCoordinates().y)
 									then (max := ti.getCoordinates().y; tempY := tf.getCoordinates().y)
 									else (tempY := ti.getCoordinates().y; max := tf.getCoordinates().y);
-								while(tempY < max)
-									do(tempY := tempY + 1;
+								while(tempY < max-1)
+									do(
+											tempY := tempY + 1;
 											if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
 												then return false);
 								return true
@@ -52,14 +53,16 @@ operations
 		canMoveTo(ti, tf, n) == (
 			if(ti.isSpecial())
 				then (
-					return (checkPiecesMiddle(ti, tf) and
-									(ti.getCoordinates().x = tf.getCoordinates().x or 
-							 		ti.getCoordinates().x = tf.getCoordinates().x))
+					return ((ti.getCoordinates().x = tf.getCoordinates().x or 
+							 		ti.getCoordinates().x = tf.getCoordinates().x) and checkPiecesMiddle(ti, tf))
 				)
 			else
 				return (((abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n) and ti.getCoordinates().x = tf.getCoordinates().x )or 
 							 ((abs(ti.getCoordinates().y - tf.getCoordinates().y)) <= n and ti.getCoordinates().x = tf.getCoordinates().x));
 		)
 		pre ti <> tf;
+
+		pure public getSize: () ==> nat1
+		getSize() == return 1;
 
 end Square

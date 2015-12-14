@@ -9,18 +9,23 @@ operations
 		checkPiecesMiddle(ti,tf) == (
 				dcl tempX: nat1 := ti.getCoordinates().x;
 				dcl tempY: nat1 := ti.getCoordinates().y;
-				dcl maxX: nat1 := tf.getCoordinates().x;
-				dcl maxY: nat1 := tf.getCoordinates().y;
-				if(ti.getCoordinates().x > tf.getCoordinates().x)
-						then (tempX := tf.getCoordinates().x;	maxX := ti.getCoordinates().x;);
-				if(ti.getCoordinates().y > tf.getCoordinates().y)
-						then (tempY := tf.getCoordinates().y; maxY := ti.getCoordinates().y);
-				while(tempX < maxX-1 and tempY < maxY-1)
+				dcl signalX: bool := false;
+				dcl signalY: bool := false;
+				if(tf.getCoordinates().x > ti.getCoordinates().x)
+					then signalX := true;
+				if(tf.getCoordinates().y > ti.getCoordinates().y)
+					then signalY := true;
+				while(tempX <> tf.getCoordinates().x and tempY <> tf.getCoordinates().y)
 						do (
-								tempX := tempX + 1;
-								tempY := tempY + 1;
+								if(signalX)
+									then tempX := tempX + 1
+								else	tempX := tempX - 1;
+								if(signalY)
+									then tempY := tempY + 1
+								else
+									tempY := tempY-1;
 								if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
-									then return false
+									then return false;
 								);
 				return true;
 		);
@@ -44,11 +49,15 @@ operations
 						return checkPiecesMiddle(ti,tf) and
 										abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y);
 					)
-				else return	checkPiecesMiddle(ti,tf) and
-										abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n and
+				else return	abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n and
 										abs(ti.getCoordinates().y - tf.getCoordinates().y) <= n and
-										abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y);
+										abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y) --and
+										--checkPiecesMiddle(ti,tf)
+										;
 		)
 		pre ti <> tf;
+		
+		pure public getSize: () ==> nat1
+		getSize() == return 1;
 		
 end Circle
