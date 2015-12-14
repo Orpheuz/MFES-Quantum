@@ -33,13 +33,13 @@ operations
 						if tf.getPiece() <> nil and tf.getPiece().getSize() < 6
 						then (
 							ti.setPiece(nil);
-							if (isofclass(Tower, tf.getPiece())) then (
+							if (isofclass(Tower, self)) then (
 								capturePiece(tf.getPiece());
 								tf.setPiece(self);
 							)
 							else (
-								tf.setPiece(new Tower(pieceOfPlayer, self, tf.getPiece()));
 								capturePiece(tf.getPiece());
+								tf.setPiece(new Tower(pieceOfPlayer, self, tf.getPiece().getStack()));
 							);
 							return true;
 						)
