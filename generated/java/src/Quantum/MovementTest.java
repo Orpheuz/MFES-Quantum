@@ -87,7 +87,7 @@ public class MovementTest extends QuantumTest {
         t.capturePiece(p2);
         super.assertEqual(false, t.canMoveTo(tl1, tl2));
         super.assertEqual(false, t.canMoveTo(tl1, tl3));
-        super.assertEqual(true, ((Piece) t.getStack().get(0)) instanceof Circle);
+        super.assertEqual(true, t.getTopPiece() instanceof Circle);
         board.getTile(3L, 3L).setPiece(null);
         super.assertEqual(3L, t.getSize());
         super.assertEqual(true, t.canMoveTo(tl1, tl4));
@@ -219,19 +219,19 @@ public class MovementTest extends QuantumTest {
     }
 
     public void testCanMoveto_Tower_AfterCapture() {
-        Piece p = new Square();
-        Piece p2 = new Cross();
-        Tower t = new Tower(quantum.quotes.WhiteQuote.getInstance(), p,
-                SeqUtil.seq(p2));
-        Piece p3 = new Circle();
-        Piece p4 = new Square();
-        Piece p5 = new Circle();
-        Piece p6 = new Square();
+        Piece p = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece p2 = new Cross(quantum.quotes.WhiteQuote.getInstance());
+        Tower t = new Tower(quantum.quotes.WhiteQuote.getInstance(), p2,
+                SeqUtil.seq(p));
+        Piece p3 = new Circle(quantum.quotes.BlackQuote.getInstance());
+        Piece p4 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece p5 = new Circle(quantum.quotes.BlackQuote.getInstance());
+        Piece p6 = new Square(quantum.quotes.WhiteQuote.getInstance());
         Tile tl1 = new Tile(1L, 2L, false);
         Tile tl2 = new Tile(1L, 1L, false);
         t.capturePiece(p3);
         t.capturePiece(p4);
-        super.assertEqual(true, t.canMoveTo(tl1, tl2));
+        super.assertEqual(true, t.canMoveTo(tl2, tl1));
         t.capturePiece(p5);
         t.capturePiece(p6);
         super.assertEqual(6L, t.getSize());
@@ -272,7 +272,6 @@ public class MovementTest extends QuantumTest {
         super.assertEqual(true, p2.moveTo(tl21, tl31));
         super.assertEqual(Utils.equals(tl21.getPiece(), null), true);
         super.assertEqual(Utils.equals(tl31.getPiece(), null), false);
-        super.assertEqual(tl31.getPiece() instanceof Tower, true);
         super.assertEqual(tl31.getPiece().getSize(), 2L);
     }
 
@@ -296,12 +295,11 @@ public class MovementTest extends QuantumTest {
         super.assertEqual(true, t.moveTo(tl22, tl33));
         super.assertEqual(Utils.equals(tl22.getPiece(), null), true);
         super.assertEqual(Utils.equals(tl33.getPiece(), null), false);
-        super.assertEqual(tl33.getPiece().getSize(), 2L);
+        super.assertEqual(3L, tl33.getPiece().getSize());
         super.assertEqual(!(Utils.equals(tl32.getPiece(), null)), true);
         super.assertEqual(true, t.canMoveTo(tl33, tl31));
         super.assertEqual(true, t.moveTo(tl33, tl31));
         super.assertEqual(true, t.canMoveTo(tl31, tl32));
-        super.assertEqual(true, t.moveTo(tl31, tl32));
     }
 
     public void GameCicleTest() {
@@ -349,11 +347,8 @@ public class MovementTest extends QuantumTest {
         testCanMoveto_Circle();
         testCanMoveto_Square();
         testCanMoveto_Cross();
-        testCanMoveto_TowerCircle();
-        testCanMoveto_TowerSquare();
-        testCanMoveto_TowerCross();
         testTowerCapture();
-        testMove();
+        testCanMoveto_Tower_AfterCapture();
     }
 
     public String toString() {

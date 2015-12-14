@@ -36,7 +36,7 @@ public class Tower extends Piece {
     }
 
     public void capturePiece(final Piece p) {
-        stack = SeqUtil.conc(Utils.copy(stack), p.getStack());
+        stack = SeqUtil.conc(p.getStack(), Utils.copy(stack));
     }
 
     public Number getSize() {

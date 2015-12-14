@@ -133,34 +133,42 @@ public class Square extends Piece {
 
             return andResult_20;
         } else {
+            Boolean andResult_21 = false;
+
             Boolean orResult_8 = false;
 
-            Boolean andResult_21 = false;
+            Boolean andResult_22 = false;
 
             if (Utils.abs(ti.getCoordinates().x.longValue() -
                         tf.getCoordinates().x.longValue()) <= n.longValue()) {
                 if (Utils.equals(ti.getCoordinates().x, tf.getCoordinates().x)) {
-                    andResult_21 = true;
+                    andResult_22 = true;
                 }
             }
 
-            if (andResult_21) {
+            if (andResult_22) {
                 orResult_8 = true;
             } else {
-                Boolean andResult_22 = false;
+                Boolean andResult_23 = false;
 
                 if (Utils.abs(ti.getCoordinates().y.longValue() -
                             tf.getCoordinates().y.longValue()) <= n.longValue()) {
                     if (Utils.equals(ti.getCoordinates().x,
                                 tf.getCoordinates().x)) {
-                        andResult_22 = true;
+                        andResult_23 = true;
                     }
                 }
 
-                orResult_8 = andResult_22;
+                orResult_8 = andResult_23;
             }
 
-            return orResult_8;
+            if (orResult_8) {
+                if (checkPiecesMiddle(ti, tf)) {
+                    andResult_21 = true;
+                }
+            }
+
+            return andResult_21;
         }
     }
 

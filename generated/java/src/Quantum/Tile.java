@@ -30,55 +30,55 @@ public class Tile {
         coordinates = new Coordinates(xT, yT);
         piece = null;
 
-        if (bigBoard) {
+        if (!(bigBoard)) {
             Boolean orResult_9 = false;
 
-            Boolean andResult_23 = false;
+            Boolean andResult_24 = false;
 
             if (Utils.equals(xT, 1L)) {
                 if (Utils.equals(yT, 1L)) {
-                    andResult_23 = true;
+                    andResult_24 = true;
                 }
             }
 
-            if (andResult_23) {
+            if (andResult_24) {
                 orResult_9 = true;
             } else {
                 Boolean orResult_10 = false;
 
-                Boolean andResult_24 = false;
+                Boolean andResult_25 = false;
 
                 if (Utils.equals(xT, Board.smallSizeX)) {
                     if (Utils.equals(yT, Board.smallSizeY)) {
-                        andResult_24 = true;
+                        andResult_25 = true;
                     }
                 }
 
-                if (andResult_24) {
+                if (andResult_25) {
                     orResult_10 = true;
                 } else {
                     Boolean orResult_11 = false;
 
-                    Boolean andResult_25 = false;
+                    Boolean andResult_26 = false;
 
                     if (Utils.equals(xT, 1L)) {
                         if (Utils.equals(yT, Board.smallSizeY)) {
-                            andResult_25 = true;
+                            andResult_26 = true;
                         }
                     }
 
-                    if (andResult_25) {
+                    if (andResult_26) {
                         orResult_11 = true;
                     } else {
-                        Boolean andResult_26 = false;
+                        Boolean andResult_27 = false;
 
                         if (Utils.equals(xT, Board.smallSizeX)) {
                             if (Utils.equals(yT, 1L)) {
-                                andResult_26 = true;
+                                andResult_27 = true;
                             }
                         }
 
-                        orResult_11 = andResult_26;
+                        orResult_11 = andResult_27;
                     }
 
                     orResult_10 = orResult_11;
@@ -91,52 +91,52 @@ public class Tile {
         } else {
             Boolean orResult_12 = false;
 
-            Boolean andResult_27 = false;
+            Boolean andResult_28 = false;
 
             if (Utils.equals(xT, 1L)) {
                 if (Utils.equals(yT, 1L)) {
-                    andResult_27 = true;
+                    andResult_28 = true;
                 }
             }
 
-            if (andResult_27) {
+            if (andResult_28) {
                 orResult_12 = true;
             } else {
                 Boolean orResult_13 = false;
 
-                Boolean andResult_28 = false;
+                Boolean andResult_29 = false;
 
                 if (Utils.equals(xT, Board.bigSizeX)) {
                     if (Utils.equals(yT, Board.bigSizeY)) {
-                        andResult_28 = true;
+                        andResult_29 = true;
                     }
                 }
 
-                if (andResult_28) {
+                if (andResult_29) {
                     orResult_13 = true;
                 } else {
                     Boolean orResult_14 = false;
 
-                    Boolean andResult_29 = false;
+                    Boolean andResult_30 = false;
 
                     if (Utils.equals(xT, 1L)) {
                         if (Utils.equals(yT, Board.bigSizeY)) {
-                            andResult_29 = true;
+                            andResult_30 = true;
                         }
                     }
 
-                    if (andResult_29) {
+                    if (andResult_30) {
                         orResult_14 = true;
                     } else {
-                        Boolean andResult_30 = false;
+                        Boolean andResult_31 = false;
 
                         if (Utils.equals(xT, Board.bigSizeX)) {
                             if (Utils.equals(yT, 1L)) {
-                                andResult_30 = true;
+                                andResult_31 = true;
                             }
                         }
 
-                        orResult_14 = andResult_30;
+                        orResult_14 = andResult_31;
                     }
 
                     orResult_13 = orResult_14;
