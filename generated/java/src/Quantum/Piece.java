@@ -80,7 +80,6 @@ abstract public class Piece {
                         capturePiece(tf.getPiece());
                         tf.setPiece(this);
                     } else {
-                        capturePiece(tf.getPiece());
                         tf.setPiece(new Tower(((Object) pieceOfPlayer), this,
                                 tf.getPiece().getStack()));
                     }
@@ -99,11 +98,7 @@ abstract public class Piece {
     }
 
     public void capturePiece(final Piece p) {
-        if (Utils.equals(pieceOfPlayer, quantum.quotes.WhiteQuote.getInstance())) {
-            pieceOfPlayer = quantum.quotes.BlackQuote.getInstance();
-        } else {
-            pieceOfPlayer = quantum.quotes.WhiteQuote.getInstance();
-        }
+        return;
     }
 
     public Object getPlayer() {
