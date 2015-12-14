@@ -139,9 +139,9 @@ public class Square extends Piece {
 
             Boolean andResult_22 = false;
 
-            if (Utils.abs(ti.getCoordinates().x.longValue() -
-                        tf.getCoordinates().x.longValue()) <= n.longValue()) {
-                if (Utils.equals(ti.getCoordinates().x, tf.getCoordinates().x)) {
+            if (Utils.equals(ti.getCoordinates().x, tf.getCoordinates().x)) {
+                if (Utils.abs(tf.getCoordinates().y.longValue() -
+                            ti.getCoordinates().y.longValue()) <= n.longValue()) {
                     andResult_22 = true;
                 }
             }
@@ -151,10 +151,9 @@ public class Square extends Piece {
             } else {
                 Boolean andResult_23 = false;
 
-                if (Utils.abs(ti.getCoordinates().y.longValue() -
-                            tf.getCoordinates().y.longValue()) <= n.longValue()) {
-                    if (Utils.equals(ti.getCoordinates().x,
-                                tf.getCoordinates().x)) {
+                if (Utils.equals(ti.getCoordinates().y, tf.getCoordinates().y)) {
+                    if (Utils.abs(tf.getCoordinates().x.longValue() -
+                                ti.getCoordinates().x.longValue()) <= n.longValue()) {
                         andResult_23 = true;
                     }
                 }

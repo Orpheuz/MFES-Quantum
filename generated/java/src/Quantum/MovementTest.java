@@ -91,6 +91,8 @@ public class MovementTest extends QuantumTest {
         board.getTile(3L, 3L).setPiece(null);
         super.assertEqual(3L, t.getSize());
         super.assertEqual(true, t.canMoveTo(tl1, tl4));
+        super.assertEqual(true, t.canMoveTo(tl4, tl1));
+        super.assertEqual(true, t.canMoveTo(tl5, tl1));
     }
 
     public void testCanMoveto_TowerCross() {
@@ -347,8 +349,14 @@ public class MovementTest extends QuantumTest {
         testCanMoveto_Circle();
         testCanMoveto_Square();
         testCanMoveto_Cross();
+        testCanMoveto_TowerCircle();
         testTowerCapture();
         testCanMoveto_Tower_AfterCapture();
+        testTowerCaptureTower();
+        testMove();
+        testPowerTile();
+        GameCicleTest();
+        GameOverTest();
     }
 
     public String toString() {
