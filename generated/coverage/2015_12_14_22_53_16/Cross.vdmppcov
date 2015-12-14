@@ -2,12 +2,9 @@ class Cross is subclass of Piece
 
 operations
 
-
-		--cross constructor
 		public Cross: Player ==> Cross
 		Cross(p) == Piece(p);
 
-		--checks if theres a piece between two tiles according to cross movement
 		public checkPiecesMiddle: Tile * Tile ==> bool
 		checkPiecesMiddle(ti,tf) == (
 				dcl tempX: nat1;
@@ -66,7 +63,7 @@ operations
 				)
 		);
 
-    --Can move one space between two tiles
+    -- checks if can move between two different tiles
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
 			if(tf.getPiece() <> nil)
@@ -84,7 +81,6 @@ operations
 
 		) pre ti <> tf;
 		
-		--Can move a variable number of spaces between two tiles
 		public canMoveTo: Tile * Tile * nat1 ==> bool
 		canMoveTo(ti, tf, n) == (
 			if(tf.getPiece() <> nil)
@@ -105,11 +101,9 @@ operations
 			)
 		pre ti <> tf;
 		
-		--override get piece size
 		pure public getSize: () ==> nat1
 		getSize() == return 1;
 		
-		--override get piece
 		pure public getTopPiece: () ==> Piece
 		getTopPiece() == return self;
 		

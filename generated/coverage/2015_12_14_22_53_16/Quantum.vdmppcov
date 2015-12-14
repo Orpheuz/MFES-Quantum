@@ -1,18 +1,17 @@
 class Quantum
 types
-		public Player = <Player1> | <Player2>; --Player types
-		public State = <Player1Won> | <Player2Won> | <Playing> | <NotStarted>; --Game states
+		public Player = <Player1> | <Player2>;
+		public State = <Player1Won> | <Player2Won> | <Playing> | <NotStarted>;
 
 instance variables
-		private boardType: bool; --Board type
-		public board: Board; --Board instance
-		private playerTurn: Player; --Player turn
-		private actualState: State; --Actual game state
-		private score: map Player to nat := {<Player1> |-> 0, <Player2> |-> 0}; --score map
+		private boardType: bool;
+		public board: Board;
+		private playerTurn: Player;
+		private actualState: State;
+		private score: map Player to nat := {<Player1> |-> 0, <Player2> |-> 0};
 	
 operations
 		
-		--Game constructor
 		public Quantum: bool ==> Quantum
     Quantum(n) == (
 			boardType := n;
@@ -20,9 +19,8 @@ operations
 			board.setBoardType(boardType);
 			playerTurn := <Player1>;
 			actualState := <NotStarted>;
-    );      
-      
-    --checks if game is over yet          
+    );
+                
     public updateGameState: () ==> ()
     updateGameState() == (
     		dcl countW: nat := 0;
@@ -42,12 +40,10 @@ operations
     			score := score ++ {<Player2> |-> score(<Player2>) + 1};
     			)
     );   
-    
-    --changes game state to started      
+             
     public startGame: () ==> ()
     startGame() == actualState := <Playing>;  
     
-    --ends a player turn
     public endTurn: () ==> ()
     endTurn() == (
     	if(playerTurn = <Player1>) then playerTurn := <Player2>
@@ -55,7 +51,6 @@ operations
     )
     post playerTurn <> playerTurn~;
     
-    --move piece from a tile to another
     public movePieceTo: nat1 * nat1 * nat1 * nat1 ==> bool
     movePieceTo(xi, yi, xf, yf) == (
     	if(board.getTile(xi, yi).getPiece() <> nil)
@@ -63,16 +58,10 @@ operations
     	else return false;
     );
     
-    --method get game state
     pure public getGameState: () ==> State
     getGameState() == return actualState;
     
-    --method get actual player turn
     pure public getActualPlayer: () ==> Player
     getActualPlayer() == return playerTurn;
-    
-    --method get score
-    pure public getScore: () ==> map Player to nat
-    getScore() == return score;
     
 end Quantum

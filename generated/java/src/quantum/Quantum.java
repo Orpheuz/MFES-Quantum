@@ -34,11 +34,11 @@ public class Quantum {
         Number countW = 0L;
         Number countB = 0L;
         VDMSet setCompResult_1 = SetUtil.set();
-        VDMSet set_5 = SetUtil.range(0L, Board.smallSizeX);
+        VDMSet set_5 = SetUtil.range(1L, Board.smallSizeY);
 
         for (Iterator iterator_5 = set_5.iterator(); iterator_5.hasNext();) {
             Number x = ((Number) iterator_5.next());
-            VDMSet set_6 = SetUtil.range(0L, Board.smallSizeY);
+            VDMSet set_6 = SetUtil.range(1L, Board.smallSizeX);
 
             for (Iterator iterator_6 = set_6.iterator(); iterator_6.hasNext();) {
                 Number y = ((Number) iterator_6.next());
@@ -50,8 +50,15 @@ public class Quantum {
         for (Iterator iterator_7 = setCompResult_1.iterator();
                 iterator_7.hasNext();) {
             Tile t = (Tile) iterator_7.next();
+            Boolean andResult_27 = false;
 
-            if (t.getPiece().getSize().longValue() >= 6L) {
+            if (!(Utils.equals(t.getPiece(), null))) {
+                if (t.getPiece().getSize().longValue() >= 6L) {
+                    andResult_27 = true;
+                }
+            }
+
+            if (andResult_27) {
                 if (Utils.equals(t.getPiece().getPlayer(),
                             quantum.quotes.WhiteQuote.getInstance())) {
                     countW = countW.longValue() + 1L;

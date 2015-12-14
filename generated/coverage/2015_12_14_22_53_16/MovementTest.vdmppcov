@@ -343,6 +343,7 @@ operations
 		q.endTurn(); q.endTurn();
 		assertEqual(1, q.board.getTile(3,5).getPiece().getSize());
 		assertEqual(<Black>, q.board.getTile(2,5).getPiece().getPlayer());
+		assertEqual(<Black>, q.board.getTile(2,5).getPiece().getOwner());
 		assertEqual(q.movePieceTo(3, 5, 2, 5), true);
 		assertEqual(2, q.board.getTile(2,5).getPiece().getSize());
 		q.endTurn(); q.endTurn();

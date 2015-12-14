@@ -57,11 +57,9 @@ operations
 					return new Tile(x,y, bigBoard);
 		);
 		
-		--returns singleton
 		public static getInstance: () ==> Board
 		getInstance() == return boardInstance;
 		
-		--set board type
 		public setBoardType: bool ==> () 
 		setBoardType(boardType) == (
 			bigBoard := boardType;
@@ -71,13 +69,11 @@ operations
 					board := [[buildBoard(j, i) | j in set {1, ..., smallSizeX}] |  i in set {1, ..., smallSizeY}];
 		);
 		
-		--get method for a board tile
 		pure public getTile: nat1 * nat1 ==> Tile
 		getTile(x, y) == (
 				return board(x)(y);
 		);
 		
-		--get method for board type
 		pure public isBigBoard: () ==> bool
 		isBigBoard() == return bigBoard;
         

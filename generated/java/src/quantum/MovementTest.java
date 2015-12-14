@@ -88,6 +88,17 @@ public class MovementTest extends QuantumTest {
         Tile tl5 = new Tile(2L, 2L, false);
         board.setBoardType(false);
         super.assertEqual(false, t.canMoveTo(tl1, tl4));
+        super.assertEqual(false, t.canMoveTo(tl1, tl5));
+        super.assertEqual(true, t.canMoveTo(tl1, tl2));
+        t.capturePiece(p2);
+        super.assertEqual(true, t.canMoveTo(tl1, tl2));
+        super.assertEqual(true, t.canMoveTo(tl1, tl3));
+        super.assertEqual(true, t.getTopPiece() instanceof Square);
+        super.assertEqual(3L, t.getSize());
+        super.assertEqual(true, t.canMoveTo(tl1, tl2));
+        super.assertEqual(true, t.canMoveTo(tl1, tl3));
+        super.assertEqual(true, t.canMoveTo(tl2, tl1));
+        super.assertEqual(true, t.canMoveTo(tl3, tl1));
     }
 
     public void testCanMoveto_TowerCross() {
@@ -331,12 +342,60 @@ public class MovementTest extends QuantumTest {
         super.assertEqual(1L, q.board.getTile(3L, 5L).getPiece().getSize());
         super.assertEqual(quantum.quotes.BlackQuote.getInstance(),
             ((Object) q.board.getTile(2L, 5L).getPiece().getPlayer()));
+        super.assertEqual(quantum.quotes.BlackQuote.getInstance(),
+            ((Object) q.board.getTile(2L, 5L).getPiece().getOwner()));
         super.assertEqual(q.movePieceTo(3L, 5L, 2L, 5L), true);
         super.assertEqual(2L, q.board.getTile(2L, 5L).getPiece().getSize());
         q.endTurn();
         q.endTurn();
         super.assertEqual(true,
             !(Utils.equals(q.board.getTile(1L, 5L).getPiece(), null)));
+        super.assertEqual(quantum.quotes.Player1Quote.getInstance(),
+            ((Object) q.getActualPlayer()));
+        q.updateGameState();
+        super.assertEqual(true,
+            Utils.equals(q.getGameState(),
+                quantum.quotes.PlayingQuote.getInstance()));
+    }
+
+    public void GameOverTest2() {
+        Quantum q = new Quantum(false);
+        Board board = Board.getInstance();
+        Piece p = new Cross(quantum.quotes.WhiteQuote.getInstance());
+        Piece pa = new Cross(quantum.quotes.WhiteQuote.getInstance());
+        Piece pb = new Cross(quantum.quotes.WhiteQuote.getInstance());
+        Piece p1 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece p2 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece p3 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece p4 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece p5 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece pa1 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece pa2 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece pa3 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece pa4 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece pa5 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece pb1 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece pb2 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece pb3 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece pb4 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece pb5 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece t1 = new Tower(quantum.quotes.WhiteQuote.getInstance(), p,
+                SeqUtil.seq(p1, p2, p3, p4, p5));
+        Piece t2 = new Tower(quantum.quotes.WhiteQuote.getInstance(), pa,
+                SeqUtil.seq(pa1, pa2, pa3, pa4, pa5));
+        Piece t3 = new Tower(quantum.quotes.WhiteQuote.getInstance(), pb,
+                SeqUtil.seq(pb1, pb2, pb3, pb4, pb5));
+        q.startGame();
+        board.getInstance().getTile(1L, 1L).setPiece(t1);
+        board.getInstance().getTile(1L, 2L).setPiece(t2);
+        board.getInstance().getTile(1L, 3L).setPiece(t3);
+        q.updateGameState();
+        super.assertEqual(true,
+            Utils.equals(q.getGameState(),
+                quantum.quotes.Player1WonQuote.getInstance()));
+        super.assertEqual(false,
+            Utils.equals(q.getGameState(),
+                quantum.quotes.PlayingQuote.getInstance()));
     }
 
     public void testAll() {
@@ -355,6 +414,7 @@ public class MovementTest extends QuantumTest {
         testTowerMoveandCapture();
         GameCicleTest();
         GameOverTest();
+        GameOverTest2();
     }
 
     public String toString() {

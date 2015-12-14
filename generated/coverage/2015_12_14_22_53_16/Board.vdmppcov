@@ -1,8 +1,7 @@
 class Board
 
 values
-		
-		--board sizes
+
 		public smallSizeX: nat1 = 10;
 		public smallSizeY: nat1 = 6;
 		
@@ -11,13 +10,12 @@ values
 		
 instance variables
 
-		private board: seq of seq of Tile := [[]]; --Board, integrity check with piece coords
-		private bigBoard: bool := false; -- Board type
-		private static boardInstance:Board := new Board(); --Board singleton
+		private board: seq of seq of Tile := [[]];
+		private bigBoard: bool := false;
+		private static boardInstance:Board := new Board();
 
 operations
 		
-		--builds small board
 		private buildBoard: nat1 * nat1 ==> Tile
 		buildBoard(x, y) == (
 			let piece =
@@ -37,7 +35,6 @@ operations
 					return new Tile(x,y, bigBoard);
 		);
 		
-		--builds big board
 		private buildBigBoard: nat1 * nat1 ==> Tile
 		buildBigBoard(x, y) == (
 			let piece =
@@ -57,11 +54,9 @@ operations
 					return new Tile(x,y, bigBoard);
 		);
 		
-		--returns singleton
 		public static getInstance: () ==> Board
 		getInstance() == return boardInstance;
 		
-		--set board type
 		public setBoardType: bool ==> () 
 		setBoardType(boardType) == (
 			bigBoard := boardType;
@@ -71,13 +66,11 @@ operations
 					board := [[buildBoard(j, i) | j in set {1, ..., smallSizeX}] |  i in set {1, ..., smallSizeY}];
 		);
 		
-		--get method for a board tile
 		pure public getTile: nat1 * nat1 ==> Tile
 		getTile(x, y) == (
 				return board(x)(y);
 		);
 		
-		--get method for board type
 		pure public isBigBoard: () ==> bool
 		isBigBoard() == return bigBoard;
         

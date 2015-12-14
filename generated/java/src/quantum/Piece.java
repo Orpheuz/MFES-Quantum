@@ -28,52 +28,52 @@ abstract public class Piece {
     public abstract Boolean checkPiecesMiddle(final Tile ti, final Tile tf);
 
     public Boolean moveTo(final Tile ti, final Tile tf) {
-        Boolean andResult_17 = false;
+        Boolean andResult_23 = false;
 
         if (canMoveTo(ti, tf)) {
-            Boolean orResult_7 = false;
+            Boolean orResult_9 = false;
 
             if (Utils.equals(tf.getPiece(), null)) {
-                orResult_7 = true;
+                orResult_9 = true;
             } else {
-                orResult_7 = !(Utils.equals(ti.getPiece().pieceOfPlayer,
+                orResult_9 = !(Utils.equals(ti.getPiece().pieceOfPlayer,
                         tf.getPiece().pieceOfPlayer));
             }
 
-            if (orResult_7) {
-                andResult_17 = true;
+            if (orResult_9) {
+                andResult_23 = true;
             }
         }
 
-        if (andResult_17) {
-            Boolean andResult_18 = false;
+        if (andResult_23) {
+            Boolean andResult_24 = false;
 
             if (!(Utils.equals(tf.getPiece(), null))) {
-                Boolean andResult_19 = false;
+                Boolean andResult_25 = false;
 
                 if (tf.getPiece() instanceof Tower) {
                     if (tf.getPiece().getSize().longValue() > 6L) {
-                        andResult_19 = true;
+                        andResult_25 = true;
                     }
                 }
 
-                if (andResult_19) {
-                    andResult_18 = true;
+                if (andResult_25) {
+                    andResult_24 = true;
                 }
             }
 
-            if (andResult_18) {
+            if (andResult_24) {
                 return false;
             } else {
-                Boolean andResult_20 = false;
+                Boolean andResult_26 = false;
 
                 if (!(Utils.equals(tf.getPiece(), null))) {
                     if (tf.getPiece().getSize().longValue() < 6L) {
-                        andResult_20 = true;
+                        andResult_26 = true;
                     }
                 }
 
-                if (andResult_20) {
+                if (andResult_26) {
                     ti.setPiece(null);
 
                     if (this instanceof Tower) {

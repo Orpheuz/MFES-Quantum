@@ -33,7 +33,8 @@ public class Main {
 			if(!game.movePieceTo(Integer.parseInt(coordI[1]), Integer.parseInt(coordI[0]), 
 					Integer.parseInt(coordF[1]), Integer.parseInt(coordF[0])))
 				System.out.println("Movimento inválido");
-			//game.updateGameState();
+			game.endTurn();
+			game.updateGameState();
 			printBoard(bigBoard);
 		}
 

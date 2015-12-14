@@ -4,30 +4,25 @@ types
 
 instance variables
 
-		protected pieceOfPlayer : Player; --Piece owner
+		protected pieceOfPlayer : Player;
 		
 operations
 
-		--Piece constructor
 		protected Piece: Player ==> Piece
 		Piece(p) == pieceOfPlayer := p;
 		
-		--Can move one space between two tiles
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == is subclass responsibility;
 		--pre ti.getPiece() <> nil;
 		
-		--Can move a variable number of spaces between two tiles
 		public canMoveTo: Tile * Tile * nat1 ==> bool
 		canMoveTo(ti, tf, nt) == is subclass responsibility;
 		--pre ti.getPiece() <> nil;
 		
-		--checks if theres a piece between two tiles according to pieces movement
 		public checkPiecesMiddle: Tile * Tile ==> bool
 		checkPiecesMiddle(ti, tf) == is subclass responsibility;
 		--pre ti.getPiece() <> nil;
 		
-		--moves a piece after verification 
 		public moveTo: Tile * Tile ==> bool
 		moveTo(ti, tf) == (
 				if (canMoveTo(ti, tf) and (tf.getPiece() = nil or ti.getPiece().pieceOfPlayer <> tf.getPiece().pieceOfPlayer))
@@ -59,30 +54,29 @@ operations
 		pre ti.getPiece() <> nil;
 		--post tf.getPiece() = ti~.getPiece(); not supported 
 		
-		--captures a piece (tower method)
+		
 		public capturePiece: Piece ==> ()
 		capturePiece(p) == (
 			return;
 		)
-		pre p <> self;
+		pre p <> self
+		post pieceOfPlayer <> pieceOfPlayer~;
 		
-		--method return owner player
 		pure public getPlayer: () ==> Player
 		getPlayer() == return pieceOfPlayer;
 		
-		--method return piece/stack
 		pure public getStack: () ==> seq of Piece
 		getStack() == return [self];
 		
-		--method return size
 		pure public getSize: () ==> nat1
 		getSize() == is not yet specified;
-
-		--method set owner		
+		
+		pure public getOwner: () ==> Player
+		getOwner() == return pieceOfPlayer;
+		
 		public setOwner: Player ==> ()
 		setOwner(p) == pieceOfPlayer := p;
 		
-		--method get top piece
 		pure public getTopPiece: () ==> Piece
 		getTopPiece() == is subclass responsibility;
 	

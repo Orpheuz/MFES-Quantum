@@ -2,12 +2,10 @@ class Tower is subclass of Piece
 
 instance variables
 
-	private stack : seq of Piece := []; --Stack of pieces of a tower
-	inv len stack > 1; --A tower has two or more pieces
+	private stack : seq of Piece := [];
+	inv len stack > 1;
 	
 operations
-
-		--Tower constructor, appends two sequences
 		public Tower: Player * Piece * seq of Piece ==> Tower
 		Tower(player, p1, p2) == (	
 				stack := [p1] ^ p2;
@@ -15,13 +13,11 @@ operations
 		)
 		post p1.pieceOfPlayer <> (hd p2).pieceOfPlayer;
 		
-		--checks if theres a piece between two tiles according to top piece movement
 		public checkPiecesMiddle: Tile * Tile ==> bool
 		checkPiecesMiddle(ti,tf) == (
 				return (hd stack).checkPiecesMiddle(ti, tf);
 		);
 		
-		--Can move one space between two tiles
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
 				return (hd stack).canMoveTo(ti, tf, getSize());
@@ -32,23 +28,19 @@ operations
 		public canMoveTo: Tile * Tile * nat1 ==> bool
 		canMoveTo(ti, tf, n) == return true;
 		
-		--Append new piece/pieces to tower stack
 		public capturePiece: Piece ==> ()
 		capturePiece(p) == (
 			stack := stack ^ p.getStack();
 		)
 		pre len stack < 6
 		post len stack > len stack~;
-		
-		--override get piece size
+			
 		pure public getSize: () ==> nat1
 		getSize() == return len stack;
 		
-		--get tower pieces stack
 		pure public getStack: () ==> seq of Piece
 		getStack() == return stack;
 		
-		--get top piece from stack
 		pure public getTopPiece: () ==> Piece
 		getTopPiece() == return (hd stack);
 		

@@ -1,12 +1,10 @@
 class Circle is subclass of Piece
 
 operations
-		
-		--circle constructor
+
 		public Circle: Player ==> Circle
 		Circle(p) == Piece(p);
 
-		--checks if theres a piece between two tiles according to circle movement
 		public checkPiecesMiddle: Tile * Tile ==> bool
 		checkPiecesMiddle(ti,tf) == (
 				dcl tempX: nat1 := ti.getCoordinates().x;
@@ -42,8 +40,7 @@ operations
 				)
 				else return false;
 		);
-		
-		--Can move one space between two tiles
+
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
 			if(ti.isSpecial())
@@ -56,7 +53,6 @@ operations
 		)
 		pre ti <> tf;
 		
-		--Can move a variable number of spaces between two tiles
 		public canMoveTo: Tile * Tile * nat1 ==> bool
 		canMoveTo(ti, tf, n) == (
 				if(ti.isSpecial())
@@ -71,11 +67,9 @@ operations
 		)
 		pre ti <> tf;
 		
-		--override get piece size
 		pure public getSize: () ==> nat1
 		getSize() == return 1;
 		
-		--override get piece
 		pure public getTopPiece: () ==> Piece
 		getTopPiece() == return self;
 		

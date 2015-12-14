@@ -4,19 +4,17 @@ types
 												 y : nat1;
 instance variables
 
-		private special: bool; --is a special tile
-		private coordinates: Coordinates; --tile coordinates, integrity check with board coordinates
-		private piece: [Piece]; --Piece on tile, can be null if there is none
-		private bigBoard: bool; --board type tile
+		private special: bool;
+		private coordinates: Coordinates;
+		private piece: [Piece];
+		private bigBoard: bool;
 		
 		inv if bigBoard then coordinates.x in set {1, ..., Board`bigSizeX} and
 				coordinates.y in set {1, ..., Board`bigSizeY}
 				else coordinates.x in set {1, ..., Board`smallSizeX} and
-				coordinates.y in set {1, ..., Board`smallSizeY}; --defines sequence domain
+				coordinates.y in set {1, ..., Board`smallSizeY};
 		
 operations
-
-		--Tile constuctor
 		public Tile: nat1 * nat1 * bool ==> Tile
 		Tile(xT, yT, boardType) == (
 				bigBoard := boardType;
@@ -30,7 +28,6 @@ operations
 				return self
 		);
 		
-		--Tile constructor with piece
 		public Tile: nat1 * nat1 * Piece * bool ==> Tile
 				Tile(xT, yT, p, boardType) == (
 				bigBoard := boardType;
@@ -40,19 +37,15 @@ operations
 				return self
 		);
 		
-		--method get coordinates
 		pure public getCoordinates: () ==> Coordinates
 		getCoordinates() == return coordinates;
 		
-		--method get piece
 		pure public getPiece: () ==> [Piece]
 		getPiece() == return piece;
 		
-		--method is special tile
 		pure public isSpecial: () ==> bool
 		isSpecial() == return special;
 		
-		--method set piece
 		public setPiece: [Piece] ==> ()
 		setPiece(p) == piece := p;
 		

@@ -31,121 +31,121 @@ public class Tile {
         piece = null;
 
         if (!(bigBoard)) {
-            Boolean orResult_11 = false;
+            Boolean orResult_13 = false;
 
-            Boolean andResult_26 = false;
+            Boolean andResult_33 = false;
 
             if (Utils.equals(xT, 1L)) {
                 if (Utils.equals(yT, 1L)) {
-                    andResult_26 = true;
+                    andResult_33 = true;
                 }
             }
 
-            if (andResult_26) {
-                orResult_11 = true;
+            if (andResult_33) {
+                orResult_13 = true;
             } else {
-                Boolean orResult_12 = false;
+                Boolean orResult_14 = false;
 
-                Boolean andResult_27 = false;
+                Boolean andResult_34 = false;
 
                 if (Utils.equals(xT, Board.smallSizeX)) {
                     if (Utils.equals(yT, Board.smallSizeY)) {
-                        andResult_27 = true;
+                        andResult_34 = true;
                     }
                 }
 
-                if (andResult_27) {
-                    orResult_12 = true;
+                if (andResult_34) {
+                    orResult_14 = true;
                 } else {
-                    Boolean orResult_13 = false;
+                    Boolean orResult_15 = false;
 
-                    Boolean andResult_28 = false;
+                    Boolean andResult_35 = false;
 
                     if (Utils.equals(xT, 1L)) {
                         if (Utils.equals(yT, Board.smallSizeY)) {
-                            andResult_28 = true;
+                            andResult_35 = true;
                         }
                     }
 
-                    if (andResult_28) {
-                        orResult_13 = true;
+                    if (andResult_35) {
+                        orResult_15 = true;
                     } else {
-                        Boolean andResult_29 = false;
+                        Boolean andResult_36 = false;
 
                         if (Utils.equals(xT, Board.smallSizeX)) {
                             if (Utils.equals(yT, 1L)) {
-                                andResult_29 = true;
+                                andResult_36 = true;
                             }
                         }
 
-                        orResult_13 = andResult_29;
+                        orResult_15 = andResult_36;
                     }
 
-                    orResult_12 = orResult_13;
+                    orResult_14 = orResult_15;
                 }
 
-                orResult_11 = orResult_12;
+                orResult_13 = orResult_14;
             }
 
-            special = orResult_11;
+            special = orResult_13;
         } else {
-            Boolean orResult_14 = false;
+            Boolean orResult_16 = false;
 
-            Boolean andResult_30 = false;
+            Boolean andResult_37 = false;
 
             if (Utils.equals(xT, 1L)) {
                 if (Utils.equals(yT, 1L)) {
-                    andResult_30 = true;
+                    andResult_37 = true;
                 }
             }
 
-            if (andResult_30) {
-                orResult_14 = true;
+            if (andResult_37) {
+                orResult_16 = true;
             } else {
-                Boolean orResult_15 = false;
+                Boolean orResult_17 = false;
 
-                Boolean andResult_31 = false;
+                Boolean andResult_38 = false;
 
                 if (Utils.equals(xT, Board.bigSizeX)) {
                     if (Utils.equals(yT, Board.bigSizeY)) {
-                        andResult_31 = true;
+                        andResult_38 = true;
                     }
                 }
 
-                if (andResult_31) {
-                    orResult_15 = true;
+                if (andResult_38) {
+                    orResult_17 = true;
                 } else {
-                    Boolean orResult_16 = false;
+                    Boolean orResult_18 = false;
 
-                    Boolean andResult_32 = false;
+                    Boolean andResult_39 = false;
 
                     if (Utils.equals(xT, 1L)) {
                         if (Utils.equals(yT, Board.bigSizeY)) {
-                            andResult_32 = true;
+                            andResult_39 = true;
                         }
                     }
 
-                    if (andResult_32) {
-                        orResult_16 = true;
+                    if (andResult_39) {
+                        orResult_18 = true;
                     } else {
-                        Boolean andResult_33 = false;
+                        Boolean andResult_40 = false;
 
                         if (Utils.equals(xT, Board.bigSizeX)) {
                             if (Utils.equals(yT, 1L)) {
-                                andResult_33 = true;
+                                andResult_40 = true;
                             }
                         }
 
-                        orResult_16 = andResult_33;
+                        orResult_18 = andResult_40;
                     }
 
-                    orResult_15 = orResult_16;
+                    orResult_17 = orResult_18;
                 }
 
-                orResult_14 = orResult_15;
+                orResult_16 = orResult_17;
             }
 
-            special = orResult_14;
+            special = orResult_16;
         }
 
         return;

@@ -1,14 +1,9 @@
 class Square is subclass of Piece
 
 operations
-
-
-		--Square constructor
 		public Square: Player ==> Square
 		Square(p) == Piece(p);
 		
-		
-		--checks if theres a piece between two tiles according to square movement
 		public checkPiecesMiddle: Tile * Tile ==> bool
 		checkPiecesMiddle(ti,tf) == (
 				dcl tempX: nat1;
@@ -41,7 +36,6 @@ operations
 				);
 		);
 		
-		--Can move one space between two tiles
 		public canMoveTo: Tile * Tile ==> bool
 		canMoveTo(ti, tf) == (
 			if(ti.isSpecial())
@@ -55,7 +49,6 @@ operations
 		)
 		pre ti <> tf;
 		
-		--Can move a variable number of spaces between two tiles
 		public canMoveTo: Tile * Tile * nat1 ==> bool
 		canMoveTo(ti, tf, n) == (
 			if(ti.isSpecial())
@@ -69,14 +62,16 @@ operations
 							 (ti.getCoordinates().y = tf.getCoordinates().y and 
 							 			abs(tf.getCoordinates().x - ti.getCoordinates().x) <= n)) and
 							 checkPiecesMiddle(ti, tf);
+				
+			--	((((abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n) and ti.getCoordinates().x = tf.getCoordinates().x )or 
+			--				 ((abs(ti.getCoordinates().y - tf.getCoordinates().y)) <= n and ti.getCoordinates().x = tf.getCoordinates().x)) and
+			--				 checkPiecesMiddle(ti, tf));
 		)
 		pre ti <> tf;
 
-		--override get piece size
 		pure public getSize: () ==> nat1
 		getSize() == return 1;
 		
-		--override get piece
 		pure public getTopPiece: () ==> Piece
 		getTopPiece() == return self;
 
