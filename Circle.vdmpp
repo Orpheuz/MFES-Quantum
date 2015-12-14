@@ -51,8 +51,8 @@ operations
 					)
 				else return	abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n and
 										abs(ti.getCoordinates().y - tf.getCoordinates().y) <= n and
-										abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y) --and
-										--checkPiecesMiddle(ti,tf)
+										abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y) and
+										checkPiecesMiddle(ti,tf)
 										;
 		)
 		pre ti <> tf;
