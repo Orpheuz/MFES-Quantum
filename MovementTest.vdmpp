@@ -50,7 +50,7 @@ operations
   testCanMoveto_TowerSquare() == (
   	dcl p: Piece := new Circle(<Black>);
   	dcl p2: Piece := new Circle(<White>);
-  	dcl t: Piece := new Tower(<Black>, p, p2);
+  	dcl t: Piece := new Tower(<Black>, p, [p2]);
   	dcl p3: Piece := new Square(<White>);
   	  	
   	dcl tl1: Tile := new Tile(4,4,t,false);
@@ -73,7 +73,7 @@ operations
   	dcl p: Piece := new Circle(<Black>);
   	dcl p2: Piece := new Circle(<Black>);
   	dcl p3: Piece := new Square(<White>);
-  	dcl t: Piece := new Tower(<White>, p3, p);
+  	dcl t: Piece := new Tower(<White>, p3, [p]);
   	
   	dcl tl1: Tile := new Tile(4,4,false);
   	dcl tl2: Tile := new Tile(4,3,false);
@@ -100,7 +100,7 @@ operations
   	dcl p: Piece := new Circle(<Black>);
   	dcl p3: Piece := new Cross(<Black>);
   	dcl p2: Piece := new Square(<White>);
-  	dcl t: Piece := new Tower(<White>, p2, p);
+  	dcl t: Piece := new Tower(<White>, p2, [p]);
   	
   	dcl tl1: Tile := new Tile(4,4,false);
   	dcl tl2: Tile := new Tile(4,3,false);
@@ -204,7 +204,7 @@ operations
   	dcl p3: Piece := new Cross(<White>);
   	dcl p4: Piece := new Cross(<Black>);
   	dcl p2: Piece := new Square(<White>);
-  	dcl t: Piece := new Tower(<White>, p2, p);
+  	dcl t: Piece := new Tower(<White>, p2, [p]);
   	
   	assertEqual(t.getSize(), 2);
   	t.capturePiece(p4);
@@ -217,7 +217,7 @@ operations
   testCanMoveto_Tower_AfterCapture() == (
   	dcl p: Piece := new Square();
   	dcl p2: Piece := new Cross();
-  	dcl t: Tower := new Tower(<White>, p, p2);
+  	dcl t: Tower := new Tower(<White>, p, [p2]);
   	dcl p3: Piece := new Circle();
   	dcl p4: Piece := new Square();
   	dcl p5: Piece := new Circle();
@@ -244,8 +244,8 @@ operations
   	dcl p5: Piece := new Cross(<White>);
   	dcl p6: Piece := new Cross(<Black>);
   	dcl p7: Piece := new Cross(<Black>);
-  	dcl t: Piece := new Tower(<White>,p,p2);
-  	dcl t2: Piece := new Tower(<Black>,p3,p4);
+  	dcl t: Piece := new Tower(<White>,p,[p2]);
+  	dcl t2: Piece := new Tower(<Black>,p3,[p4]);
   	
   	t2.capturePiece(p5);
   	t2.capturePiece(p7);
@@ -282,7 +282,7 @@ operations
   testTowerMoveandCapture() == (
   	dcl p: Piece := new Circle(<White>);
   	dcl p2: Piece := new Circle(<Black>);
-  	dcl t: Piece := new Tower(<Black>, p2, p);
+  	dcl t: Piece := new Tower(<Black>, p2, [p]);
   	dcl p3: Piece := new Square(<White>);
   	dcl p4: Piece := new Cross(<Black>);
   	
