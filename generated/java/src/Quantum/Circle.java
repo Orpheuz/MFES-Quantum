@@ -122,10 +122,18 @@ public class Circle extends Piece {
 
                 if (Utils.abs(ti.getCoordinates().y.longValue() -
                             tf.getCoordinates().y.longValue()) <= n.longValue()) {
+                    Boolean andResult_7 = false;
+
                     if (Utils.equals(Utils.abs(ti.getCoordinates().x.longValue() -
                                     tf.getCoordinates().x.longValue()),
                                 Utils.abs(ti.getCoordinates().y.longValue() -
                                     tf.getCoordinates().y.longValue()))) {
+                        if (checkPiecesMiddle(ti, tf)) {
+                            andResult_7 = true;
+                        }
+                    }
+
+                    if (andResult_7) {
                         andResult_6 = true;
                     }
                 }

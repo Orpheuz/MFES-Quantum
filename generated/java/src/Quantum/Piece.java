@@ -28,7 +28,7 @@ abstract public class Piece {
     public abstract Boolean checkPiecesMiddle(final Tile ti, final Tile tf);
 
     public Boolean moveTo(final Tile ti, final Tile tf) {
-        Boolean andResult_14 = false;
+        Boolean andResult_15 = false;
 
         if (canMoveTo(ti, tf)) {
             Boolean orResult_5 = false;
@@ -41,48 +41,48 @@ abstract public class Piece {
             }
 
             if (orResult_5) {
-                andResult_14 = true;
+                andResult_15 = true;
             }
         }
 
-        if (andResult_14) {
-            Boolean andResult_15 = false;
+        if (andResult_15) {
+            Boolean andResult_16 = false;
 
             if (!(Utils.equals(tf.getPiece(), null))) {
-                Boolean andResult_16 = false;
+                Boolean andResult_17 = false;
 
                 if (tf.getPiece() instanceof Tower) {
                     if (tf.getPiece().getSize().longValue() > 6L) {
-                        andResult_16 = true;
-                    }
-                }
-
-                if (andResult_16) {
-                    andResult_15 = true;
-                }
-            }
-
-            if (andResult_15) {
-                return false;
-            } else {
-                Boolean andResult_17 = false;
-
-                if (!(Utils.equals(tf.getPiece(), null))) {
-                    if (tf.getPiece().getSize().longValue() < 6L) {
                         andResult_17 = true;
                     }
                 }
 
                 if (andResult_17) {
+                    andResult_16 = true;
+                }
+            }
+
+            if (andResult_16) {
+                return false;
+            } else {
+                Boolean andResult_18 = false;
+
+                if (!(Utils.equals(tf.getPiece(), null))) {
+                    if (tf.getPiece().getSize().longValue() < 6L) {
+                        andResult_18 = true;
+                    }
+                }
+
+                if (andResult_18) {
                     ti.setPiece(null);
 
-                    if (tf.getPiece() instanceof Tower) {
+                    if (this instanceof Tower) {
                         capturePiece(tf.getPiece());
                         tf.setPiece(this);
                     } else {
-                        tf.setPiece(new Tower(((Object) pieceOfPlayer), this,
-                                tf.getPiece()));
                         capturePiece(tf.getPiece());
+                        tf.setPiece(new Tower(((Object) pieceOfPlayer), this,
+                                tf.getPiece().getStack()));
                     }
 
                     return true;
