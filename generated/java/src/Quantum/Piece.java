@@ -75,9 +75,15 @@ abstract public class Piece {
 
                 if (andResult_17) {
                     ti.setPiece(null);
-                    tf.setPiece(new Tower(((Object) pieceOfPlayer), this,
-                            tf.getPiece()));
-                    capturePiece(tf.getPiece());
+
+                    if (tf.getPiece() instanceof Tower) {
+                        capturePiece(tf.getPiece());
+                        tf.setPiece(this);
+                    } else {
+                        tf.setPiece(new Tower(((Object) pieceOfPlayer), this,
+                                tf.getPiece()));
+                        capturePiece(tf.getPiece());
+                    }
 
                     return true;
                 } else {
@@ -111,6 +117,16 @@ abstract public class Piece {
     public Number getSize() {
         throw new UnsupportedOperationException();
     }
+
+    public Object getOwner() {
+        return pieceOfPlayer;
+    }
+
+    public void setOwner(final Object p) {
+        pieceOfPlayer = p;
+    }
+
+    public abstract Piece getTopPiece();
 
     public String toString() {
         return "Piece{" + "pieceOfPlayer := " + Utils.toString(pieceOfPlayer) +
