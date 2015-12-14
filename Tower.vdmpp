@@ -7,12 +7,12 @@ instance variables
 	-- inv 2 peças seguidas tem de ser de players diferentes
 	
 operations
-		public Tower: Player * Piece * Piece ==> Tower
+		public Tower: Player * Piece * seq of Piece ==> Tower
 		Tower(player, p1, p2) == (	
-				stack := [p1, p2] ^ stack;
+				stack := [p1] ^ p2;
 				Piece(player);
 		)
-		post p1.pieceOfPlayer <> p2.pieceOfPlayer;
+		post p1.pieceOfPlayer <> (hd p2).pieceOfPlayer;
 		
 		public checkPiecesMiddle: Tile * Tile ==> bool
 		checkPiecesMiddle(ti,tf) == (
