@@ -1,0 +1,83 @@
+class Square is subclass of Piece
+
+operations
+
+
+		--Square constructor
+		public Square: Player ==> Square
+		Square(p) == Piece(p);
+		
+		
+		--checks if theres a piece between two tiles according to square movement
+		public checkPiecesMiddle: Tile * Tile ==> bool
+		checkPiecesMiddle(ti,tf) == (
+				dcl tempX: nat1;
+				dcl tempY: nat1;
+				dcl max: nat1;
+				if(ti.getCoordinates().x = tf.getCoordinates().x)
+					then (
+								tempX := ti.getCoordinates().x;
+								if(ti.getCoordinates().y > tf.getCoordinates().y)
+									then (max := ti.getCoordinates().y; tempY := tf.getCoordinates().y)
+									else (tempY := ti.getCoordinates().y; max := tf.getCoordinates().y);
+								while(tempY < max-1)
+									do(
+											tempY := tempY + 1;
+											if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
+												then return false);
+								return true
+								)
+					else(
+				 				tempY := ti.getCoordinates().y;
+				 				if(ti.getCoordinates().x > tf.getCoordinates().x)
+									then (max := ti.getCoordinates().x; tempX := tf.getCoordinates().x)
+									else (tempX := ti.getCoordinates().x; max := tf.getCoordinates().x);
+								while(tempX < max-1)
+									do (tempX := tempX + 1;
+											if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
+												then return false
+											);
+								return true
+				);
+		);
+		
+		--Can move one space between two tiles
+		public canMoveTo: Tile * Tile ==> bool
+		canMoveTo(ti, tf) == (
+			if(ti.isSpecial())
+				then (
+					return (checkPiecesMiddle(ti, tf) and
+									(ti.getCoordinates().x = tf.getCoordinates().x or 
+							 		ti.getCoordinates().x = tf.getCoordinates().x))
+				)
+			else
+				return (abs(ti.getCoordinates().x - tf.getCoordinates().x) + abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1)
+		)
+		pre ti <> tf;
+		
+		--Can move a variable number of spaces between two tiles
+		public canMoveTo: Tile * Tile * nat1 ==> bool
+		canMoveTo(ti, tf, n) == (
+			if(ti.isSpecial())
+				then (
+					return ((ti.getCoordinates().x = tf.getCoordinates().x or 
+							 		ti.getCoordinates().x = tf.getCoordinates().x) and checkPiecesMiddle(ti, tf))
+				)
+			else
+				return ((ti.getCoordinates().x = tf.getCoordinates().x and
+										abs(tf.getCoordinates().y - ti.getCoordinates().y) <= n) or
+							 (ti.getCoordinates().y = tf.getCoordinates().y and 
+							 			abs(tf.getCoordinates().x - ti.getCoordinates().x) <= n)) and
+							 checkPiecesMiddle(ti, tf);
+		)
+		pre ti <> tf;
+
+		--override get piece size
+		pure public getSize: () ==> nat1
+		getSize() == return 1;
+		
+		--override get piece
+		pure public getTopPiece: () ==> Piece
+		getTopPiece() == return self;
+
+end Square

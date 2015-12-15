@@ -86,7 +86,7 @@ public class Square extends Piece {
 
     public Boolean canMoveTo(final Tile ti, final Tile tf) {
         if (ti.isSpecial()) {
-            Boolean andResult_28 = false;
+            Boolean andResult_26 = false;
 
             if (checkPiecesMiddle(ti, tf)) {
                 Boolean orResult_10 = false;
@@ -99,11 +99,11 @@ public class Square extends Piece {
                 }
 
                 if (orResult_10) {
-                    andResult_28 = true;
+                    andResult_26 = true;
                 }
             }
 
-            return andResult_28;
+            return andResult_26;
         } else {
             return Utils.equals(Utils.abs(ti.getCoordinates().x.longValue() -
                     tf.getCoordinates().x.longValue()) +
@@ -114,7 +114,7 @@ public class Square extends Piece {
 
     public Boolean canMoveTo(final Tile ti, final Tile tf, final Number n) {
         if (ti.isSpecial()) {
-            Boolean andResult_29 = false;
+            Boolean andResult_27 = false;
 
             Boolean orResult_11 = false;
 
@@ -127,47 +127,47 @@ public class Square extends Piece {
 
             if (orResult_11) {
                 if (checkPiecesMiddle(ti, tf)) {
-                    andResult_29 = true;
+                    andResult_27 = true;
                 }
             }
 
-            return andResult_29;
+            return andResult_27;
         } else {
-            Boolean andResult_30 = false;
+            Boolean andResult_28 = false;
 
             Boolean orResult_12 = false;
 
-            Boolean andResult_31 = false;
+            Boolean andResult_29 = false;
 
             if (Utils.equals(ti.getCoordinates().x, tf.getCoordinates().x)) {
                 if (Utils.abs(tf.getCoordinates().y.longValue() -
                             ti.getCoordinates().y.longValue()) <= n.longValue()) {
-                    andResult_31 = true;
+                    andResult_29 = true;
                 }
             }
 
-            if (andResult_31) {
+            if (andResult_29) {
                 orResult_12 = true;
             } else {
-                Boolean andResult_32 = false;
+                Boolean andResult_30 = false;
 
                 if (Utils.equals(ti.getCoordinates().y, tf.getCoordinates().y)) {
                     if (Utils.abs(tf.getCoordinates().x.longValue() -
                                 ti.getCoordinates().x.longValue()) <= n.longValue()) {
-                        andResult_32 = true;
+                        andResult_30 = true;
                     }
                 }
 
-                orResult_12 = andResult_32;
+                orResult_12 = andResult_30;
             }
 
             if (orResult_12) {
                 if (checkPiecesMiddle(ti, tf)) {
-                    andResult_30 = true;
+                    andResult_28 = true;
                 }
             }
 
-            return andResult_30;
+            return andResult_28;
         }
     }
 

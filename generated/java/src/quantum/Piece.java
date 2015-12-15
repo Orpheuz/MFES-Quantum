@@ -28,7 +28,7 @@ abstract public class Piece {
     public abstract Boolean checkPiecesMiddle(final Tile ti, final Tile tf);
 
     public Boolean moveTo(final Tile ti, final Tile tf) {
-        Boolean andResult_23 = false;
+        Boolean andResult_21 = false;
 
         if (canMoveTo(ti, tf)) {
             Boolean orResult_9 = false;
@@ -41,39 +41,39 @@ abstract public class Piece {
             }
 
             if (orResult_9) {
-                andResult_23 = true;
+                andResult_21 = true;
             }
         }
 
-        if (andResult_23) {
-            Boolean andResult_24 = false;
+        if (andResult_21) {
+            Boolean andResult_22 = false;
 
             if (!(Utils.equals(tf.getPiece(), null))) {
-                Boolean andResult_25 = false;
+                Boolean andResult_23 = false;
 
                 if (tf.getPiece() instanceof Tower) {
                     if (tf.getPiece().getSize().longValue() > 6L) {
-                        andResult_25 = true;
+                        andResult_23 = true;
                     }
                 }
 
-                if (andResult_25) {
-                    andResult_24 = true;
+                if (andResult_23) {
+                    andResult_22 = true;
                 }
             }
 
-            if (andResult_24) {
+            if (andResult_22) {
                 return false;
             } else {
-                Boolean andResult_26 = false;
+                Boolean andResult_24 = false;
 
                 if (!(Utils.equals(tf.getPiece(), null))) {
                     if (tf.getPiece().getSize().longValue() < 6L) {
-                        andResult_26 = true;
+                        andResult_24 = true;
                     }
                 }
 
-                if (andResult_26) {
+                if (andResult_24) {
                     ti.setPiece(null);
 
                     if (this instanceof Tower) {
@@ -111,10 +111,6 @@ abstract public class Piece {
 
     public Number getSize() {
         throw new UnsupportedOperationException();
-    }
-
-    public Object getOwner() {
-        return pieceOfPlayer;
     }
 
     public void setOwner(final Object p) {

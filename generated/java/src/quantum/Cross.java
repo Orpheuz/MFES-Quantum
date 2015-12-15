@@ -19,13 +19,66 @@ public class Cross extends Piece {
     }
 
     public Boolean checkPiecesMiddle(final Tile ti, final Tile tf) {
-        Number tempX = 1L;
-        Number tempY = 1L;
-        Number maxX = 1L;
-        Number tempXc = ti.getCoordinates().x;
-        Number tempYc = ti.getCoordinates().y;
+        Number tempX = ti.getCoordinates().x;
+        Number tempY = ti.getCoordinates().y;
         Boolean signalX = false;
         Boolean signalY = false;
+        Number maxX = ti.getCoordinates().x;
+        Number maxY = ti.getCoordinates().y;
+        Number max = 1L;
+
+        if (Utils.equals(Utils.abs(tf.getCoordinates().x.longValue() -
+                        ti.getCoordinates().x.longValue()),
+                    Utils.abs(tf.getCoordinates().y.longValue() -
+                        ti.getCoordinates().y.longValue()))) {
+            if (tf.getCoordinates().x.longValue() > ti.getCoordinates().x.longValue()) {
+                signalX = true;
+                maxX = tf.getCoordinates().x;
+            }
+
+            if (tf.getCoordinates().y.longValue() > ti.getCoordinates().y.longValue()) {
+                signalY = true;
+                maxY = tf.getCoordinates().y;
+            }
+
+            Boolean whileCond_2 = true;
+
+            while (whileCond_2) {
+                Boolean orResult_2 = false;
+
+                if (tempX.longValue() < (maxX.longValue() - 1L)) {
+                    orResult_2 = true;
+                } else {
+                    orResult_2 = tempY.longValue() < (maxY.longValue() - 1L);
+                }
+
+                whileCond_2 = orResult_2;
+
+                if (!(whileCond_2)) {
+                    break;
+                }
+
+                if (signalX) {
+                    tempX = tempX.longValue() + 1L;
+                } else {
+                    tempX = tempX.longValue() - 1L;
+                }
+
+                if (signalY) {
+                    tempY = tempY.longValue() + 1L;
+                } else {
+                    tempY = tempY.longValue() - 1L;
+                }
+
+                if (!(Utils.equals(Board.getInstance().getTile(tempX, tempY)
+                                            .getPiece(), null))) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         Boolean andResult_7 = false;
 
         if (Utils.equals(ti.getCoordinates().x, tf.getCoordinates().x)) {
@@ -38,19 +91,19 @@ public class Cross extends Piece {
             tempX = ti.getCoordinates().x;
 
             if (ti.getCoordinates().y.longValue() > tf.getCoordinates().y.longValue()) {
-                maxX = ti.getCoordinates().y;
+                max = ti.getCoordinates().y;
                 tempY = tf.getCoordinates().y;
             } else {
                 tempY = ti.getCoordinates().y;
-                maxX = tf.getCoordinates().y;
+                max = tf.getCoordinates().y;
             }
 
-            Boolean whileCond_2 = true;
+            Boolean whileCond_3 = true;
 
-            while (whileCond_2) {
-                whileCond_2 = tempY.longValue() < (maxX.longValue() - 1L);
+            while (whileCond_3) {
+                whileCond_3 = tempY.longValue() < (max.longValue() - 1L);
 
-                if (!(whileCond_2)) {
+                if (!(whileCond_3)) {
                     break;
                 }
 
@@ -77,19 +130,19 @@ public class Cross extends Piece {
             tempY = ti.getCoordinates().y;
 
             if (ti.getCoordinates().x.longValue() > tf.getCoordinates().x.longValue()) {
-                maxX = ti.getCoordinates().x;
+                max = ti.getCoordinates().x;
                 tempX = tf.getCoordinates().x;
             } else {
                 tempX = ti.getCoordinates().x;
-                maxX = tf.getCoordinates().x;
+                max = tf.getCoordinates().x;
             }
 
-            Boolean whileCond_3 = true;
+            Boolean whileCond_4 = true;
 
-            while (whileCond_3) {
-                whileCond_3 = tempX.longValue() < (maxX.longValue() - 1L);
+            while (whileCond_4) {
+                whileCond_4 = tempX.longValue() < (max.longValue() - 1L);
 
-                if (!(whileCond_3)) {
+                if (!(whileCond_4)) {
                     break;
                 }
 
@@ -104,57 +157,7 @@ public class Cross extends Piece {
             return true;
         }
 
-        if (Utils.equals(Utils.abs(tf.getCoordinates().x.longValue() -
-                        ti.getCoordinates().x.longValue()),
-                    Utils.abs(tf.getCoordinates().y.longValue() -
-                        ti.getCoordinates().y.longValue()))) {
-            if (tf.getCoordinates().x.longValue() > ti.getCoordinates().x.longValue()) {
-                signalX = true;
-            }
-
-            if (tf.getCoordinates().y.longValue() > ti.getCoordinates().y.longValue()) {
-                signalY = true;
-            }
-
-            Boolean whileCond_4 = true;
-
-            while (whileCond_4) {
-                Boolean andResult_9 = false;
-
-                if (!(Utils.equals(tempXc, tf.getCoordinates().x))) {
-                    if (!(Utils.equals(tempYc, tf.getCoordinates().y))) {
-                        andResult_9 = true;
-                    }
-                }
-
-                whileCond_4 = andResult_9;
-
-                if (!(whileCond_4)) {
-                    break;
-                }
-
-                if (signalX) {
-                    tempXc = tempXc.longValue() + 1L;
-                } else {
-                    tempXc = tempXc.longValue() - 1L;
-                }
-
-                if (signalY) {
-                    tempYc = tempYc.longValue() + 1L;
-                } else {
-                    tempYc = tempYc.longValue() - 1L;
-                }
-
-                if (!(Utils.equals(Board.getInstance().getTile(tempXc, tempYc)
-                                            .getPiece(), null))) {
-                    return false;
-                }
-            }
-
-            return true;
-        } else {
-            return false;
-        }
+        return false;
     }
 
     public Boolean canMoveTo(final Tile ti, final Tile tf) {
@@ -163,7 +166,9 @@ public class Cross extends Piece {
         }
 
         if (ti.isSpecial()) {
-            Boolean orResult_2 = false;
+            Boolean andResult_9 = false;
+
+            Boolean orResult_3 = false;
 
             Boolean andResult_10 = false;
 
@@ -174,9 +179,9 @@ public class Cross extends Piece {
             }
 
             if (andResult_10) {
-                orResult_2 = true;
+                orResult_3 = true;
             } else {
-                Boolean orResult_3 = false;
+                Boolean orResult_4 = false;
 
                 Boolean andResult_11 = false;
 
@@ -188,38 +193,36 @@ public class Cross extends Piece {
                 }
 
                 if (andResult_11) {
-                    orResult_3 = true;
+                    orResult_4 = true;
                 } else {
-                    Boolean andResult_12 = false;
-
-                    if (Utils.equals(Utils.abs(ti.getCoordinates().x.longValue() -
-                                    tf.getCoordinates().x.longValue()),
-                                Utils.abs(ti.getCoordinates().y.longValue() -
-                                    tf.getCoordinates().y.longValue()))) {
-                        if (checkPiecesMiddle(ti, tf)) {
-                            andResult_12 = true;
-                        }
-                    }
-
-                    orResult_3 = andResult_12;
+                    orResult_4 = Utils.equals(Utils.abs(ti.getCoordinates().x.longValue() -
+                                tf.getCoordinates().x.longValue()),
+                            Utils.abs(ti.getCoordinates().y.longValue() -
+                                tf.getCoordinates().y.longValue()));
                 }
 
-                orResult_2 = orResult_3;
+                orResult_3 = orResult_4;
             }
 
-            return orResult_2;
+            if (orResult_3) {
+                if (checkPiecesMiddle(ti, tf)) {
+                    andResult_9 = true;
+                }
+            }
+
+            return andResult_9;
         } else {
-            Boolean andResult_13 = false;
+            Boolean andResult_12 = false;
 
             if (Utils.abs(ti.getCoordinates().x.longValue() -
                         tf.getCoordinates().x.longValue()) <= 1L) {
                 if (Utils.abs(ti.getCoordinates().y.longValue() -
                             tf.getCoordinates().y.longValue()) <= 1L) {
-                    andResult_13 = true;
+                    andResult_12 = true;
                 }
             }
 
-            return andResult_13;
+            return andResult_12;
         }
     }
 
@@ -229,7 +232,9 @@ public class Cross extends Piece {
         }
 
         if (ti.isSpecial()) {
-            Boolean orResult_4 = false;
+            Boolean andResult_13 = false;
+
+            Boolean orResult_5 = false;
 
             Boolean andResult_14 = false;
 
@@ -240,9 +245,9 @@ public class Cross extends Piece {
             }
 
             if (andResult_14) {
-                orResult_4 = true;
+                orResult_5 = true;
             } else {
-                Boolean orResult_5 = false;
+                Boolean orResult_6 = false;
 
                 Boolean andResult_15 = false;
 
@@ -254,57 +259,55 @@ public class Cross extends Piece {
                 }
 
                 if (andResult_15) {
-                    orResult_5 = true;
+                    orResult_6 = true;
                 } else {
-                    Boolean andResult_16 = false;
-
-                    if (Utils.equals(Utils.abs(ti.getCoordinates().x.longValue() -
-                                    tf.getCoordinates().x.longValue()),
-                                Utils.abs(ti.getCoordinates().y.longValue() -
-                                    tf.getCoordinates().y.longValue()))) {
-                        if (checkPiecesMiddle(ti, tf)) {
-                            andResult_16 = true;
-                        }
-                    }
-
-                    orResult_5 = andResult_16;
+                    orResult_6 = Utils.equals(Utils.abs(ti.getCoordinates().x.longValue() -
+                                tf.getCoordinates().x.longValue()),
+                            Utils.abs(ti.getCoordinates().y.longValue() -
+                                tf.getCoordinates().y.longValue()));
                 }
 
-                orResult_4 = orResult_5;
+                orResult_5 = orResult_6;
             }
 
-            return orResult_4;
-        } else {
-            Boolean orResult_6 = false;
+            if (orResult_5) {
+                if (checkPiecesMiddle(ti, tf)) {
+                    andResult_13 = true;
+                }
+            }
 
-            Boolean andResult_17 = false;
+            return andResult_13;
+        } else {
+            Boolean orResult_7 = false;
+
+            Boolean andResult_16 = false;
 
             if (Utils.equals(ti.getCoordinates().x, tf.getCoordinates().x)) {
                 if (Utils.abs(ti.getCoordinates().y.longValue() -
                             tf.getCoordinates().y.longValue()) <= n.longValue()) {
-                    andResult_17 = true;
+                    andResult_16 = true;
                 }
             }
 
-            if (andResult_17) {
-                orResult_6 = true;
+            if (andResult_16) {
+                orResult_7 = true;
             } else {
-                Boolean orResult_7 = false;
+                Boolean orResult_8 = false;
 
-                Boolean andResult_18 = false;
+                Boolean andResult_17 = false;
 
                 if (Utils.abs(ti.getCoordinates().x.longValue() -
                             tf.getCoordinates().x.longValue()) <= n.longValue()) {
                     if (Utils.equals(ti.getCoordinates().y,
                                 tf.getCoordinates().y)) {
-                        andResult_18 = true;
+                        andResult_17 = true;
                     }
                 }
 
-                if (andResult_18) {
-                    orResult_7 = true;
+                if (andResult_17) {
+                    orResult_8 = true;
                 } else {
-                    Boolean orResult_8 = false;
+                    Boolean andResult_18 = false;
 
                     Boolean andResult_19 = false;
 
@@ -328,36 +331,18 @@ public class Cross extends Piece {
                     }
 
                     if (andResult_19) {
-                        orResult_8 = true;
-                    } else {
-                        Boolean andResult_21 = false;
-
-                        if (Utils.abs(ti.getCoordinates().x.longValue() -
-                                    tf.getCoordinates().x.longValue()) <= n.longValue()) {
-                            Boolean andResult_22 = false;
-
-                            if (Utils.abs(ti.getCoordinates().y.longValue() -
-                                        tf.getCoordinates().y.longValue()) <= n.longValue()) {
-                                if (checkPiecesMiddle(ti, tf)) {
-                                    andResult_22 = true;
-                                }
-                            }
-
-                            if (andResult_22) {
-                                andResult_21 = true;
-                            }
+                        if (checkPiecesMiddle(ti, tf)) {
+                            andResult_18 = true;
                         }
-
-                        orResult_8 = andResult_21;
                     }
 
-                    orResult_7 = orResult_8;
+                    orResult_8 = andResult_18;
                 }
 
-                orResult_6 = orResult_7;
+                orResult_7 = orResult_8;
             }
 
-            return orResult_6;
+            return orResult_7;
         }
     }
 

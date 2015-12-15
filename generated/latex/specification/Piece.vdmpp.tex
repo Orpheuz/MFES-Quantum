@@ -1,0 +1,124 @@
+\begin{vdmpp}[breaklines=true]
+class Piece
+types
+  public Player = <White> | <Black>; 
+
+instance variables
+
+  protected pieceOfPlayer : Player; --Piece owner
+  
+operations
+
+(*@
+\label{Piece:11}
+@*)
+  --Piece constructor
+  protected Piece: Player ==> Piece
+  Piece(p) == pieceOfPlayer := p;
+(*@
+\label{canMoveTo:14}
+@*)
+  
+  --Can move one space between two tiles
+  public canMoveTo: Tile * Tile ==> bool
+  canMoveTo(ti, tf) == is subclass responsibility;
+  --pre ti.getPiece() <> nil;
+  
+  --Can move a variable number of spaces between two tiles
+  public canMoveTo: Tile * Tile * nat1 ==> bool
+(*@
+\label{checkPiecesMiddle:22}
+@*)
+  canMoveTo(ti, tf, nt) == is subclass responsibility;
+  --pre ti.getPiece() <> nil;
+  
+  --checks if theres a piece between two tiles according to pieces movement
+(*@
+\label{moveTo:26}
+@*)
+  public checkPiecesMiddle: Tile * Tile ==> bool
+  checkPiecesMiddle(ti, tf) == is subclass responsibility;
+  --pre ti.getPiece() <> nil;
+  
+  --moves a piece after verification 
+  public moveTo: Tile * Tile ==> bool
+  moveTo(ti, tf) == (
+    if (canMoveTo(ti, tf) and (tf.getPiece() = nil or ti.getPiece().pieceOfPlayer <> tf.getPiece().pieceOfPlayer))
+    then (
+     if (tf.getPiece() <> nil and isofclass(Tower, tf.getPiece()) and tf.getPiece().getSize() > 6)
+     then return false
+     else (
+      if tf.getPiece() <> nil and tf.getPiece().getSize() < 6
+      then (
+       ti.setPiece(nil);
+       if (isofclass(Tower, self)) then (
+        capturePiece(tf.getPiece());
+        tf.setPiece(self);
+       )
+       else (
+        tf.setPiece(new Tower(pieceOfPlayer, self, tf.getPiece().getStack()));
+       );
+       return true;
+      )
+      else (
+       ti.setPiece(nil);
+       tf.setPiece(self);
+       return true;
+      )
+     );
+    )
+    else return false;
+(*@
+\label{capturePiece:58}
+@*)
+  )
+  pre ti.getPiece() <> nil;
+  --post tf.getPiece() = ti~.getPiece(); not supported 
+  
+  --captures a piece (tower method)
+  public capturePiece: Piece ==> ()
+  capturePiece(p) == (
+(*@
+\label{getPlayer:65}
+@*)
+   return;
+  )
+  pre p <> self;
+(*@
+\label{getStack:68}
+@*)
+  
+  --method return owner player
+  pure public getPlayer: () ==> Player
+(*@
+\label{getSize:71}
+@*)
+  getPlayer() == return pieceOfPlayer;
+  
+  --method return piece/stack
+(*@
+\label{getOwner:74}
+@*)
+  pure public getStack: () ==> seq of Piece
+  getStack() == return [self];
+  
+(*@
+\label{setOwner:77}
+@*)
+  --method return size
+  pure public getSize: () ==> nat1
+  getSize() == is not yet specified;
+(*@
+\label{getTopPiece:80}
+@*)
+
+  --method set owner  
+  public setOwner: Player ==> ()
+  setOwner(p) == pieceOfPlayer := p;
+  
+  --method get top piece
+  pure public getTopPiece: () ==> Piece
+  getTopPiece() == is subclass responsibility;
+ 
+end Piece
+\end{vdmpp}

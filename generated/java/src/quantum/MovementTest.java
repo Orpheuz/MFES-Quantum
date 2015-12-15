@@ -136,6 +136,20 @@ public class MovementTest extends QuantumTest {
         Piece ps = new Square();
         Piece pc = new Circle();
         Piece pcr = new Cross();
+        Piece s1 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece s2 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece s3 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece s4 = new Square(quantum.quotes.BlackQuote.getInstance());
+        Piece ts = new Tower(quantum.quotes.WhiteQuote.getInstance(), s1,
+                SeqUtil.seq(s2, s3, s4));
+        Piece c1 = new Circle(quantum.quotes.WhiteQuote.getInstance());
+        Piece c2 = new Circle(quantum.quotes.BlackQuote.getInstance());
+        Piece tc = new Tower(quantum.quotes.WhiteQuote.getInstance(), c1,
+                SeqUtil.seq(c2));
+        Piece cr1 = new Cross(quantum.quotes.WhiteQuote.getInstance());
+        Piece cr2 = new Cross(quantum.quotes.BlackQuote.getInstance());
+        Piece tcr = new Tower(quantum.quotes.WhiteQuote.getInstance(), cr1,
+                SeqUtil.seq(cr2));
         board.setBoardType(false);
         super.assertEqual(true, board.getInstance().getTile(1L, 1L).isSpecial());
         board.getInstance().getTile(1L, 1L).setPiece(ps);
@@ -186,6 +200,39 @@ public class MovementTest extends QuantumTest {
         super.assertEqual(false,
             board.getInstance().getTile(3L, 1L).getPiece()
                  .canMoveTo(board.getInstance().getTile(3L, 1L),
+                board.getInstance().getTile(1L, 1L)));
+        board.getInstance().getTile(1L, 1L).setPiece(ts);
+        board.getInstance().getTile(1L, 2L).setPiece(null);
+        super.assertEqual(false,
+            board.getInstance().getTile(1L, 1L).getPiece()
+                 .canMoveTo(board.getInstance().getTile(1L, 1L),
+                board.getInstance().getTile(1L, 2L)));
+        board.getInstance().getTile(1L, 1L).setPiece(tc);
+        board.getInstance().getTile(4L, 4L).setPiece(null);
+        super.assertEqual(true,
+            board.getInstance().getTile(1L, 1L).getPiece()
+                 .canMoveTo(board.getInstance().getTile(1L, 1L),
+                board.getInstance().getTile(4L, 4L)));
+        board.getInstance().getTile(1L, 1L).setPiece(tcr);
+        board.getInstance().getTile(2L, 2L).setPiece(null);
+        super.assertEqual(true,
+            board.getInstance().getTile(1L, 1L).getPiece()
+                 .canMoveTo(board.getInstance().getTile(1L, 1L),
+                board.getInstance().getTile(2L, 2L)));
+        board.getInstance().getTile(1L, 6L).setPiece(tcr);
+        board.getInstance().getTile(3L, 4L).setPiece(null);
+        board.getInstance().getTile(2L, 5L).setPiece(new Cross());
+        super.assertEqual(false,
+            board.getInstance().getTile(1L, 6L).getPiece()
+                 .canMoveTo(board.getInstance().getTile(1L, 6L),
+                board.getInstance().getTile(3L, 4L)));
+        board.getInstance().getTile(1L, 1L).setPiece(null);
+        board.getInstance().getTile(1L, 2L).setPiece(null);
+        board.getInstance().getTile(1L, 3L).setPiece(new Circle());
+        board.getInstance().getTile(1L, 4L).setPiece(ts);
+        super.assertEqual(false,
+            board.getInstance().getTile(1L, 4L).getPiece()
+                 .canMoveTo(board.getInstance().getTile(1L, 4L),
                 board.getInstance().getTile(1L, 1L)));
     }
 
@@ -342,8 +389,6 @@ public class MovementTest extends QuantumTest {
         super.assertEqual(1L, q.board.getTile(3L, 5L).getPiece().getSize());
         super.assertEqual(quantum.quotes.BlackQuote.getInstance(),
             ((Object) q.board.getTile(2L, 5L).getPiece().getPlayer()));
-        super.assertEqual(quantum.quotes.BlackQuote.getInstance(),
-            ((Object) q.board.getTile(2L, 5L).getPiece().getOwner()));
         super.assertEqual(q.movePieceTo(3L, 5L, 2L, 5L), true);
         super.assertEqual(2L, q.board.getTile(2L, 5L).getPiece().getSize());
         q.endTurn();
@@ -359,7 +404,7 @@ public class MovementTest extends QuantumTest {
     }
 
     public void GameOverTest2() {
-        Quantum q = new Quantum(false);
+        Quantum q = new Quantum(true);
         Board board = Board.getInstance();
         Piece p = new Cross(quantum.quotes.WhiteQuote.getInstance());
         Piece pa = new Cross(quantum.quotes.WhiteQuote.getInstance());
@@ -386,6 +431,7 @@ public class MovementTest extends QuantumTest {
         Piece t3 = new Tower(quantum.quotes.WhiteQuote.getInstance(), pb,
                 SeqUtil.seq(pb1, pb2, pb3, pb4, pb5));
         q.startGame();
+        super.assertEqual(true, board.isBigBoard());
         board.getInstance().getTile(1L, 1L).setPiece(t1);
         board.getInstance().getTile(1L, 2L).setPiece(t2);
         board.getInstance().getTile(1L, 3L).setPiece(t3);
@@ -393,6 +439,47 @@ public class MovementTest extends QuantumTest {
         super.assertEqual(true,
             Utils.equals(q.getGameState(),
                 quantum.quotes.Player1WonQuote.getInstance()));
+        super.assertEqual(false,
+            Utils.equals(q.getGameState(),
+                quantum.quotes.PlayingQuote.getInstance()));
+    }
+
+    public void GameOverTest3() {
+        Quantum q = new Quantum(true);
+        Board board = Board.getInstance();
+        Piece p = new Cross(quantum.quotes.BlackQuote.getInstance());
+        Piece pa = new Cross(quantum.quotes.BlackQuote.getInstance());
+        Piece pb = new Cross(quantum.quotes.BlackQuote.getInstance());
+        Piece p1 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece p2 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece p3 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece p4 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece p5 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece pa1 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece pa2 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece pa3 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece pa4 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece pa5 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece pb1 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece pb2 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece pb3 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece pb4 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece pb5 = new Square(quantum.quotes.WhiteQuote.getInstance());
+        Piece t1 = new Tower(quantum.quotes.BlackQuote.getInstance(), p,
+                SeqUtil.seq(p1, p2, p3, p4, p5));
+        Piece t2 = new Tower(quantum.quotes.BlackQuote.getInstance(), pa,
+                SeqUtil.seq(pa1, pa2, pa3, pa4, pa5));
+        Piece t3 = new Tower(quantum.quotes.BlackQuote.getInstance(), pb,
+                SeqUtil.seq(pb1, pb2, pb3, pb4, pb5));
+        q.startGame();
+        super.assertEqual(true, board.isBigBoard());
+        board.getInstance().getTile(1L, 1L).setPiece(t1);
+        board.getInstance().getTile(1L, 2L).setPiece(t2);
+        board.getInstance().getTile(1L, 3L).setPiece(t3);
+        q.updateGameState();
+        super.assertEqual(true,
+            Utils.equals(q.getGameState(),
+                quantum.quotes.Player2WonQuote.getInstance()));
         super.assertEqual(false,
             Utils.equals(q.getGameState(),
                 quantum.quotes.PlayingQuote.getInstance()));
@@ -415,6 +502,7 @@ public class MovementTest extends QuantumTest {
         GameCicleTest();
         GameOverTest();
         GameOverTest2();
+        GameOverTest3();
     }
 
     public String toString() {

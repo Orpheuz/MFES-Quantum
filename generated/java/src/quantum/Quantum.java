@@ -50,15 +50,15 @@ public class Quantum {
         for (Iterator iterator_7 = setCompResult_1.iterator();
                 iterator_7.hasNext();) {
             Tile t = (Tile) iterator_7.next();
-            Boolean andResult_27 = false;
+            Boolean andResult_25 = false;
 
             if (!(Utils.equals(t.getPiece(), null))) {
                 if (t.getPiece().getSize().longValue() >= 6L) {
-                    andResult_27 = true;
+                    andResult_25 = true;
                 }
             }
 
-            if (andResult_27) {
+            if (andResult_25) {
                 if (Utils.equals(t.getPiece().getPlayer(),
                             quantum.quotes.WhiteQuote.getInstance())) {
                     countW = countW.longValue() + 1L;
@@ -118,6 +118,10 @@ public class Quantum {
 
     public Object getActualPlayer() {
         return playerTurn;
+    }
+
+    public VDMMap getScore() {
+        return Utils.copy(score);
     }
 
     public String toString() {

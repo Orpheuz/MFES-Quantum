@@ -1,0 +1,136 @@
+\begin{vdmpp}[breaklines=true]
+class Cross is subclass of Piece
+
+operations
+
+(*@
+\label{Cross:5}
+@*)
+  --cross constructor
+  public Cross: Player ==> Cross
+  Cross(p) == Piece(p);
+(*@
+\label{checkPiecesMiddle:8}
+@*)
+
+  --checks if theres a piece between two tiles according to cross movement
+  public checkPiecesMiddle: Tile * Tile ==> bool
+  checkPiecesMiddle(ti,tf) == (
+    dcl tempX: nat1 := ti.getCoordinates().x;
+    dcl tempY: nat1 := ti.getCoordinates().y;
+    dcl signalX: bool := false;
+    dcl signalY: bool := false;
+    dcl maxX: nat1 := ti.getCoordinates().x;
+    dcl maxY: nat1 := ti.getCoordinates().y;
+    dcl max: nat1;
+    if (abs(tf.getCoordinates().x - ti.getCoordinates().x) = abs(tf.getCoordinates().y - ti.getCoordinates().y)) then (
+     if(tf.getCoordinates().x > ti.getCoordinates().x)
+      then (
+       signalX := true;
+       maxX := tf.getCoordinates().x;
+      );
+     if(tf.getCoordinates().y > ti.getCoordinates().y)
+      then (
+       signalY := true;
+       maxY := tf.getCoordinates().y;
+      );
+     while(tempX < maxX -1 or tempY < maxY -1)
+       do (
+         if(signalX)
+          then tempX := tempX + 1
+         else tempX := tempX - 1;
+         if(signalY)
+          then tempY := tempY + 1
+         else
+          tempY := tempY-1;
+         if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
+          then return false;
+         );
+     return true;
+    );
+    if (ti.getCoordinates().x = tf.getCoordinates().x and ti.getCoordinates().y <> tf.getCoordinates().y)
+     then (
+        tempX := ti.getCoordinates().x;
+        if(ti.getCoordinates().y > tf.getCoordinates().y)
+         then (max := ti.getCoordinates().y; tempY := tf.getCoordinates().y)
+         else (tempY := ti.getCoordinates().y; max := tf.getCoordinates().y);
+        while(tempY < max-1)
+         do(
+           tempY := tempY + 1;
+           if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
+            then return false);
+        return true
+        );
+    if (ti.getCoordinates().x <> tf.getCoordinates().x and ti.getCoordinates().y = tf.getCoordinates().y) 
+     then(
+         tempY := ti.getCoordinates().y;
+         if(ti.getCoordinates().x > tf.getCoordinates().x)
+         then (max := ti.getCoordinates().x; tempX := tf.getCoordinates().x)
+         else (tempX := ti.getCoordinates().x; max := tf.getCoordinates().x);
+        while(tempX < max-1)
+         do (tempX := tempX + 1;
+           if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
+(*@
+\label{canMoveTo:66}
+@*)
+            then return false
+           );
+        return true
+    );
+    return false;
+  );
+
+    --Can move one space between two tiles
+  public canMoveTo: Tile * Tile ==> bool
+  canMoveTo(ti, tf) == (
+   if(tf.getPiece() <> nil)
+    then return false;
+   if(ti.isSpecial())
+    then (
+     return ((ti.getCoordinates().x = tf.getCoordinates().x and ti.getCoordinates().y <> tf.getCoordinates().y) or
+          (ti.getCoordinates().x <> tf.getCoordinates().x and ti.getCoordinates().y = tf.getCoordinates().y) or
+          abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y)) and
+          checkPiecesMiddle(ti, tf);
+    )
+   else
+    return abs(ti.getCoordinates().x - tf.getCoordinates().x) <= 1 and
+        abs(ti.getCoordinates().y - tf.getCoordinates().y) <= 1
+
+  ) pre ti <> tf;
+  
+  --Can move a variable number of spaces between two tiles
+  public canMoveTo: Tile * Tile * nat1 ==> bool
+  canMoveTo(ti, tf, n) == (
+   if(tf.getPiece() <> nil)
+    then return false;
+   if(ti.isSpecial())
+    then (
+     return ((ti.getCoordinates().x = tf.getCoordinates().x and ti.getCoordinates().y <> tf.getCoordinates().y) or
+          (ti.getCoordinates().x <> tf.getCoordinates().x and ti.getCoordinates().y = tf.getCoordinates().y) or 
+         abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y)) and
+          checkPiecesMiddle(ti, tf);
+    )
+(*@
+\label{getSize:103}
+@*)
+   else return ((ti.getCoordinates().x = tf.getCoordinates().x and abs(ti.getCoordinates().y - tf.getCoordinates().y) <= n) or
+           (abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n and ti.getCoordinates().y = tf.getCoordinates().y) or 
+          (abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y) and
+(*@
+\label{getTopPiece:106}
+@*)
+            abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n and abs(ti.getCoordinates().y - tf.getCoordinates().y) <= n)
+            and checkPiecesMiddle(ti, tf));
+   )
+  pre ti <> tf;
+  
+  --override get piece size
+  pure public getSize: () ==> nat1
+  getSize() == return 1;
+  
+  --override get piece
+  pure public getTopPiece: () ==> Piece
+  getTopPiece() == return self;
+  
+end Cross
+\end{vdmpp}

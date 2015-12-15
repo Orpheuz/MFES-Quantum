@@ -1,21 +1,16 @@
 package quantum;
 
-import java.util.Iterator;
+import org.overture.codegen.runtime.*;
 
-import org.overture.codegen.runtime.SeqUtil;
-import org.overture.codegen.runtime.SetUtil;
-import org.overture.codegen.runtime.Tuple;
-import org.overture.codegen.runtime.Utils;
-import org.overture.codegen.runtime.VDMSeq;
-import org.overture.codegen.runtime.VDMSet;
+import java.util.*;
 
 
 @SuppressWarnings("all")
 public class Board {
-    public static final double smallSizeX = 10L;
-    public static final double smallSizeY = 6L;
-    public static final double bigSizeX = 12L;
-    public static final double bigSizeY = 8L;
+    public static final Number smallSizeX = 10L;
+    public static final Number smallSizeY = 6L;
+    public static final Number bigSizeX = 12L;
+    public static final Number bigSizeY = 8L;
     private static Board boardInstance = new Board();
     private VDMSeq board = SeqUtil.seq(SeqUtil.seq());
     private Boolean bigBoard = false;

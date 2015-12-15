@@ -1,0 +1,82 @@
+class Circle is subclass of Piece
+
+operations
+		
+		--circle constructor
+		public Circle: Player ==> Circle
+		Circle(p) == Piece(p);
+
+		--checks if theres a piece between two tiles according to circle movement
+		public checkPiecesMiddle: Tile * Tile ==> bool
+		checkPiecesMiddle(ti,tf) == (
+				dcl tempX: nat1 := ti.getCoordinates().x;
+				dcl tempY: nat1 := ti.getCoordinates().y;
+				dcl signalX: bool := false;
+				dcl signalY: bool := false;
+				dcl maxX: nat1 := ti.getCoordinates().x;
+				dcl maxY: nat1 := ti.getCoordinates().y;
+				if (abs(tf.getCoordinates().x - ti.getCoordinates().x) = abs(tf.getCoordinates().y - ti.getCoordinates().y)) then (
+					if(tf.getCoordinates().x > ti.getCoordinates().x)
+						then (
+							signalX := true;
+							maxX := tf.getCoordinates().x;
+						);
+					if(tf.getCoordinates().y > ti.getCoordinates().y)
+						then (
+							signalY := true;
+							maxY := tf.getCoordinates().y;
+						);
+					while(tempX < maxX -1 or tempY < maxY -1)
+							do (
+									if(signalX)
+										then tempX := tempX + 1
+									else	tempX := tempX - 1;
+									if(signalY)
+										then tempY := tempY + 1
+									else
+										tempY := tempY-1;
+									if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
+										then return false;
+									);
+					return true;
+				)
+				else return false;
+		);
+		
+		--Can move one space between two tiles
+		public canMoveTo: Tile * Tile ==> bool
+		canMoveTo(ti, tf) == (
+			if(ti.isSpecial())
+				then (
+					return checkPiecesMiddle(ti,tf) and
+									abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y);
+				)
+			else return	(abs(ti.getCoordinates().x - tf.getCoordinates().x) = 1 and
+								abs(ti.getCoordinates().y - tf.getCoordinates().y) = 1)
+		)
+		pre ti <> tf;
+		
+		--Can move a variable number of spaces between two tiles
+		public canMoveTo: Tile * Tile * nat1 ==> bool
+		canMoveTo(ti, tf, n) == (
+				if(ti.isSpecial())
+					then (
+						return checkPiecesMiddle(ti,tf) and
+										abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y);
+					)
+				else return	abs(ti.getCoordinates().x - tf.getCoordinates().x) <= n and
+										abs(ti.getCoordinates().y - tf.getCoordinates().y) <= n and
+										abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y)
+										 and checkPiecesMiddle(ti,tf);
+		)
+		pre ti <> tf;
+		
+		--override get piece size
+		pure public getSize: () ==> nat1
+		getSize() == return 1;
+		
+		--override get piece
+		pure public getTopPiece: () ==> Piece
+		getTopPiece() == return self;
+		
+end Circle
