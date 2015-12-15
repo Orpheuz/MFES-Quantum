@@ -79,7 +79,7 @@ operations
 @*)
      if(board.getTile(xi, yi).getPiece() <> nil)
       then return board.getTile(xi, yi).getPiece().moveTo(board.getTile(xi, yi), board.getTile(xf, yf))
-     else return false;
+     else (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{false}@*);
 (*@
 \label{getActualPlayer:64}
 @*)
@@ -98,7 +98,34 @@ operations
     
     --method get score
     pure public getScore: () ==> map Player to nat
-    getScore() == return score;
+    getScore() == (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{score}@*);
     
 end Quantum
 \end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Quantum:15]{Quantum} & 15&100.0\% & 4 \\
+\hline
+\hyperref[endTurn:47]{endTurn} & 47&100.0\% & 8 \\
+\hline
+\hyperref[getActualPlayer:64]{getActualPlayer} & 64&100.0\% & 4 \\
+\hline
+\hyperref[getGameState:61]{getGameState} & 61&100.0\% & 7 \\
+\hline
+\hyperref[getScore:67]{getScore} & 67&0.0\% & 0 \\
+\hline
+\hyperref[movePieceTo:54]{movePieceTo} & 54&92.3\% & 3 \\
+\hline
+\hyperref[startGame:44]{startGame} & 44&100.0\% & 4 \\
+\hline
+\hyperref[updateGameState:24]{updateGameState} & 24&100.0\% & 3 \\
+\hline
+\hline
+Quantum.vdmpp & & 97.0\% & 33 \\
+\hline
+\end{longtable}
+

@@ -37,13 +37,13 @@ operations
        do (
          if(signalX)
           then tempX := tempX + 1
-         else tempX := tempX - 1;
+         else (*@\vdmnotcovered{tempX}@*) := (*@\vdmnotcovered{tempX}@*) (*@\vdmnotcovered{-}@*) (*@\vdmnotcovered{1}@*);
          if(signalY)
           then tempY := tempY + 1
          else
-          tempY := tempY-1;
+          (*@\vdmnotcovered{tempY}@*) := (*@\vdmnotcovered{tempY}@*)(*@\vdmnotcovered{-}@*)(*@\vdmnotcovered{1}@*);
          if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
-          then return false;
+          then (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{false}@*);
          );
      return true;
     )
@@ -93,7 +93,28 @@ operations
   
   --override get piece
   pure public getTopPiece: () ==> Piece
-  getTopPiece() == return self;
+  getTopPiece() == (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{self}@*);
   
 end Circle
 \end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Circle:5]{Circle} & 5&100.0\% & 98 \\
+\hline
+\hyperref[canMoveTo:44]{canMoveTo} & 44&100.0\% & 10 \\
+\hline
+\hyperref[checkPiecesMiddle:8]{checkPiecesMiddle} & 8&90.9\% & 10 \\
+\hline
+\hyperref[getSize:70]{getSize} & 70&100.0\% & 25 \\
+\hline
+\hyperref[getTopPiece:73]{getTopPiece} & 73&0.0\% & 0 \\
+\hline
+\hline
+Circle.vdmpp & & 95.0\% & 143 \\
+\hline
+\end{longtable}
+

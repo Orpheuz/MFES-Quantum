@@ -37,12 +37,12 @@ operations
      while(tempX < maxX -1 or tempY < maxY -1)
        do (
          if(signalX)
-          then tempX := tempX + 1
+          then (*@\vdmnotcovered{tempX}@*) := (*@\vdmnotcovered{tempX}@*) (*@\vdmnotcovered{+}@*) (*@\vdmnotcovered{1}@*)
          else tempX := tempX - 1;
          if(signalY)
           then tempY := tempY + 1
          else
-          tempY := tempY-1;
+          (*@\vdmnotcovered{tempY}@*) := (*@\vdmnotcovered{tempY}@*)(*@\vdmnotcovered{-}@*)(*@\vdmnotcovered{1}@*);
          if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
           then return false;
          );
@@ -52,20 +52,20 @@ operations
      then (
         tempX := ti.getCoordinates().x;
         if(ti.getCoordinates().y > tf.getCoordinates().y)
-         then (max := ti.getCoordinates().y; tempY := tf.getCoordinates().y)
+         then (*@\vdmnotcovered{(}@*)(*@\vdmnotcovered{max}@*) := (*@\vdmnotcovered{ti}@*).(*@\vdmnotcovered{getCoordinates}@*)().(*@\vdmnotcovered{y}@*); (*@\vdmnotcovered{tempY}@*) := (*@\vdmnotcovered{tf}@*).(*@\vdmnotcovered{getCoordinates}@*)().(*@\vdmnotcovered{y}@*))
          else (tempY := ti.getCoordinates().y; max := tf.getCoordinates().y);
         while(tempY < max-1)
          do(
            tempY := tempY + 1;
            if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
-            then return false);
+            then (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{false}@*));
         return true
         );
     if (ti.getCoordinates().x <> tf.getCoordinates().x and ti.getCoordinates().y = tf.getCoordinates().y) 
      then(
          tempY := ti.getCoordinates().y;
          if(ti.getCoordinates().x > tf.getCoordinates().x)
-         then (max := ti.getCoordinates().x; tempX := tf.getCoordinates().x)
+         then (*@\vdmnotcovered{(}@*)(*@\vdmnotcovered{max}@*) := (*@\vdmnotcovered{ti}@*).(*@\vdmnotcovered{getCoordinates}@*)().(*@\vdmnotcovered{x}@*); (*@\vdmnotcovered{tempX}@*) := (*@\vdmnotcovered{tf}@*).(*@\vdmnotcovered{getCoordinates}@*)().(*@\vdmnotcovered{x}@*))
          else (tempX := ti.getCoordinates().x; max := tf.getCoordinates().x);
         while(tempX < max-1)
          do (tempX := tempX + 1;
@@ -73,23 +73,23 @@ operations
 (*@
 \label{canMoveTo:66}
 @*)
-            then return false
+            then (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{false}@*)
            );
         return true
     );
-    return false;
+    (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{false}@*);
   );
 
     --Can move one space between two tiles
   public canMoveTo: Tile * Tile ==> bool
   canMoveTo(ti, tf) == (
    if(tf.getPiece() <> nil)
-    then return false;
+    then (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{false}@*);
    if(ti.isSpecial())
     then (
      return ((ti.getCoordinates().x = tf.getCoordinates().x and ti.getCoordinates().y <> tf.getCoordinates().y) or
           (ti.getCoordinates().x <> tf.getCoordinates().x and ti.getCoordinates().y = tf.getCoordinates().y) or
-          abs(ti.getCoordinates().x - tf.getCoordinates().x) = abs(ti.getCoordinates().y - tf.getCoordinates().y)) and
+          (*@\vdmnotcovered{abs}@*)((*@\vdmnotcovered{ti}@*).(*@\vdmnotcovered{getCoordinates}@*)().(*@\vdmnotcovered{x}@*) (*@\vdmnotcovered{-}@*) (*@\vdmnotcovered{tf}@*).(*@\vdmnotcovered{getCoordinates}@*)().(*@\vdmnotcovered{x}@*)) (*@\vdmnotcovered{=}@*) (*@\vdmnotcovered{abs}@*)((*@\vdmnotcovered{ti}@*).(*@\vdmnotcovered{getCoordinates}@*)().(*@\vdmnotcovered{y}@*) (*@\vdmnotcovered{-}@*) (*@\vdmnotcovered{tf}@*).(*@\vdmnotcovered{getCoordinates}@*)().(*@\vdmnotcovered{y}@*))) and
           checkPiecesMiddle(ti, tf);
     )
    else
@@ -102,7 +102,7 @@ operations
   public canMoveTo: Tile * Tile * nat1 ==> bool
   canMoveTo(ti, tf, n) == (
    if(tf.getPiece() <> nil)
-    then return false;
+    then (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{false}@*);
    if(ti.isSpecial())
     then (
      return ((ti.getCoordinates().x = tf.getCoordinates().x and ti.getCoordinates().y <> tf.getCoordinates().y) or
@@ -130,7 +130,28 @@ operations
   
   --override get piece
   pure public getTopPiece: () ==> Piece
-  getTopPiece() == return self;
+  getTopPiece() == (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{self}@*);
   
 end Cross
 \end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Cross:5]{Cross} & 5&100.0\% & 74 \\
+\hline
+\hyperref[canMoveTo:66]{canMoveTo} & 66&98.6\% & 12 \\
+\hline
+\hyperref[checkPiecesMiddle:8]{checkPiecesMiddle} & 8&87.2\% & 10 \\
+\hline
+\hyperref[getSize:103]{getSize} & 103&100.0\% & 16 \\
+\hline
+\hyperref[getTopPiece:106]{getTopPiece} & 106&0.0\% & 0 \\
+\hline
+\hline
+Cross.vdmpp & & 88.9\% & 112 \\
+\hline
+\end{longtable}
+
