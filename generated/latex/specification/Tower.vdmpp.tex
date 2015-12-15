@@ -43,7 +43,7 @@ operations
 @*)
   --placeholder
   public canMoveTo: Tile * Tile * nat1 ==> bool
-  canMoveTo(ti, tf, n) == return true;
+  canMoveTo(ti, tf, n) == (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{true}@*);
   
   --Append new piece/pieces to tower stack
   public capturePiece: Piece ==> ()
@@ -76,3 +76,28 @@ operations
   
 end Tower
 \end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Tower:9]{Tower} & 9&100.0\% & 19 \\
+\hline
+\hyperref[canMoveTo:21]{canMoveTo} & 21&0.0\% & 0 \\
+\hline
+\hyperref[capturePiece:31]{capturePiece} & 31&100.0\% & 16 \\
+\hline
+\hyperref[checkPiecesMiddle:16]{checkPiecesMiddle} & 16&100.0\% & 1 \\
+\hline
+\hyperref[getSize:38]{getSize} & 38&100.0\% & 52 \\
+\hline
+\hyperref[getStack:41]{getStack} & 41&100.0\% & 1 \\
+\hline
+\hyperref[getTopPiece:44]{getTopPiece} & 44&100.0\% & 1 \\
+\hline
+\hline
+Tower.vdmpp & & 96.8\% & 90 \\
+\hline
+\end{longtable}
+

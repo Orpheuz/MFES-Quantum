@@ -31,7 +31,7 @@ operations
          do(
            tempY := tempY + 1;
            if(Board`getInstance().getTile(tempX, tempY).getPiece() <> nil)
-            then return false);
+            then (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{false}@*));
         return true
         )
      else(
@@ -71,7 +71,7 @@ operations
    if(ti.isSpecial())
     then (
      return ((ti.getCoordinates().x = tf.getCoordinates().x or 
-          ti.getCoordinates().x = tf.getCoordinates().x) and checkPiecesMiddle(ti, tf))
+          ti.getCoordinates().x = tf.getCoordinates().x) and (*@\vdmnotcovered{checkPiecesMiddle}@*)((*@\vdmnotcovered{ti}@*), (*@\vdmnotcovered{tf}@*)))
     )
    else
     return ((ti.getCoordinates().x = tf.getCoordinates().x and
@@ -94,7 +94,28 @@ operations
   
   --override get piece
   pure public getTopPiece: () ==> Piece
-  getTopPiece() == return self;
+  getTopPiece() == (*@\vdmnotcovered{return}@*) (*@\vdmnotcovered{self}@*);
 
 end Square
 \end{vdmpp}
+\bigskip
+\begin{longtable}{|l|r|r|r|}
+\hline
+Function or operation & Line & Coverage & Calls \\
+\hline
+\hline
+\hyperref[Square:4]{Square} & 4&100.0\% & 130 \\
+\hline
+\hyperref[canMoveTo:39]{canMoveTo} & 39&95.7\% & 11 \\
+\hline
+\hyperref[checkPiecesMiddle:7]{checkPiecesMiddle} & 7&98.2\% & 10 \\
+\hline
+\hyperref[getSize:72]{getSize} & 72&100.0\% & 25 \\
+\hline
+\hyperref[getTopPiece:75]{getTopPiece} & 75&0.0\% & 0 \\
+\hline
+\hline
+Square.vdmpp & & 97.0\% & 176 \\
+\hline
+\end{longtable}
+
